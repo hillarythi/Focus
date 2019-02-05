@@ -51,17 +51,17 @@ a:hover{
 
 
 	<!-- Error Sign -->
-	<div class="alert alert-danger" role="alert">
+<!-- 	<div class="alert alert-danger" role="alert">
   		<span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
   		<span class="sr-only">Error:</span>
  		 Enter a valid email address
-	</div>
+	</div> -->
 
-	<!-- Dropdown -->
+
+	<!-- OVERALL TASK -->
+	<p>OVERALL TASK</p>
 	<div class="dropdown">
-	  <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-	    Dropdown
-	  </button>
+	  <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">Task </button>
 	  <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
 	  	<li class="dropdown-header">COURSE 1</li>
 	    <li><a href="#">Task 1</a></li>
@@ -72,6 +72,55 @@ a:hover{
 	    <li><a href="#">Task 1</a></li>
 	  </ul>
 	</div>
+	<br>
+
+	<!-- Class -->
+	<p>Class</p>
+	<div class="dropdown">
+	  <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">Class </button>
+	  <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+	    <li><a href="#">Class 1</a></li>
+	    <li><a href="#">Class 2</a></li>
+	    <li><a href="#">Class 3</a></li>
+	  </ul>
+	</div>
+	<br>
+
+	<!-- Task -->
+	<p>Task</p>
+	<div class="dropdown">
+	  <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">Study </button>
+	  <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+	    <li><a href="#">Task 1</a></li>
+	    <li><a href="#">Task 2</a></li>
+	    <li><a href="#">Task 3</a></li>
+	  </ul>
+	</div>
+	<br>
+	<!-- Add New option? -->
+
+
+	<!-- Select Time -->
+	<p>Select Time</p>
+	<div class="dropdown" style="display:inline">
+	  <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">0 </button> Hours
+	  <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+	    <li><a href="#">1</a></li>
+	    <li><a href="#">2</a></li>
+	    <li><a href="#">3</a></li>
+	  </ul>
+	</div>
+
+	<div class="dropdown" style="display:inline">
+	  <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">0 </button> Mins
+	  <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+	    <li><a href="#">1</a></li>
+	    <li><a href="#">2</a></li>
+	    <li><a href="#">3</a></li>
+	  </ul>
+	</div>
+	<br><br>
+
 
 	<!-- Breaks -->
 	Breaks
@@ -81,16 +130,20 @@ a:hover{
 	    <button type="button" class="btn btn-secondary">2</button>
 	    <button type="button" class="btn btn-secondary">3</button>
 	    <button type="button" class="btn btn-secondary">4</button>
-	  </div>
-	  <div class="btn-group mr-2" role="group" aria-label="Second group">
 	    <button type="button" class="btn btn-secondary">5</button>
 	    <button type="button" class="btn btn-secondary">6</button>
-	    <button type="button" class="btn btn-secondary">7</button>
-	  </div>
-	  <div class="btn-group" role="group" aria-label="Third group">
-	    <button type="button" class="btn btn-secondary">8</button>
 	  </div>
 	</div>
+
+
+<script>
+	
+$(".dropdown-menu li a").click(function(){
+	$(this).parents(".dropdown").find('.btn').html($(this).text()+' ');
+	$(this).parents(".dropdown").find('.btn').val($(this).data('value'));
+});
+</script>
+
 
 
 </body>
