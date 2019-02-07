@@ -35,8 +35,27 @@ li:hover{
 a:hover{
 	text-decoration:none;
 }
-
-	</style>
+.fixed-length button{
+	width:100%;
+}
+.center-page{
+	position: fixed;
+	top: 10%;
+	left: 15%;
+	width: 70%; /* width of everything */
+	/*transform: translate(-50%, -50%);*/
+}
+.left{
+	float:left;
+}
+.right{
+	float:right;
+}
+/*for turn in */
+.glyphicon{
+	color:black;
+}
+</style>
 </head>
 <body>
 	<!-- NAVBAR -->
@@ -49,7 +68,6 @@ a:hover{
 	</ul>
 
 
-
 	<!-- Error Sign -->
 <!-- 	<div class="alert alert-danger" role="alert">
   		<span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
@@ -57,11 +75,14 @@ a:hover{
  		 Enter a valid email address
 	</div> -->
 
+	<div class="container center-page">
+	<a href='index.html'><span class="glyphicon glyphicon-chevron-left"></span></a>
+	<br><br>
 
 	<!-- OVERALL TASK -->
-	<p>OVERALL TASK</p>
-	<div class="dropdown">
-	  <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">Task </button>
+	<p>TEST TASK</p>
+	<div class="dropdown fixed-length">
+	  <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">task </button>
 	  <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
 	  	<li class="dropdown-header">COURSE 1</li>
 	    <li><a href="#">Task 1</a></li>
@@ -74,10 +95,10 @@ a:hover{
 	</div>
 	<br>
 
-	<!-- Class -->
-	<p>Class</p>
-	<div class="dropdown">
-	  <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">Class </button>
+	<!-- Class / subject -->
+	<p>subject</p>
+	<div class="dropdown fixed-length">
+	  <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">subject </button>
 	  <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
 	    <li><a href="#">Class 1</a></li>
 	    <li><a href="#">Class 2</a></li>
@@ -86,10 +107,10 @@ a:hover{
 	</div>
 	<br>
 
-	<!-- Task -->
-	<p>Task</p>
-	<div class="dropdown">
-	  <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">Study </button>
+	<!-- Task / assignment -->
+	<p>assignment</p>
+	<div class="dropdown fixed-length">
+	  <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">assignment </button>
 	  <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
 	    <li><a href="#">Task 1</a></li>
 	    <li><a href="#">Task 2</a></li>
@@ -100,19 +121,20 @@ a:hover{
 	<!-- Add New option? -->
 
 
-	<!-- Select Time -->
-	<p>Select Time</p>
+	<!-- Select Time / time length-->
+	<p>time length</p>
 	<div class="dropdown" style="display:inline">
-	  <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">0 </button> Hours
+	  <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">0 </button> hr
 	  <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
 	    <li><a href="#">1</a></li>
 	    <li><a href="#">2</a></li>
 	    <li><a href="#">3</a></li>
 	  </ul>
 	</div>
+	&nbsp;&nbsp;
 
 	<div class="dropdown" style="display:inline">
-	  <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">0 </button> Mins
+	  <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">0 </button> min
 	  <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
 	    <li><a href="#">1</a></li>
 	    <li><a href="#">2</a></li>
@@ -134,7 +156,17 @@ a:hover{
 	    <button type="button" class="btn btn-secondary">6</button>
 	  </div>
 	</div>
+	<br>
 
+	<div>
+		<a href='#'><span class="glyphicon glyphicon-arrow-left left"></span></a>
+		<a href='#'><span class="glyphicon glyphicon-arrow-right right"></span></a>
+		<br>
+		<p class="left">Save for Later</p>
+		<p class="right">Let's Go!</p>
+	</div>
+
+	</div>
 
 <script>
 	
