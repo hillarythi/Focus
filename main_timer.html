@@ -9,62 +9,65 @@
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 	<title>test app</title>
 	<style>
+	.navbar {
+	    width:100%;
+	    margin:0px auto;
+	    bottom: 0;
+	    padding:10 0px;
+	    position: fixed;
 
-.navbar {
-    width:100%;
-    margin:0px auto;
-    bottom: 0;
-    padding:10 0px;
-    position: fixed;
-
-    /*list-style:none;*/
-    text-align:center;
-    /*font-family: sans-serif; */
-	/*background-color: gray;*/
-	/*overflow: hidden;*/
-}
-.navbar li { 
-    display:inline-block;
-    width:24%; 
-    margin:0;
-    padding:0;
-}
-li:hover{
-	/*background-color: gray;*/
-}
-a:hover{
-	text-decoration:none;
-}
-.fixed-length button{
-	width:100%;
-}
-.center-page{
-	position: fixed;
-	top: 10%;
-	left: 15%;
-	width: 70%; /* width of everything */
-	/*transform: translate(-50%, -50%);*/
-}
-.left{
-	float:left;
-}
-.right{
-	float:right;
-}
-/*for turn in */
-.glyphicon{
-	color:black;
-}
-</style>
+	    /*list-style:none;*/
+	    text-align:center;
+	    /*font-family: sans-serif; */
+		/*background-color: gray;*/
+		/*overflow: hidden;*/
+	}
+	.navbar li { 
+	    display:inline-block;
+	    width:24%; 
+	    margin:0;
+	    padding:0;
+	}
+	li:hover{
+		/*background-color: gray;*/
+	}
+	a:hover{
+		text-decoration:none;
+	}
+	.fixed-length button{
+		width:100%;
+	}
+	.center-page{
+		position: fixed;
+		top: 10%;
+		left: 15%;
+		width: 70%; /* width of everything */
+		/*transform: translate(-50%, -50%);*/
+	}
+	.left{
+		float:left;
+	}
+	.right{
+		float:right;
+	}
+	/*for turn in */
+	.glyphicon{
+		color:black;
+	}
+	.glyphicon:hover{
+		color:black;
+	}
+	</style>
 </head>
+
+
 <body>
 	<!-- NAVBAR -->
 	<ul class="navbar border-top">
-		<!-- <button type="button"><li class="border-right"><a href="#home">Create New</a></li></button> -->
-		<li class="border-right"><a href="#home" class="glyphicon glyphicon-plus"></a></li>
-		<li class="border-right"><a href="#news" class="glyphicon glyphicon-th-list"></a></li>
-		<li class="border-right"><a href="#contact" class="glyphicon glyphicon-time"></a></li>
-		<li><a href="#contact" class="glyphicon glyphicon-cog"></a></li>
+		<li class="border-right"><a href="main_timer.html" class="glyphicon glyphicon-plus"></a></li>
+		<li class="border-right"><a href="main_todo.html" class="glyphicon glyphicon-th-list"></a></li>
+		<li class="border-right"><a href="main_log.html" class="glyphicon glyphicon-time"></a></li>
+		<li><a href="main_settings.html" class="glyphicon glyphicon-cog"></a></li>
 	</ul>
 
 
