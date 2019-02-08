@@ -9,10 +9,11 @@ var path = require('path');
 var handlebars = require('express3-handlebars')
 
 var index = require('./routes/index');
+var new_timer = require('./routes/main_timer');
+var log = require('./routes/main_log');
+var todo = require('./routes/main_todo');
+var settings = require('./routes/main_settings');
 var timer = require('./routes/timer');
-var log = require('./routes/log');
-var todo = require('./routes/todo');
-var settings = require('./routes/settings');
 // Example route
 // var user = require('./routes/user');
 
@@ -43,7 +44,8 @@ app.get('/', index.view);
 app.get('/main_todo', todo.view);
 app.get('/main_log', log.view);
 app.get('/main_settings', settings.view);
-app.get('/main_timer', timer.view);
+app.get('/main_timer', new_timer.view);
+app.get('/timer', timer.view)
 // Example route
 // app.get('/users', user.list);
 
