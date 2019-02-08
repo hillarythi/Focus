@@ -32,6 +32,7 @@ app.use(express.cookieParser('IxD secret key'));
 app.use(express.session());
 app.use(app.router);
 app.use(express.static(path.join(__dirname, 'public')));
+//app.use(express.static(__dirname));
 
 // development only
 if ('development' == app.get('env')) {
@@ -39,10 +40,10 @@ if ('development' == app.get('env')) {
 }
 
 app.get('/', index.view);
-app.get('main_todo', todo.view);
-app.get('main_log', log.view);
-app.get('main_settings', settings.view);
-app.get('main_timer', timer.view);
+app.get('/main_todo', todo.view);
+app.get('/main_log', log.view);
+app.get('/main_settings', settings.view);
+app.get('/main_timer', timer.view);
 // Example route
 // app.get('/users', user.list);
 
