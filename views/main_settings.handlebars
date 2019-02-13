@@ -83,5 +83,15 @@
 	</div>
 	<br>
 	</div>
+
+<script>
+	
+$(".dropdown-menu li a").click(function(){
+	$(this).parents(".dropdown").find('.btn').html($(this).text()+' ');
+	$(this).parents(".dropdown").find('.btn').val($(this).data('value'));
+});
+</script>
+
 </body>
+
 </html>

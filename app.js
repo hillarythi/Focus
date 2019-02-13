@@ -14,6 +14,7 @@ var log = require('./routes/main_log');
 var todo = require('./routes/main_todo');
 var settings = require('./routes/main_settings');
 var timer = require('./routes/timer');
+var new_subject = require('./routes/new_subject');
 // Example route
 // var user = require('./routes/user');
 
@@ -45,7 +46,8 @@ app.get('/main_todo', todo.view);
 app.get('/main_log', log.view);
 app.get('/main_settings', settings.view);
 app.get('/main_timer', new_timer.view);
-app.get('/timer', timer.view)
+app.get('/timer', timer.view);
+app.get('/new_subject', new_subject.view)
 // Example route
 // app.get('/users', user.list);
 
