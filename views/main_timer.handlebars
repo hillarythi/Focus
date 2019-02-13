@@ -2,13 +2,20 @@
 <html lang="en">
 <head>
 	<meta charset="utf-8">
-	<!-- <meta name="viewport" content="width=device-width, initial-scale=1"> -->
+	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css">
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	<!-- fonts -->
+	<link href="https://fonts.googleapis.com/css?family=Fira+Sans" rel="stylesheet">
+
 	<title>test app</title>
 	<style>
+	body{
+		font-family: 'Fira Sans', sans-serif;
+		font-weight: lighter !important; /*not working*/
+	}
 	.navbar {
 	    width:100%;
 	    margin:0px auto;
@@ -54,16 +61,34 @@
 	.glyphicon{
 		color:black;
 	}
-	.glyphicon:hover{
-		color:black;
+	.navbar .glyphicon{
+		font-size:200%;
+		color:white;
 	}
+	.glyphicon:hover{
+		/*color:black;*/
+	}
+	.dusty-gray{
+		background-color: rgb(104,124,135);
+	}
+	.dropdown-toggle, .btn-secondary{ 
+		/*dusty pink*/
+		background-color: rgb(212,171,179);
+		color:white;
+	}
+	.title{
+		/*dusty blue */
+		color: rgb(153,195,203);
+		margin-bottom:0px;
+	}
+	
 	</style>
 </head>
 
 
 <body>
 	<!-- NAVBAR -->
-	<ul class="navbar border-top">
+	<ul class="navbar border-top dusty-gray">
 		<li class="border-right"><a href="main_timer" class="glyphicon glyphicon-plus"></a></li>
 		<li class="border-right"><a href="main_todo" class="glyphicon glyphicon-th-list"></a></li>
 		<li class="border-right"><a href="main_log" class="glyphicon glyphicon-time"></a></li>
@@ -80,11 +105,11 @@
 
 	<!-- Top left back button -->
 	<div class="container center-page">
-	<a href='/'><span class="glyphicon glyphicon-chevron-left"></span></a>
+	<a href='/'><span class="glyphicon glyphicon-chevron-left title"></span></a>
 	<br><br>
 
 	<!-- OVERALL TASK -->
-	<p>TEST TASK</p>
+	<p class="title">TEST TASK</p>
 	<div class="dropdown fixed-length">
 	  <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">task </button>
 	  <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
@@ -100,7 +125,7 @@
 	<br>
 
 	<!-- Class / subject -->
-	<p>subject</p>
+	<p class="title">subject</p>
 	<div class="dropdown fixed-length">
 	  <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">subject </button>
 	  <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
@@ -112,7 +137,7 @@
 	<br>
 
 	<!-- Task / assignment -->
-	<p>assignment</p>
+	<p class="title">assignment</p>
 	<div class="dropdown fixed-length">
 	  <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">assignment </button>
 	  <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
@@ -126,9 +151,9 @@
 
 
 	<!-- Select Time / time length-->
-	<p>time length</p>
+	<p class="title">time length</p>
 	<div class="dropdown" style="display:inline">
-	  <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">0 </button> hr
+	  <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">0 </button><span class="title"> hr</span>
 	  <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
 	    <li><a href="#">1</a></li>
 	    <li><a href="#">2</a></li>
@@ -138,7 +163,7 @@
 	&nbsp;&nbsp;
 
 	<div class="dropdown" style="display:inline">
-	  <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">0 </button> min
+	  <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">0 </button> <span class="title">min</span>
 	  <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
 	    <li><a href="#">1</a></li>
 	    <li><a href="#">2</a></li>
@@ -149,7 +174,7 @@
 
 
 	<!-- Breaks -->
-	Breaks
+	<p class="title">breaks</p>
 	<div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
 	  <div class="btn-group mr-2" role="group" aria-label="First group">
 	    <button type="button" class="btn btn-secondary">1</button>
@@ -166,8 +191,8 @@
 		<a href='/'><span class="glyphicon glyphicon-arrow-left left"></span></a>
 		<a href='timer'><span class="glyphicon glyphicon-arrow-right right"></span></a>
 		<br>
-		<p class="left">Save for Later</p>
-		<p class="right">Let's Go!</p>
+		<p class="left title">save for later</p>
+		<p class="right title">let's study!</p>
 	</div>
 
 	</div>
