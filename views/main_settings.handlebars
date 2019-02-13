@@ -16,6 +16,15 @@
 	    position: fixed;
 	    text-align:center;
 	}
+	.center-page{
+		position: fixed;
+		top: 10%;
+		left: 15%;
+		width: 70%;
+	}
+	.fixed-length button{
+		width: 100%;
+	}
 	.navbar li { 
 	    display:inline-block;
 	    width:24%; 
@@ -44,5 +53,35 @@
 		<li><a href="main_settings" class="glyphicon glyphicon-cog"></a></li>
 	</ul>
 
+	<div class="container center-page">
+	<a href='/'><span class="glyphicon glyphicon-chevron-left"></span></a>
+	<br><br>
+	<p>Break Length</p>
+	<div class="dropdown fixed-length">
+		<button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">Length (in Minutes)</button>
+		<ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+			<li><a href="#">5</a></li>
+			<li><a href="#">10</a></li>
+			<li><a href="#">15</a></li>
+			<li><a href="#">20</a></li>
+			<li><a href="#">25</a></li>
+			<li><a href="#">30</a></li>
+		</ul>
+	</div>
+	<br>
+
+	<p>Snooze Length</p>
+	<div class="dropdown fixed-length">
+		<button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">Length (in Minutes)</button>
+		<ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+			<li><a href="#">2</a></li>
+			<li><a href="#">3</a></li>
+			<li><a href="#">5</a></li>
+			<li><a href="#">10</a></li>
+			<li><a href="#">15</a></li>
+		</ul>
+	</div>
+	<br>
+	</div>
 </body>
 </html>
