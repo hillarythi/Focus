@@ -15,7 +15,6 @@ var todo = require('./routes/main_todo');
 var settings = require('./routes/main_settings');
 var timer = require('./routes/timer');
 var new_subject = require('./routes/new_subject');
-var current = require('./routes/current'); 
 // Example route
 // var user = require('./routes/user');
 
