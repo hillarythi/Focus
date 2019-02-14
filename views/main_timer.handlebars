@@ -65,9 +65,6 @@
 		font-size:200%;
 		color:white;
 	}
-	.glyphicon:hover{
-		/*color:black;*/
-	}
 	.dusty-gray{
 		background-color: rgb(104,124,135);
 	}
@@ -158,6 +155,7 @@
 	    <li><a href="#">1</a></li>
 	    <li><a href="#">2</a></li>
 	    <li><a href="#">3</a></li>
+	    <li><a href="#">4</a></li>
 	  </ul>
 	</div>
 	&nbsp;&nbsp;
@@ -165,9 +163,18 @@
 	<div class="dropdown" style="display:inline">
 	  <button class="btn btn-default dropdown-toggle" type="button" id="dropMinute" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">0 </button> <span class="title">min</span>
 	  <ul class="dropdown-menu" aria-labelledby="dropMinute">
-	    <li><a href="#">1</a></li>
-	    <li><a href="#">2</a></li>
-	    <li><a href="#">3</a></li>
+	  	<li><a href="#">0</a></li>
+	    <li><a href="#">5</a></li>
+	    <li><a href="#">10</a></li>
+	    <li><a href="#">15</a></li>
+	    <li><a href="#">20</a></li>
+	    <li><a href="#">25</a></li>
+	    <li><a href="#">30</a></li>
+	    <li><a href="#">35</a></li>
+	    <li><a href="#">40</a></li>
+	    <li><a href="#">45</a></li>
+	    <li><a href="#">50</a></li>
+	    <li><a href="#">55</a></li>
 	  </ul>
 	</div>
 	<br><br>
@@ -176,16 +183,16 @@
 	<!-- Breaks -->
 	<p class="title">breaks</p>
 	<div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
-	  <!-- <div class="btn-group mr-2" role="group" aria-label="First group"> -->
+	  <div class="btn-group mr-2" role="group" aria-label="First group">
 	 
 	    <button type="button" class="btn btn-secondary break-btn" onclick="selectTime(1)">1</button>
 	    <button type="button" class="btn btn-secondary break-btn" onclick="selectTime(2)">2</button>
 	    <button type="button" class="btn btn-secondary break-btn" onclick="selectTime(3)">3</button>
 	    <button type="button" class="btn btn-secondary break-btn" onclick="selectTime(4)">4</button>
 	    <button type="button" class="btn btn-secondary break-btn" onclick="selectTime(5)">5</button>
-	    <button type="button" class="btn btn-secondary break-btn" onclick="selectTime(6)">6</button>
-	    
-	  <!-- </div> -->
+	    <!-- <button type="button" class="btn btn-secondary break-btn" onclick="selectTime(6)">6</button> -->
+	    <!-- can add back more breaks, can't get them to align rn in timer.handlebars -->
+	  </div>
 	</div>
 	<br>
 
@@ -223,13 +230,17 @@ $(".dropdown-menu li a").click(function(){
 	$(this).parents(".dropdown").find('.btn').html($(this).text()+' ');
 	// $(this).parents(".dropdown").find('.btn').val($(this).data('value'));
 	$(this).parents(".dropdown").find('.btn').val($(this).text());
+
+	$(this).parents(".dropdown").find('.btn').css("background-color","rgb(209, 98, 118)");
 });
 
 function selectTime(n){
 	document.getElementById("breaks").value = n;
-	$(".btn-secondary").css("background-color","rgb(209, 98, 118)");
-	// $(this).css("background-color","rgb(209,144,156)");
-	$(this).css("background-color","white");
+	$(".btn-secondary").css("background-color","rgb(212,171,179)");
+
+	for (var i = 0; i < n; i++){
+		$('.break-btn').eq(i).css("background-color","rgb(209, 98, 118)");
+	}
 }
 
 function fillForm(){
