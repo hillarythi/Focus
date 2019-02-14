@@ -37,6 +37,7 @@
 		position: fixed;
 		text-align:center;
 		width: 100%;
+		margin: 0 auto;
 	}
 	.list-item{
 		height: 220px;
@@ -53,14 +54,21 @@
 		<li class="border-right"><a href="main_log" class="glyphicon glyphicon-time"></a></li>
 		<li><a href="main_settings" class="glyphicon glyphicon-cog"></a></li>
 	</ul>
-	<!-- Title Bar -->
+	<!-- Title -->
 	<div class="top-bar">
-		<div class = "card"><h5>New Subject</h5></div>
+		<div class="form-group"><input class="form-control" id="subjectTitle" placeholder="Subject name"></div>
 	</div>
 	<!-- Checklist Items -->
 	<div class="list-item" style="padding-top: 42px">
-		<button type="button" class="btn btn-default btn-block home-icon"> +Add New </button>
+		<button type="button" class="btn btn-default btn-block home-icon"> +Add Task </button>
 	</div>
+
+	<script>	
+	$(".dropdown-menu li a").click(function(){
+		$(this).parents(".dropdown").find('.btn').html($(this).text()+' ');
+		$(this).parents(".dropdown").find('.btn').val($(this).data('value'));
+	});
+	</script>
 
 </body>
 </html>
