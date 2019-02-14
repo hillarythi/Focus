@@ -111,8 +111,8 @@
 	<!-- OVERALL TASK -->
 	<p class="title">TEST TASK</p>
 	<div class="dropdown fixed-length">
-	  <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">task </button>
-	  <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+	  <button class="btn btn-default dropdown-toggle" type="button" id="dropTest" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">task </button>
+	  <ul class="dropdown-menu" aria-labelledby="dropTest">
 	  	<li class="dropdown-header">COURSE 1</li>
 	    <li><a href="#">Task 1</a></li>
 	    <li><a href="#">Task 2</a></li>
@@ -127,8 +127,8 @@
 	<!-- Class / subject -->
 	<p class="title">subject</p>
 	<div class="dropdown fixed-length">
-	  <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">subject </button>
-	  <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+	  <button class="btn btn-default dropdown-toggle" type="button" id="dropSubject" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">subject </button>
+	  <ul class="dropdown-menu" aria-labelledby="dropSubject">
 	    <li><a href="#">Class 1</a></li>
 	    <li><a href="#">Class 2</a></li>
 	    <li><a href="#">Class 3</a></li>
@@ -139,8 +139,8 @@
 	<!-- Task / assignment -->
 	<p class="title">assignment</p>
 	<div class="dropdown fixed-length">
-	  <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">assignment </button>
-	  <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+	  <button class="btn btn-default dropdown-toggle" type="button" id="dropAssignment" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">assignment </button>
+	  <ul class="dropdown-menu" aria-labelledby="dropAssignment">
 	    <li><a href="#">Task 1</a></li>
 	    <li><a href="#">Task 2</a></li>
 	    <li><a href="#">Task 3</a></li>
@@ -153,8 +153,8 @@
 	<!-- Select Time / time length-->
 	<p class="title">time length</p>
 	<div class="dropdown" style="display:inline">
-	  <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">0 </button><span class="title"> hr</span>
-	  <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+	  <button class="btn btn-default dropdown-toggle" type="button" id="dropHour" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">0 </button><span class="title"> hr</span>
+	  <ul class="dropdown-menu" aria-labelledby="dropHour">
 	    <li><a href="#">1</a></li>
 	    <li><a href="#">2</a></li>
 	    <li><a href="#">3</a></li>
@@ -163,8 +163,8 @@
 	&nbsp;&nbsp;
 
 	<div class="dropdown" style="display:inline">
-	  <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">0 </button> <span class="title">min</span>
-	  <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+	  <button class="btn btn-default dropdown-toggle" type="button" id="dropMinute" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">0 </button> <span class="title">min</span>
+	  <ul class="dropdown-menu" aria-labelledby="dropMinute">
 	    <li><a href="#">1</a></li>
 	    <li><a href="#">2</a></li>
 	    <li><a href="#">3</a></li>
@@ -176,33 +176,74 @@
 	<!-- Breaks -->
 	<p class="title">breaks</p>
 	<div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
-	  <div class="btn-group mr-2" role="group" aria-label="First group">
-	    <button type="button" class="btn btn-secondary">1</button>
-	    <button type="button" class="btn btn-secondary">2</button>
-	    <button type="button" class="btn btn-secondary">3</button>
-	    <button type="button" class="btn btn-secondary">4</button>
-	    <button type="button" class="btn btn-secondary">5</button>
-	    <button type="button" class="btn btn-secondary">6</button>
-	  </div>
+	  <!-- <div class="btn-group mr-2" role="group" aria-label="First group"> -->
+	 
+	    <button type="button" class="btn btn-secondary break-btn" onclick="selectTime(1)">1</button>
+	    <button type="button" class="btn btn-secondary break-btn" onclick="selectTime(2)">2</button>
+	    <button type="button" class="btn btn-secondary break-btn" onclick="selectTime(3)">3</button>
+	    <button type="button" class="btn btn-secondary break-btn" onclick="selectTime(4)">4</button>
+	    <button type="button" class="btn btn-secondary break-btn" onclick="selectTime(5)">5</button>
+	    <button type="button" class="btn btn-secondary break-btn" onclick="selectTime(6)">6</button>
+	    
+	  <!-- </div> -->
 	</div>
 	<br>
 
 	<div>
 		<a href='/'><span class="glyphicon glyphicon-arrow-left left"></span></a>
-		<a href='timer'><span class="glyphicon glyphicon-arrow-right right"></span></a>
+		
+		<!-- invisible form to send data -->
+
+		<form action="timer" method="get" name="invisible" id="send">
+			<input type="hidden" id="subject" name="subject">
+			<input type="hidden" id="assignment" name="assignment">
+			<input type="hidden" id="hour" name="hour">
+			<input type="hidden" id="minute" name="minute">
+			<input type="hidden" id="breaks" name="breaks">
+			<!-- <input type="submit" value="Submit" id="other" name="what" onclick="fillForm()"> -->
+			<button onclick="fillForm()" style="float:right"><span class="glyphicon glyphicon-arrow-right right"></button>
+		</form>
+
+
+
+		<!-- <a href='timer' onclick="fillForm()"><span class="glyphicon glyphicon-arrow-right right"></span></a> -->
 		<br>
 		<p class="left title">save for later</p>
 		<p class="right title">let's study!</p>
 	</div>
 
-	</div>
+	
+
+
+</div>
 
 <script>
 	
 $(".dropdown-menu li a").click(function(){
 	$(this).parents(".dropdown").find('.btn').html($(this).text()+' ');
-	$(this).parents(".dropdown").find('.btn').val($(this).data('value'));
+	// $(this).parents(".dropdown").find('.btn').val($(this).data('value'));
+	$(this).parents(".dropdown").find('.btn').val($(this).text());
 });
+
+function selectTime(n){
+	document.getElementById("breaks").value = n;
+	$(".btn-secondary").css("background-color","rgb(209, 98, 118)");
+	// $(this).css("background-color","rgb(209,144,156)");
+	$(this).css("background-color","white");
+}
+
+function fillForm(){
+	document.getElementById("subject").value = document.getElementById("dropSubject").value;
+	document.getElementById("assignment").value = document.getElementById("dropAssignment").value;
+	document.getElementById("hour").value = document.getElementById("dropHour").value;
+	document.getElementById("minute").value = document.getElementById("dropMinute").value;
+
+	// document.invisible.submit();
+	// document.forms[0].submit();
+	// $('#send').submit();
+}
+
+
 </script>
 
 

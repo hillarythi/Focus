@@ -15,6 +15,7 @@ var todo = require('./routes/main_todo');
 var settings = require('./routes/main_settings');
 var timer = require('./routes/timer');
 var new_subject = require('./routes/new_subject');
+var current = require('./routes/current'); 
 // Example route
 // var user = require('./routes/user');
 
@@ -48,6 +49,7 @@ app.get('/main_settings', settings.view);
 app.get('/main_timer', new_timer.view);
 app.get('/timer', timer.view);
 app.get('/new_subject', new_subject.view)
+// app.get('/current', current.changeCurrent); //add task to current json
 // Example route
 // app.get('/users', user.list);
 

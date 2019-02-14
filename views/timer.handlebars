@@ -3,11 +3,18 @@
 <head>
 	<meta charset="utf-8">
 	<title>start timer</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css">
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	<!-- fonts -->
+	<link href="https://fonts.googleapis.com/css?family=Fira+Sans" rel="stylesheet">
 	<style>
+	body{
+		font-family: 'Fira Sans', sans-serif;
+		font-weight: lighter !important; /*not working*/
+	}
 	.navbar {
 	    width:100%;
 	    margin:0px auto;
@@ -22,6 +29,10 @@
 	    margin:0;
 	    padding:0;
 	}
+	.navbar .glyphicon{
+		font-size:200%;
+		color:white;
+	}
 	a:hover{
 		text-decoration:none;
 	}
@@ -32,19 +43,22 @@
 	.glyphicon:hover{
 		color:black;
 	}
+	.dusty-gray{
+		background-color: rgb(104,124,135);
+	}
 	</style>
 </head>
 <body>
 
 	<!-- NAVBAR -->
-	<ul class="navbar border-top">
+	<ul class="navbar border-top dusty-gray">
 		<li class="border-right"><a href="main_timer" class="glyphicon glyphicon-plus"></a></li>
 		<li class="border-right"><a href="main_todo" class="glyphicon glyphicon-th-list"></a></li>
 		<li class="border-right"><a href="main_log" class="glyphicon glyphicon-time"></a></li>
 		<li><a href="main_settings" class="glyphicon glyphicon-cog"></a></li>
 	</ul>
 
-	<h1> START TIMER </h1>
+	<h1>Subject: {{subject}}</h1>
 
 </body>
 </html>
