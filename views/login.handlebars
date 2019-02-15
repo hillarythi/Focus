@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<title>Home</title>
-	<!-- <meta name="viewport" content="width=device-width, initial-scale=1"> -->
+	<meta name="viewport" content="width=device-width, initial-scale=1">
 
 	<!-- bootstrap, js-->
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
@@ -36,18 +36,24 @@
 			/* for some reason makes the buttons unaligned when both top and left have margins */
 		}
 		.center-page{
-			text-align:center;
-			transform: translate(2px,60%);
+		  display: flex;
+		  flex-direction: column;
+		  justify-content: center;
+		  align-items: center;
+		  text-align: center;
+		  min-height: 100vh;
+		  transform: translate(0%, -10%);
 		}
 		.glyphicon, .btn{
 			font-size:400%;
 			color:white;
 		}
 		#app-name{
-			position: fixed;
+			/*position: fixed;*/
+			text-align:center;
 			top: 10%;
-			left: 38%; /* hard coding this part? */
-			font-size: 100px;
+			left: 30%; 
+			font-size: 50px;
 			color:gray;
 		}
 
@@ -57,18 +63,43 @@
 		.dusty-blue{
 			background-color: rgb(153,195,203);
 		}
+		.space{
+			margin-top: 10%;
+		}
+		#login-form{
+			/*position: fixed;*/
+			top: 30%;
+			/*left: 30%; */
+			/*font-size: 50px;*/
+			/*color:gray;*/
+			text-align:center;
+			vertical-align:center;
+		}
 
 	</style>
 
 </head>
 <body>
 
+<div class="center-page">
 	<p id="app-name">focus</p>
-	<div class="center-page">
-		<div class="form-group"><input type="email" class="form-control" id="subjectTitle" placeholder="Email"></div>
-		<div class="form-group"><input type="password" class="form-control" id="subjectTitle" placeholder="Password"></div>
-		<a href="index" role="button" type="submit" class="btn btn-primary">Log In</button>
-	</div>
+	<br><br>
+
+	<!-- <form action="index" onsubmit="return checkLogin()"> -->
+
+	<form action="index">
+	  <div class="form-group">
+	    <label for="exampleFormControlInput1" style="float:left">Email</label>
+	    <input type="email" id="login-email" class="form-control" placeholder="ixd@gmail.com">
+  	  </div>
+  	  <div class="form-group">
+	    <label for="exampleFormControlInput2" style="float:left">Password</label>
+	    <input type="password" id="login-password" class="form-control" placeholder="cse170">
+  	  </div>
+		<!-- <a href="index" type="submit" class="btn btn-primary">Log In</a> -->
+	  <input type="submit" class="btn-primary" value="Submit">
+	</form>
+</div>
 
 
 
@@ -77,6 +108,16 @@
 
 $(".home-icon").width('10%');	
 $(".home-icon").height( $(".home-icon").width() );
+
+function checkLogin(){
+	var e = $("#login-email").value;
+	var p = $("#login-password").value;
+	console.log( "e" + e);
+	if ( e == "ixd@gmail.com" && p == "cse170" ){
+		return true;
+	}
+	return false;
+}
 
 
 </script>
