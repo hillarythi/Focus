@@ -8,6 +8,7 @@ var http = require('http');
 var path = require('path');
 var handlebars = require('express3-handlebars')
 
+var login = require('./routes/login');
 var index = require('./routes/index');
 var new_timer = require('./routes/main_timer');
 var log = require('./routes/main_log');
@@ -41,7 +42,8 @@ if ('development' == app.get('env')) {
   app.use(express.errorHandler());
 }
 
-app.get('/', index.view);
+app.get('/', login.view);
+app.get('/index', index.view);
 app.get('/main_todo', todo.view);
 app.get('/main_log', log.view);
 app.get('/main_settings', settings.view);
