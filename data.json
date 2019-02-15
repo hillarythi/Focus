@@ -1,0 +1,47 @@
+{
+  "subjects": [
+  {
+    "name": "MATH 183",
+    "tasks": [ {
+      "name":"Study for Midterm"
+    },
+    {
+      "name":"Do Homework 1"
+    }
+    ]
+  },
+  {
+    "name": "COGS 120",
+    "tasks": [ {
+      "name":"Do Lab 5"
+    },
+    {
+      "name":"Do Assignment 5"
+    },
+    {
+      "name":"Read Lecture 5"
+    }
+    ]
+  },
+  {
+    "name": "ECE 109",
+    "tasks": [ {
+      "name":"Study Chapter 4"
+    },
+    {
+      "name":"Do Homework 3"
+    }
+    ]
+  }
+  ],
+  "completed": [
+  {
+    "subject": "ECE 109",
+    "task": "Do homework 2"
+  },
+  {
+    "subject": "COGS 120",
+    "task": "Do Lab 4"
+  }
+  ]
+}

@@ -106,23 +106,31 @@
 	<br><br>
 
 	<!-- OVERALL TASK -->
-	<p class="title">TEST TASK</p>
+	<p class="title">Task</p>
 	<div class="dropdown fixed-length">
-	  <button class="btn btn-default dropdown-toggle" type="button" id="dropTest" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">task </button>
+	  <button class="btn btn-default dropdown-toggle" type="button" id="dropAssignment" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">Task </button>
 	  <ul class="dropdown-menu" aria-labelledby="dropTest">
-	  	<li class="dropdown-header">COURSE 1</li>
+            {{#each subjects}}
+              <li class="dropdown-header">{{name}}</li>
+              {{#each tasks}}
+              <li><a href="#">{{name}}</a></li>
+              {{/each}}
+            {{/each}}
+          </li>
+
+	  	<!--li class="dropdown-header">COURSE 1</li>
 	    <li><a href="#">Task 1</a></li>
 	    <li><a href="#">Task 2</a></li>
 	    <li><a href="#">Task 3</a></li>
 	    <li role="separator" class="divider"></li>
 	    <li class="dropdown-header">COURSE 2</li>
-	    <li><a href="#">Task 1</a></li>
+	    <li><a href="#">Task 1</a></li-->
 	  </ul>
 	</div>
 	<br>
 
 	<!-- Class / subject -->
-	<p class="title">subject</p>
+	<!--p class="title">subject</p>
 	<div class="dropdown fixed-length">
 	  <button class="btn btn-default dropdown-toggle" type="button" id="dropSubject" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">subject </button>
 	  <ul class="dropdown-menu" aria-labelledby="dropSubject">
@@ -131,10 +139,10 @@
 	    <li><a href="#">Class 3</a></li>
 	  </ul>
 	</div>
-	<br>
+	<br-->
 
 	<!-- Task / assignment -->
-	<p class="title">assignment</p>
+	<!--p class="title">assignment</p>
 	<div class="dropdown fixed-length">
 	  <button class="btn btn-default dropdown-toggle" type="button" id="dropAssignment" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">assignment </button>
 	  <ul class="dropdown-menu" aria-labelledby="dropAssignment">
@@ -143,7 +151,7 @@
 	    <li><a href="#">Task 3</a></li>
 	  </ul>
 	</div>
-	<br>
+	<br-->
 	<!-- Add New option? -->
 
 
@@ -244,7 +252,7 @@ function selectTime(n){
 }
 
 function fillForm(){
-	document.getElementById("subject").value = document.getElementById("dropSubject").value;
+//	document.getElementById("subject").value = document.getElementById("dropSubject").value;
 	document.getElementById("assignment").value = document.getElementById("dropAssignment").value;
 	document.getElementById("hour").value = document.getElementById("dropHour").value;
 	document.getElementById("minute").value = document.getElementById("dropMinute").value;

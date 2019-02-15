@@ -60,12 +60,10 @@
 	</div>
 	<!-- Checklist Items -->
 	<div class="list-item" style="padding-top: 42px">
-		
-		<button type="button" class="btn btn-default btn-block home-icon"> Subject 1 </button>
-		<button type="button" class="btn btn-default btn-block home-icon"> Subject 2 </button>
-		<a href="new_subject">
-			<button type="button" class="btn btn-default btn-block home-icon"> +Add New </button>
-		</a>
+		{{#each subjects}}
+		<a role="button" aria-pressed="true" class="btn btn-default btn-block home-icon"> {{name}} </a>
+		{{/each}}
+		<a href="new_subject" role="button" aria-pressed="true" class="btn btn-default btn-block home-icon"> +Add New </a>
 	</div>
 
 </body>

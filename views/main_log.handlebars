@@ -59,12 +59,10 @@
 	<div class="top-bar">
 		<div class = "card"><h5>Completed Tasks</h5></div>
 	</div>
-	<!-- Checklist Items -->
-	<div class="list-item" style="padding-top: 42px">
-		
-		<button type="button" class="btn btn-default btn-block home-icon"> Task 1 </button>
-		<button type="button" class="btn btn-default btn-block home-icon"> Task 2 </button>
-		<button type="button" class="btn btn-default btn-block home-icon"> Task 3 </button>
-	</div>
+        <div class="list item" style="padding-top: 42px">
+		{{#each completed}}
+		<a role="button" aria-pressed="true" class="btn btn-default btn-block home-icon"> {{task}} - {{subject}}</a>
+		{{/each}}
+        </div>
 </body>
 </html>
