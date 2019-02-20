@@ -102,7 +102,7 @@
 
 	<!-- Top left back button -->
 	<div class="container center-page">
-	<a href='/'><span class="glyphicon glyphicon-chevron-left title"></span></a>
+	<a href='index'><span class="glyphicon glyphicon-chevron-left title"></span></a>
 	<br><br>
 
 	<!-- OVERALL TASK -->
@@ -160,6 +160,7 @@
 	<div class="dropdown" style="display:inline">
 	  <button class="btn btn-default dropdown-toggle" type="button" id="dropHour" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">0 </button><span class="title"> hr</span>
 	  <ul class="dropdown-menu" aria-labelledby="dropHour">
+	    <li><a href="#">0</a></li>
 	    <li><a href="#">1</a></li>
 	    <li><a href="#">2</a></li>
 	    <li><a href="#">3</a></li>
@@ -209,7 +210,7 @@
 		
 		<!-- invisible form to send data -->
 
-		<form action="timer" method="get" name="invisible" id="send">
+		<form action="timer" method="get" name="invisible" id="send" onsubmit="return validateForm();">
 			<input type="hidden" id="subject" name="subject">
 			<input type="hidden" id="assignment" name="assignment">
 			<input type="hidden" id="hour" name="hour">
@@ -233,24 +234,70 @@
 </div>
 
 <script>
-	
-$(".dropdown-menu li a").click(function(){
-	$(this).parents(".dropdown").find('.btn').html($(this).text()+' ');
-	// $(this).parents(".dropdown").find('.btn').val($(this).data('value'));
-	$(this).parents(".dropdown").find('.btn').val($(this).text());
 
-	$(this).parents(".dropdown").find('.btn').css("background-color","rgb(209, 98, 118)");
+
+$(document).ready( ()=>{
+	//add event listeners
+
+	//main dropdown text is changed when selected
+	$(".dropdown-menu li a").click(changeText);
+
 });
 
+
+
+
+/* Clicking a break will first reset all break btns to original color */
+// $(".dropdown-menu li a").click(function(){
+// 	$(this).parents(".dropdown").find('.btn').html($(this).text()+' ');
+// 	// $(this).parents(".dropdown").find('.btn').val($(this).data('value'));
+// 	$(this).parents(".dropdown").find('.btn').val($(this).text());
+// 	$(this).parents(".dropdown").find('.btn').css("background-color","rgb(209, 98, 118)");
+// });
+
+
+/* Set as click event, so a selection will be displayed and colored */
+function changeText(){
+	$(this).parents(".dropdown").find('.btn').html($(this).text()+' ');
+	$(this).parents(".dropdown").find('.btn').val($(this).text());
+	$(this).parents(".dropdown").find('.btn').css("background-color","rgb(209, 98, 118)");
+}
+
+
+/* Dynamic coloring for break selection */
 function selectTime(n){
+	//resets to original color
 	document.getElementById("breaks").value = n;
 	$(".btn-secondary").css("background-color","rgb(212,171,179)");
 
+	//highlights selected amount
 	for (var i = 0; i < n; i++){
 		$('.break-btn').eq(i).css("background-color","rgb(209, 98, 118)");
 	}
 }
 
+/* Validates that all form fields are filled out, otherwise throw error */
+/* Error Checks */
+function validateForm(){
+	var t1 = document.getElementById("assignment").value;
+	var t2 = document.getElementById("hour").value;
+	var t3 = document.getElementById("minute").value;
+	var t4 = document.getElementById("breaks").value;
+	if (t1 == "" || t1 == null || 
+		t2 == "" || t2 == null || 
+		t3 == "" || t3 == null || 
+		t4 == "" || t4 == null){
+		alert("Please fill in all categories.");
+		return false;
+	}
+	if ( (t2==0) && (t3<15)){
+		alert("Please set your timer to at least 15 minutes.");
+		return false;
+	}
+	return true;
+}
+
+/* Fills out invisible form fields before submitting to timer */
 function fillForm(){
 //	document.getElementById("subject").value = document.getElementById("dropSubject").value;
 	document.getElementById("assignment").value = document.getElementById("dropAssignment").value;
@@ -262,6 +309,7 @@ function fillForm(){
 	// $('#send').submit();
 }
 
+//add more functions about break calculation stuff?
 
 </script>
 
