@@ -302,12 +302,19 @@ var displayNewTasks = function(){
 		$("#addTasks").append( taskCompleteTag );
 	}
 
-	//append new task thing 
-
 	//resets the click event for changing dropdown text
 	$("#addTasks li a").click(changeText);
 
+	//append new task, important to add this after above click bonding
+	$("#addTasks").append('<li><a href="new_subject" onclick="return routeNewTask();">+ New Task</a></li>');
 }
+
+/* Confirms leave upon clicking "+ Add New" task, will route to new_subject page to add to todo list */
+function routeNewTask(){
+	return confirm("Are you sure you want to leave this page create a new task? Your changes will not be saved.");
+}
+
+
 
 var display = function(next){
 	$(next).css('display', 'block');
