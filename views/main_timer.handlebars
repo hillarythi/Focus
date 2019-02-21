@@ -87,6 +87,15 @@
 	}
 	
 	</style>
+
+	<!-- //delete -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.1/handlebars.min.js"></script>
+	<script>
+	
+	// Handlebars.registerHelper("make", function() {
+	//   return  new Handlebars.SafeString("meow");
+	// });
+	</script>
 </head>
 
 
@@ -123,8 +132,9 @@
 		  <button class="btn btn-default dropdown-toggle" type="button" id="dropSubject" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">subject </button>
 		  <ul class="dropdown-menu" aria-labelledby="dropSubject">
 	         {{#each subjects}}
-		    	<li class="{{name}}" id="{{@index}}"><a href="#">{{name}}</a></li>
-	        {{/each}}
+	         	<!-- change id here  -->
+		    	<li id="{{@index}}"><a href="#" id="{{make}}">{{name}}</a></li>
+	         {{/each}}
 		  </ul>
 		</div>
 	</div>
@@ -138,7 +148,9 @@
 		<div class="dropdown fixed-length">
 		  <button class="btn btn-default dropdown-toggle" type="button" id="dropAssignment" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">assignment </button>
 		  <ul class="dropdown-menu" aria-labelledby="dropAssignment">
-	
+		    	<span id="edit-tasks">{{#each subjects.[1].tasks}}</span>
+		    		<li><a href="#">{{name}}</a></li> 
+	        	{{/each}}
 		  </ul>	
 		</div>
 	</div>
@@ -244,15 +256,28 @@ $(document).ready( ()=>{
 
 
 //when new subject is selected
-	$("body").on('DOMSubtreeModified', "#dropAssignment", displayTasks);
+	$("body").on('DOMSubtreeModified', "#dropSubject", displayTasks);
 
 });
 
+function makeId(taskName){
+	return taskName.replace(/\s/g,''); 
+}
+
 
 var displayTasks = function(){
-	var currSubject = $("#dropAssignment").html();
-	var currIndex = $("."+currSubject).attr('id');
-	$("#edit-tasks").html("\{\{#each subjects.["+currIndex+"].tasks\}\}");
+	var currSubject = $("#dropSubject").html();
+	if (currSubject == ""){
+		//first fire due to domsubtree modified
+		return;
+	}
+	//change
+	var test = "#"+makeId(currSubject);
+	console.log("TEST: " + test);
+	//var currIndex = $(test).parent().id;//attr('id');
+	var currIndex = $(test).html();
+	console.log("INDEX IS: "+currIndex);
+	// $("#edit-tasks").html("\{\{#each subjects.["+currIndex+"].tasks\}\}");
 	//\{\{#each subjects.[1].tasks\}\}
 }
 
