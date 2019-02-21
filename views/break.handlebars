@@ -76,6 +76,7 @@
 	.break-btn{
 		font-size:200%;
 		background-color: var(--dusty-pink);
+		color:white;
 	}
 
 	/*for exit button/arrow*/
@@ -116,22 +117,23 @@
 
 		<!-- breaks -->
 		<h3 class="font-blue no-margin">breaks</h3>
-		<div class="btn-group no-margin" role="group" aria-label="First group" id="breaks-left">
-		<!-- number of breaks added here  -->
-	 	</div>
-
-
-
+		<a href="break" onclick="return confirmBreak()">
+			<div class="btn-group no-margin" role="group" aria-label="First group" id="breaks-left">
+			<!-- number of breaks added here  -->
+		 	</div>
+	 	</a>
 
  	</div>
 
+ 	<!-- End Session Btn -->
  	<div id="end-session-btn">
-		<a href='break' onclick="return confirmLeave()">
+		<a href='index' onclick="return confirmLeave()">
 			<span class="glyphicon glyphicon-arrow-right font-gray" style="float:right; font-size: 40px"></span>
 		<br><h3 class="font-blue">end session</h3></a>
 	
 	</div>
 
+	<!-- Extra White Space -->
 	<div style="margin: 20%">
 		<br>
 	<!-- space under submit button so it scrolls if doesnt fit screen -->
@@ -146,9 +148,10 @@ $( document ).ready(function() {
 });
 
 function populateBreaks(){
-	//fix bc needs to be dynamic as breaks are spent?
+	//TODO fix bc needs to be dynamic as breaks are spent?
+	//removed btn-secondary from button class to remove black onclick animation
 	for (var i = 0; i < {{breaks}}; i++){
-		$('#breaks-left').append('<button type="button" class="btn btn-secondary break-btn"><span class="glyphicon glyphicon-star"></span></button>');
+		$('#breaks-left').append('<button type="button" class="btn break-btn"><span class="glyphicon glyphicon-star"></span></button>');
 	}
 }
 
@@ -194,6 +197,10 @@ function confirmLeave(){
 	//TODO Change so that leave will log current time or something
 }
 
+function confirmBreak(){
+	return confirm('You are in the middle of a session, are you sure you want to take a break early?');
+	//TODO Change so that leave will log current time or something
+}
 
 
 </script>
