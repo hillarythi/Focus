@@ -88,14 +88,7 @@
 	
 	</style>
 
-	<!-- //delete -->
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.1/handlebars.min.js"></script>
-	<script>
-
-	// Handlebars.registerHelper("make", function() {
-	//   return  new Handlebars.SafeString("meow");
-	// });
-	</script>
+	
 </head>
 
 
@@ -140,7 +133,6 @@
 	</div>
 	<br>
 
-	<!-- need an on change above to edit tihs -->
 
 	<!-- Task / assignment -->
 	<div id="show_assignment" style="display:none">
@@ -148,15 +140,11 @@
 		<div class="dropdown fixed-length">
 		  <button class="btn btn-default dropdown-toggle" type="button" id="dropAssignment" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">assignment </button>
 		  <ul class="dropdown-menu" aria-labelledby="dropAssignment" id="addTasks">
-		    	<!-- <span id="edit-tasks">{/{#each subjects.[1].tasks}/}</span> -->
-		    	<!-- <span id="edit-tasks">/{/{#each tasks.[0]/}/}</span> -->
-		    		<!-- <li><a href="#">{/{name}/}</a></li>  -->
-	        	<!-- {/{/each}/} -->
+		  	<!-- dynamically populate in js from subject above -->
 		  </ul>	
 		</div>
 	</div>
 	<br>
-	<!-- Add New option? -->
 
 
 	<!-- Select Time / time length-->
@@ -302,9 +290,8 @@ var displayNewTasks = function(){
 	//clear previously chosen assignment (#addTasks's parent's first element)
 	$("#addTasks").parent().find('.btn').html("assignment");
 	$("#addTasks").parent().find('.btn').css("background-color","rgb(212,171,179)");
+	$("#addTasks").parent().find('.btn').val(""); //reset so form cant submit cause empty
 	
-	//reset selected flag
-	$("#addTasks").attr('selected', false);
 
 	//TODO find a way to amke it so if previously selected subject is same, dont reset assignemnts
 
@@ -315,10 +302,11 @@ var displayNewTasks = function(){
 		$("#addTasks").append( taskCompleteTag );
 	}
 
+	//append new task thing 
+
 	//resets the click event for changing dropdown text
 	$("#addTasks li a").click(changeText);
 
-//delete the edit-tasks ting?	
 }
 
 var display = function(next){
@@ -327,30 +315,21 @@ var display = function(next){
 
 
 
-// $(".dropdown-menu li a").click(function(){
-// 	$(this).parents(".dropdown").find('.btn').html($(this).text()+' ');
-// 	// $(this).parents(".dropdown").find('.btn').val($(this).data('value'));
-// 	$(this).parents(".dropdown").find('.btn').val($(this).text());
-// 	$(this).parents(".dropdown").find('.btn').css("background-color","rgb(209, 98, 118)");
-// });
-
-
 /* Set as click event, so a selection will be displayed and colored */
 function changeText(){
 	$(this).parents(".dropdown").find('.btn').html($(this).text()+' ');
 	$(this).parents(".dropdown").find('.btn').val($(this).text());
 	$(this).parents(".dropdown").find('.btn').css("background-color","rgb(209, 98, 118)");
-	$(this).parents(".dropdown").find('.btn').attr('selected', true);
 }
 
 
 /* Dynamic coloring for break selection */
 function selectTime(n){
-	//resets to original color
+	//resets all buttons to original color
 	document.getElementById("breaks").value = n;
 	$(".btn-secondary").css("background-color","rgb(212,171,179)");
 
-	//highlights selected amount
+	//highlights new selected amount
 	for (var i = 0; i < n; i++){
 		$('.break-btn').eq(i).css("background-color","rgb(209, 98, 118)");
 	}
@@ -376,19 +355,11 @@ function validateForm(){
 	}
 	return true;
 }
-// function validateForm(){
-// 	//check that all selected fields are set
-// 	var t1 = $("#dropSubject").attr('selected');
-// 	var t2 = $("#dropAssignment").attr('selected');
-// 	var t3 = $("#dropHour").attr('selected');
-// 	var t4 = $("#dropMinute").attr('selected');
-// 	var t5 = document.getElementById("breaks").value; //this one in text
-// 	return ( t1 && t2 && t3 && t4 && (t5!="" && t5!=null));
-// }
+
 
 /* Fills out invisible form fields before submitting to timer */
 function fillForm(){
-//	document.getElementById("subject").value = document.getElementById("dropSubject").value;
+	document.getElementById("subject").value = document.getElementById("dropSubject").value;
 	document.getElementById("assignment").value = document.getElementById("dropAssignment").value;
 	document.getElementById("hour").value = document.getElementById("dropHour").value;
 	document.getElementById("minute").value = document.getElementById("dropMinute").value;
