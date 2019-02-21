@@ -78,6 +78,13 @@
 		color: rgb(153,195,203);
 		margin-bottom:0px;
 	}
+	#show_submit{
+		position:fixed;
+		/*text-align:center;*/
+		width:80%;
+		bottom:10%;
+		left:10%;
+	}
 	
 	</style>
 </head>
@@ -106,7 +113,7 @@
 	<br><br>
 
 	<!-- OVERALL TASK -->
-	<p class="title">task</p>
+	<!-- <p class="title">task</p>
 	<div class="dropdown fixed-length">
 	  <button class="btn btn-default dropdown-toggle" type="button" id="dropAssignment" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">Task </button>
 	  <ul class="dropdown-menu" aria-labelledby="dropTest">
@@ -116,96 +123,95 @@
               <li><a href="#">{{name}}</a></li>
               {{/each}}
             {{/each}}
-          </li>
-
-	  	<!--li class="dropdown-header">COURSE 1</li>
-	    <li><a href="#">Task 1</a></li>
-	    <li><a href="#">Task 2</a></li>
-	    <li><a href="#">Task 3</a></li>
-	    <li role="separator" class="divider"></li>
-	    <li class="dropdown-header">COURSE 2</li>
-	    <li><a href="#">Task 1</a></li-->
 	  </ul>
+	</div>
+	<br> -->
+
+	<!-- Class / subject -->
+	<div id="show_subject">
+		<p class="title">subject</p>
+		<div class="dropdown fixed-length">
+		  <button class="btn btn-default dropdown-toggle" type="button" id="dropSubject" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">subject </button>
+		  <ul class="dropdown-menu" aria-labelledby="dropSubject">
+		    {{#each subjects}}
+		    	<li><a href="#">{{name}}</a></li> 
+	        {{/each}}
+		  </ul>
+		</div>
 	</div>
 	<br>
 
-	<!-- Class / subject -->
-	<!--p class="title">subject</p>
-	<div class="dropdown fixed-length">
-	  <button class="btn btn-default dropdown-toggle" type="button" id="dropSubject" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">subject </button>
-	  <ul class="dropdown-menu" aria-labelledby="dropSubject">
-	    <li><a href="#">Class 1</a></li>
-	    <li><a href="#">Class 2</a></li>
-	    <li><a href="#">Class 3</a></li>
-	  </ul>
-	</div>
-	<br-->
-
 	<!-- Task / assignment -->
-	<!--p class="title">assignment</p>
-	<div class="dropdown fixed-length">
-	  <button class="btn btn-default dropdown-toggle" type="button" id="dropAssignment" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">assignment </button>
-	  <ul class="dropdown-menu" aria-labelledby="dropAssignment">
-	    <li><a href="#">Task 1</a></li>
-	    <li><a href="#">Task 2</a></li>
-	    <li><a href="#">Task 3</a></li>
-	  </ul>
+	<div id="show_assignment" style="display:none">
+		<p class="title">assignment</p>
+		<div class="dropdown fixed-length">
+		  <button class="btn btn-default dropdown-toggle" type="button" id="dropAssignment" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">assignment </button>
+		  <ul class="dropdown-menu" aria-labelledby="dropAssignment">
+		    {{#each subjects}}
+		    	<li><a href="#">{{name}}</a></li> 
+	        {{/each}}
+		  </ul>
+		</div>
 	</div>
-	<br-->
+	<br>
 	<!-- Add New option? -->
 
 
 	<!-- Select Time / time length-->
-	<p class="title">time length</p>
-	<div class="dropdown" style="display:inline">
-	  <button class="btn btn-default dropdown-toggle" type="button" id="dropHour" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">0 </button><span class="title"> hr</span>
-	  <ul class="dropdown-menu" aria-labelledby="dropHour">
-	    <li><a href="#">0</a></li>
-	    <li><a href="#">1</a></li>
-	    <li><a href="#">2</a></li>
-	    <li><a href="#">3</a></li>
-	    <li><a href="#">4</a></li>
-	  </ul>
-	</div>
-	&nbsp;&nbsp;
+	<div id="show_time" style="display:none">
+		<p class="title">time length</p>
+		<div class="dropdown" style="display:inline">
+		  <button class="btn btn-default dropdown-toggle" type="button" id="dropHour" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">0 </button><span class="title"> hr</span>
+		  <ul class="dropdown-menu" aria-labelledby="dropHour">
+		    <li><a href="#">0</a></li>
+		    <li><a href="#">1</a></li>
+		    <li><a href="#">2</a></li>
+		    <li><a href="#">3</a></li>
+		    <li><a href="#">4</a></li>
+		  </ul>
+		</div>
+		&nbsp;&nbsp;
 
-	<div class="dropdown" style="display:inline">
-	  <button class="btn btn-default dropdown-toggle" type="button" id="dropMinute" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">0 </button> <span class="title">min</span>
-	  <ul class="dropdown-menu" aria-labelledby="dropMinute">
-	  	<li><a href="#">0</a></li>
-	    <li><a href="#">5</a></li>
-	    <li><a href="#">10</a></li>
-	    <li><a href="#">15</a></li>
-	    <li><a href="#">20</a></li>
-	    <li><a href="#">25</a></li>
-	    <li><a href="#">30</a></li>
-	    <li><a href="#">35</a></li>
-	    <li><a href="#">40</a></li>
-	    <li><a href="#">45</a></li>
-	    <li><a href="#">50</a></li>
-	    <li><a href="#">55</a></li>
-	  </ul>
-	</div>
-	<br><br>
-
-
-	<!-- Breaks -->
-	<p class="title">breaks</p>
-	<div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
-	  <div class="btn-group mr-2" role="group" aria-label="First group">
-	 
-	    <button type="button" class="btn btn-secondary break-btn" onclick="selectTime(1)">1</button>
-	    <button type="button" class="btn btn-secondary break-btn" onclick="selectTime(2)">2</button>
-	    <button type="button" class="btn btn-secondary break-btn" onclick="selectTime(3)">3</button>
-	    <button type="button" class="btn btn-secondary break-btn" onclick="selectTime(4)">4</button>
-	    <button type="button" class="btn btn-secondary break-btn" onclick="selectTime(5)">5</button>
-	    <!-- <button type="button" class="btn btn-secondary break-btn" onclick="selectTime(6)">6</button> -->
-	    <!-- can add back more breaks, can't get them to align rn in timer.handlebars -->
-	  </div>
+		<div class="dropdown" style="display:inline">
+		  <button class="btn btn-default dropdown-toggle" type="button" id="dropMinute" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">0 </button> <span class="title">min</span>
+		  <ul class="dropdown-menu" aria-labelledby="dropMinute">
+		  	<li><a href="#">0</a></li>
+		    <li><a href="#">5</a></li>
+		    <li><a href="#">10</a></li>
+		    <li><a href="#">15</a></li>
+		    <li><a href="#">20</a></li>
+		    <li><a href="#">25</a></li>
+		    <li><a href="#">30</a></li>
+		    <li><a href="#">35</a></li>
+		    <li><a href="#">40</a></li>
+		    <li><a href="#">45</a></li>
+		    <li><a href="#">50</a></li>
+		    <li><a href="#">55</a></li>
+		  </ul>
+		</div>
 	</div>
 	<br>
 
-	<div>
+
+	<!-- Breaks -->
+	<div id="show_breaks" style="display:none">
+		<p class="title">breaks</p>
+		<div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
+		  <div class="btn-group mr-2" role="group" aria-label="First group">
+		 
+		    <button type="button" class="btn btn-secondary break-btn" onclick="selectTime(1)">1</button>
+		    <button type="button" class="btn btn-secondary break-btn" onclick="selectTime(2)">2</button>
+		    <button type="button" class="btn btn-secondary break-btn" onclick="selectTime(3)">3</button>
+		    <button type="button" class="btn btn-secondary break-btn" onclick="selectTime(4)">4</button>
+		    <button type="button" class="btn btn-secondary break-btn" onclick="selectTime(5)">5</button>
+		    <!-- <button type="button" class="btn btn-secondary break-btn" onclick="selectTime(6)">6</button> -->
+		    <!-- can add back more breaks, can't get them to align rn in timer.handlebars -->
+		  </div>
+		</div>
+	</div>
+	<br>
+
+	<div id="show_submit" style="display:none">
 		<a href='/'><span class="glyphicon glyphicon-arrow-left left"></span></a>
 		
 		<!-- invisible form to send data -->
@@ -224,8 +230,8 @@
 
 		<!-- <a href='timer' onclick="fillForm()"><span class="glyphicon glyphicon-arrow-right right"></span></a> -->
 		<br>
-		<p class="left title">save for later</p>
-		<p class="right title">let's study!</p>
+			<p class="left title">save for later</p>
+			<p class="right title">let's study!</p>
 	</div>
 
 	
@@ -242,12 +248,23 @@ $(document).ready( ()=>{
 	//main dropdown text is changed when selected
 	$(".dropdown-menu li a").click(changeText);
 
+	$("#show_subject").one( 'click', () => {  display("#show_assignment")} );
+	$("#show_assignment").one( 'click', () => {  display("#show_time")} );
+	$("#show_time").one( 'click', () => {  display("#show_breaks")} );
+	$("#show_breaks").one( 'click', () => {  display("#show_submit")} );
+	// $("#show_subject").click(display("#show_assignment"));
+	// $("#show_assignment").one("click", display("#show_time"));
+	// $("#show_time").one("click", display("#show_breaks"));
+	// $("#show_breaks").one("click", display("#show_submit"));
+
 });
 
+var display = function(next){
+	$(next).css('display', 'block');
+}
 
 
 
-/* Clicking a break will first reset all break btns to original color */
 // $(".dropdown-menu li a").click(function(){
 // 	$(this).parents(".dropdown").find('.btn').html($(this).text()+' ');
 // 	// $(this).parents(".dropdown").find('.btn').val($(this).data('value'));
