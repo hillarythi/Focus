@@ -117,11 +117,11 @@
 
 		<!-- breaks -->
 		<h3 class="font-blue no-margin">breaks</h3>
-		<a href="break" onclick="return confirmBreak()">
-			<div class="btn-group no-margin" role="group" aria-label="First group" id="breaks-left">
+		<!-- <a href="" onclick="return confirmBreak()"> -->
+			<div class="btn-group no-margin" role="group" aria-label="First group" id="breaks-left" onclick="confirmBreak()">
 			<!-- number of breaks added here  -->
 		 	</div>
-	 	</a>
+	 	<!-- </a> -->
 
  	</div>
 
@@ -139,14 +139,33 @@
 	<!-- space under submit button so it scrolls if doesnt fit screen -->
 	</div>
 
+	<!-- Hidden Forms submissions -->
+	<form action="break" method="post" id="finishBreak">
+		<input type="hidden" id="finish_breaks" name="breaks_before" value="{{breaks}}">
+		<input type="hidden" id="finish_time" name="total_minutes_spent" value="{{breaks_total}}">
+	</form>
+
+	<form action="break" method="post" id="earlyBreak">
+		<input type="hidden" id="early_breaks" name="breaks_before" value="{{breaks}}">
+		<input type="hidden" id="early_total_time" name="total_minutes_spent">
+	</form>
+
+
 
 <script>
+
+
+var currHours;
+var currMinutes;
 
 $( document ).ready(function() {
     populateBreaks();
     startCountdown();
+    currHours = 0;
+    currMinutes = 0;
 });
 
+/* pre-loading : show as many buttons as there are breaks left */
 function populateBreaks(){
 	//TODO fix bc needs to be dynamic as breaks are spent?
 	//removed btn-secondary from button class to remove black onclick animation
@@ -155,8 +174,8 @@ function populateBreaks(){
 	}
 }
 
-function startCountdown(){
-//change because countdown is supposed to be till next break not overall? can have at bottom
+/* Constant countdown timer */
+function startCountdown(){ //currently countdown to next break
 
 	// Set the date we're counting down to
 	var countDownDate = new Date();
@@ -180,6 +199,8 @@ function startCountdown(){
 	  var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
 	  var seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
+	  currHours = hours; currMinutes = minutes; 
+
 	  // Display the result in the element with id="demo"
 	  document.getElementById("countdown").innerHTML = "  " + hours + "h "
 	  + minutes + "m " + seconds + "s";
@@ -188,19 +209,45 @@ function startCountdown(){
 	  if (distance < 0) {
 	    clearInterval(x);
 	    document.getElementById("countdown").innerHTML = "DONE";
+
+	    //when timer is over, send form over to break page
+	    document.getElementById("finishBreak").submit();
+
+	    //TODO : edit json to be total time - break time {breaks, breaks_hr, breaks_min} hidden form?
+	    //on both end and navigation away, add functionality
 	  }
 	}, 1000);
 }
 
-function confirmLeave(){
+
+/**** LEAVING PAGE FROM BUTTONS *****/
+
+function populateEarlyForm(){
+	var totalBefore = ({{breaks_hr}}*60)+{{breaks_min}};
+	var totalAfter = (currHours*60)+currMinutes;
+	console.log("Before: "+totalBefore);
+	console.log("after: "+totalAfter);
+	document.getElementById("early_total_time").value = (totalBefore - totalAfter);
+}
+
+/* leaving timer to break by taking break early */
+function confirmBreak(){
+	var c = confirm('You are in the middle of a session, are you sure you want to take a break early?');
+	if (c){
+		//if leave, populate form to post to break page
+		//when timer is over, send form over to break page
+		populateEarlyForm();
+	    document.getElementById("earlyBreak").submit();
+	}
+	//TODO Change so that leave will log current time or something
+}
+
+/* leaving timer from end session button or navbar */
+function confirmLeave(){ 
 	return confirm('You are in the middle of a session, are you sure you want to leave? Your data will be lost');
 	//TODO Change so that leave will log current time or something
 }
 
-function confirmBreak(){
-	return confirm('You are in the middle of a session, are you sure you want to take a break early?');
-	//TODO Change so that leave will log current time or something
-}
 
 
 </script>

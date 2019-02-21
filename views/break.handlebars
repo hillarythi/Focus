@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 	<meta charset="utf-8">
-	<title>start timer</title>
+	<title>break timer</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
@@ -116,7 +116,7 @@
 		<h1 class="font-blue pad-10 no-margin" id="assignment">{{assignment}}</h1>
 
 		<!-- breaks -->
-		<h3 class="font-blue no-margin">breaks</h3>
+		<h3 class="font-blue no-margin">breaks left</h3>
 		<a href="break" onclick="return confirmBreak()">
 			<div class="btn-group no-margin" role="group" aria-label="First group" id="breaks-left">
 			<!-- number of breaks added here  -->
@@ -155,15 +155,13 @@ function populateBreaks(){
 	}
 }
 
-function startCountdown(){
-//change because countdown is supposed to be till next break not overall? can have at bottom
+function startCountdown(){ //counts down 5 min to next study session
 
 	// Set the date we're counting down to
 	var countDownDate = new Date();
 	// countDownDate.setHours(countDownDate.getHours()+{{total_hr}});
 	// countDownDate.setMinutes(countDownDate.getMinutes()+{{total_min}});
-	countDownDate.setHours(countDownDate.getHours()+{{breaks_hr}});
-	countDownDate.setMinutes(countDownDate.getMinutes()+{{breaks_min}});
+	countDownDate.setMinutes(countDownDate.getMinutes()+5);
 	countDownDate = countDownDate.getTime();
 
 	// Update the count down every 1 second
@@ -176,13 +174,11 @@ function startCountdown(){
 	  var distance = countDownDate - now;
 
 	  // Time calculations for days, hours, minutes and seconds
-	  var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
 	  var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
 	  var seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
-	  // Display the result in the element with id="demo"
-	  document.getElementById("countdown").innerHTML = "  " + hours + "h "
-	  + minutes + "m " + seconds + "s";
+	  // Display the result in the element with id "countdown"
+	  document.getElementById("countdown").innerHTML = "  " + minutes + "m " + seconds + "s";
 
 	  // If the count down is finished, write some text 
 	  if (distance < 0) {

@@ -49,9 +49,9 @@ app.get('/main_todo', todo.view);
 app.get('/main_log', log.view);
 app.get('/main_settings', settings.view);
 app.get('/main_timer', new_timer.view);
-app.get('/timer', timer.view);
+app.post('/timer', timer.view);
 app.get('/new_subject', new_subject.view)
-app.get('/break', breaks.view);
+app.post('/break', breaks.view);
 // app.get('/current', current.changeCurrent); //add task to current json
 // Example route
 // app.get('/users', user.list);

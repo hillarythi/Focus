@@ -14,12 +14,12 @@
 exports.view = function(request, response) {    
 	// Your code goes here
 	// console.log(request);
-	var new_subject = request.query.subject;
+	var new_subject = request.body.subject;
 	console.log("SUBJECT: "+new_subject);
-	var new_assignment = request.query.assignment;
-	var new_hr = request.query.hour;
-	var new_min = request.query.minute;
-	var new_breaks = request.query.breaks;
+	var new_assignment = request.body.assignment;
+	var new_hr = request.body.hour;
+	var new_min = request.body.minute;
+	var new_breaks = request.body.breaks;
 
 	var breakCalculations = nextBreak(new_hr, new_min, new_breaks);
 
@@ -31,6 +31,7 @@ exports.view = function(request, response) { 
 	new_task["breaks"] = new_breaks;
 	new_task["breaks_hr"] = breakCalculations[0];
 	new_task["breaks_min"] = breakCalculations[1];
+	new_task["breaks_total"] = breakCalculations[2];
 
 
 	console.log("NEW TASK: ");
@@ -49,6 +50,6 @@ function nextBreak( h, m, b){
 	var hrsNext = Math.floor(totalNext / 60);
 	var minsNext = Math.floor(totalNext % 60);
 	console.log("hrs: " + hrsNext + " mins: " + minsNext);
-	return [hrsNext, minsNext];
+	return [hrsNext, minsNext, totalNext];
 }
 
