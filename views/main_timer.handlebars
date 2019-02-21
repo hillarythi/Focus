@@ -112,20 +112,9 @@
 	<a href='index'><span class="glyphicon glyphicon-chevron-left title"></span></a>
 	<br><br>
 
-	<!-- OVERALL TASK -->
-	<!-- <p class="title">task</p>
-	<div class="dropdown fixed-length">
-	  <button class="btn btn-default dropdown-toggle" type="button" id="dropAssignment" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">Task </button>
-	  <ul class="dropdown-menu" aria-labelledby="dropTest">
-            {{#each subjects}}
-              <li class="dropdown-header">{{name}}</li>
-              {{#each tasks}}
-              <li><a href="#">{{name}}</a></li>
-              {{/each}}
-            {{/each}}
-	  </ul>
-	</div>
-	<br> -->
+	<!-- can do <li id="\{\{@index\}\}"> -->
+	<!-- class will be only instance, using as second id -->
+
 
 	<!-- Class / subject -->
 	<div id="show_subject">
@@ -133,13 +122,15 @@
 		<div class="dropdown fixed-length">
 		  <button class="btn btn-default dropdown-toggle" type="button" id="dropSubject" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">subject </button>
 		  <ul class="dropdown-menu" aria-labelledby="dropSubject">
-		    {{#each subjects}}
-		    	<li><a href="#">{{name}}</a></li> 
+	         {{#each subjects}}
+		    	<li class="{{name}}" id="{{@index}}"><a href="#">{{name}}</a></li>
 	        {{/each}}
 		  </ul>
 		</div>
 	</div>
 	<br>
+
+	<!-- need an on change above to edit tihs -->
 
 	<!-- Task / assignment -->
 	<div id="show_assignment" style="display:none">
@@ -147,10 +138,8 @@
 		<div class="dropdown fixed-length">
 		  <button class="btn btn-default dropdown-toggle" type="button" id="dropAssignment" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">assignment </button>
 		  <ul class="dropdown-menu" aria-labelledby="dropAssignment">
-		    {{#each subjects}}
-		    	<li><a href="#">{{name}}</a></li> 
-	        {{/each}}
-		  </ul>
+	
+		  </ul>	
 		</div>
 	</div>
 	<br>
@@ -248,16 +237,24 @@ $(document).ready( ()=>{
 	//main dropdown text is changed when selected
 	$(".dropdown-menu li a").click(changeText);
 
-	$("#show_subject").one( 'click', () => {  display("#show_assignment")} );
-	$("#show_assignment").one( 'click', () => {  display("#show_time")} );
-	$("#show_time").one( 'click', () => {  display("#show_breaks")} );
-	$("#show_breaks").one( 'click', () => {  display("#show_submit")} );
-	// $("#show_subject").click(display("#show_assignment"));
-	// $("#show_assignment").one("click", display("#show_time"));
-	// $("#show_time").one("click", display("#show_breaks"));
-	// $("#show_breaks").one("click", display("#show_submit"));
+	$("#show_subject").one( 'click', () => {  display("#show_assignment"); } );
+	$("#show_assignment").one( 'click', () => { display("#show_time"); } );
+	$("#show_time").one( 'click', () => {  display("#show_breaks"); } );
+	$("#show_breaks").one( 'click', () => {  display("#show_submit"); } );
+
+
+//when new subject is selected
+	$("body").on('DOMSubtreeModified', "#dropAssignment", displayTasks);
 
 });
+
+
+var displayTasks = function(){
+	var currSubject = $("#dropAssignment").html();
+	var currIndex = $("."+currSubject).attr('id');
+	$("#edit-tasks").html("\{\{#each subjects.["+currIndex+"].tasks\}\}");
+	//\{\{#each subjects.[1].tasks\}\}
+}
 
 var display = function(next){
 	$(next).css('display', 'block');
@@ -334,5 +331,3 @@ function fillForm(){
 
 </body>
 </html>
-
-
