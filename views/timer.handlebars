@@ -140,6 +140,7 @@
 	</div>
 
 	<!-- Hidden Forms submissions -->
+	<!-- To Break Screen -->
 	<form action="break" method="post" id="toBreak">
 		<input type="hidden" name="breaks_before" value="{{breaks}}">
 		<input type="hidden" id="time_passed" name="total_minutes_spent" value="{{breaks_total}}">
@@ -148,6 +149,13 @@
 		<input type="hidden" name="assignment" value="{{assignment}}">
 		<input type="hidden" name="total_time_set" value="{{total_time_set}}">
 		<input type="hidden" id="totalMinsLeft" name="total_mins_left" value="0">
+	</form>
+
+	<!-- To the Finishing Page -->
+	<form action="finish" method="post" id="toFinish">
+		<input type="hidden" name="subject" value="{{subject}}">
+		<input type="hidden" name="assignment" value="{{assignment}}">
+		<input type="hidden" name="total_time_set" value="{{total_time_set}}">
 	</form>
 
 
@@ -211,8 +219,8 @@ function startCountdown(){ //currently countdown to next break
 	    document.getElementById("countdown").innerHTML = "DONE";
 
 	    if ({{breaks}}==0){
-	    	//TODO 
 	    	//no more breaks, you're all done!
+	    	document.getElementById("toFinish").submit();
 	    }
 
 	    //when timer is over, send form over to break page

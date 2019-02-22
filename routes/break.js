@@ -1,6 +1,6 @@
 
 /*
- * GET break page.
+ * POST break page.
  */
 
  //request posted from timer.handlebars ending,
@@ -39,8 +39,8 @@ exports.view = function(request, response) { 
 
 	new_break["subject"] = subject;
 	new_break["assignment"] = assignment;
-	new_break["totalTimeSet"] = totalTimeSet;
-	new_break["totalMinsLeft"] = totalMinsLeft;
+	new_break["totalTimeSet"] = totalTimeSet; //total minutes initially set by user
+	new_break["totalMinsLeft"] = totalMinsLeft;//total minutes left in study session
 
 	//maybe send a total time left to breaks? 
 	response.render('break', new_break);
