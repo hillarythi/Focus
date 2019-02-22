@@ -2,13 +2,22 @@
 <html lang="en">
 <head>
 	<meta charset="utf-8">
-	<title>to-do</title>
+	<title>add task</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css">
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 	<style>
+	:root {
+  		--dusty-pink: rgb(212,171,179);
+  		--dusty-blue: rgb(153,195,203);
+  		--dusty-gray: rgb(104,124,135);
+	}
+	body{
+		font-family: 'Fira Sans', sans-serif;
+		font-weight: lighter !important; /*not working*/
+	}
 	.navbar {
 	    width:100%;
 	    margin:0px auto;
@@ -30,6 +39,55 @@
 	a:hover{
 		text-decoration:none;
 	}
+
+	.pad-10{
+		padding: 10% 0%;
+	}
+	.no-margin{
+		margin: 0;
+	}
+	#circle-div{ 
+		/*TODO  : center circle :( currently iphonex */
+		width:300px;
+		height:300px;
+		margin-left: 8%;
+		border: 2px solid rgb(153,195,203);
+		border-radius:50%;
+		text-align: center;
+		font-size:50px;
+	}
+	#circle-div2{
+		padding-top:35%;
+	}
+	.font-pink{
+		color: var(--dusty-pink);
+	}
+	.font-blue{
+		color: var(--dusty-blue);
+	}
+	.font-gray{
+		color: var(--dusty-gray);
+	}
+	.bg-gray{
+		background-color: var(--dusty-gray);
+	}
+	.btn-block{
+		border-radius:0 ;
+		padding: 5% 0;
+		margin-bottom: 4%;
+		border-top: 1px solid gray;
+		border-bottom: 1px solid gray;
+
+		font-size:20px;
+	}
+	
+	h2 .glyphicon{
+		font-size: 30px;
+		float:left;
+		padding-left:10px;
+	}
+
+
 
 	.top-bar{
 		position: fixed;
@@ -54,17 +112,21 @@
 	</style>
 </head>
 <body>
+
 	<!-- NAVBAR -->
-	<ul class="navbar border-top dusty-gray">
+	<ul class="navbar border-top bg-gray">
 		<li class="border-right"><a href="main_timer" class="glyphicon glyphicon-plus"></a></li>
 		<li class="border-right"><a href="main_todo" class="glyphicon glyphicon-th-list"></a></li>
 		<li class="border-right"><a href="main_log" class="glyphicon glyphicon-time"></a></li>
--		<li><a href="main_settings" class="glyphicon glyphicon-cog"></a></li>
+		<li><a href="main_settings" class="glyphicon glyphicon-cog"></a></li>
 	</ul>
-	<!-- Title -->
-	<div class="center-page">
-		<a id="back_button" href='main_todo'><span class="glyphicon glyphicon-chevron-left title"></span></a>
-		<br><br>
+
+	<div class="container">
+		<!-- Top left back button + title-->
+		<h2 class="font-blue pad-10 no-margin" style="text-align:center; padding-right:38px">
+			<a href='index'><span class="glyphicon glyphicon-chevron-left font-blue"></span></a>
+		add tasks</h2>
+
 		<!--form method="post" action="/new_subject">		
 			<div class="form-group">
 				<input type="text" class="form control" name="subject_name" placeholder="Subject name">
@@ -75,26 +137,29 @@
 			<input type="text" name="subject_name">
 			<input type="submit" value="Submit">
 		</form-->	
-		<form method="post" action="/new_subject">
+		<form method="post" action="main_todo" >
   			<div class="form-group" id="subj_info">
-    				<label for="subject_name">Enter subject information</label>
-				<input type="text" class="form-control" name="subject_name" placeholder="Subject Name" style='margin-bottom:10px'>
+    				<label for="subject_name" class="font-pink">enter subject information</label>
+				<input type="text" class="form-control btn btn-default btn-block" name="subject_name" placeholder="Subject Name" style='margin-bottom:10px'>
 			</div>
-			<button id="add_task" type="button" class="btn btn-default btn-block"> +Add Task </button>
-			<button id="submit" type="submit" class="btn btn-primary">Submit</button>
+			<button id="add_task" type="button" class="btn btn-default btn-block" style="background-color:var(--dusty-pink)"> + Add Task </button><br>
+			<button class="btn btn-primary" typ="submit">Submit</button>
 		</form>
+
 	</div>
+	
 
 	<script>
 		$('#add_task').click(append_task);
 		function append_task() { 
 			$("#subj_info").append('<input type="text" class="form-control" name="task[]" placeholder="Task">');
 		}
-		$('#submit').click(navigate_back);
-		function navigate_back() {
-			console.log("submit clicked");
-			window.location.assign("../main_todo");
-		}
+	
+		// $('#submit').click(navigate_back);
+		// function navigate_back() {
+		// 	console.log("submit clicked");
+		// 	window.location.assign("../main_todo");
+		// }
 	</script>
 	<!--script>	
 	$(".dropdown-menu li a").click(function(){

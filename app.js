@@ -8,7 +8,6 @@ var http = require('http');
 var path = require('path');
 var handlebars = require('express3-handlebars')
 
-var data = require('./data.json');
 
 var login = require('./routes/login');
 var index = require('./routes/index');
@@ -21,8 +20,7 @@ var breaks = require('./routes/break');
 var new_subject = require('./routes/new_subject');
 var finish = require('./routes/finish');
 //can clean up code to have multiple routes in same js file
-// Example route
-// var user = require('./routes/user');
+
 
 var app = express();
 
@@ -52,12 +50,13 @@ if ('development' == app.get('env')) {
 app.get('/', login.view);
 app.get('/index', index.view);
 app.get('/main_todo', todo.view);
-app.post('/main_todo', todo.view);
+app.post('/main_todo', todo.added);
 app.get('/main_log', log.view);
 app.get('/main_settings', settings.view);
+app.post('/main_settings', settings.added);
 app.get('/main_timer', new_timer.view);
 app.post('/timer', timer.view);
-app.get('/new_subject', new_subject.view)
+app.get('/new_subject', new_subject.view);
 app.post('/break', breaks.view);
 app.post('/finish', finish.view);
 
@@ -66,31 +65,8 @@ app.use(bodyParser.urlencoded({
 }));
 app.use(bodyParser.json());
 
-app.post('/new_subject', function (req, res) {
-	var i;
-	if (typeof req.body.task !== 'undefined') {
-		var tasks = req.body.task;
-		for (i = 0; i < req.body.task.length; i++) {
-			var new_task = {'name': req.body.task[i]};
-			tasks[i] = new_task;
-		}
-	}
-	var newSubj = {
-		'name': req.body.subject_name,
-		'tasks': tasks
-	};
-	data.subjects.push(newSubj);
-});
-
-app.post('/main_settings', function (req, res) {
-	data.breakLength = req.body.break_length;
-	data.snoozeLength = req.body.snooze_length;
-});
 
 
-// app.get('/current', current.changeCurrent); //add task to current json
-// Example route
-// app.get('/users', user.list);
 
 http.createServer(app).listen(app.get('port'), function(){
   console.log('Express server listening on port ' + app.get('port'));
