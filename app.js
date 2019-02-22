@@ -52,6 +52,7 @@ app.get('/main_timer', new_timer.view);
 app.post('/timer', timer.view);
 app.get('/new_subject', new_subject.view)
 app.post('/break', breaks.view);
+app.post('/timer/session', timer.continue);
 // app.get('/current', current.changeCurrent); //add task to current json
 // Example route
 // app.get('/users', user.list);

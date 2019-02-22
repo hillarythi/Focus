@@ -117,7 +117,7 @@
 
 		<!-- breaks -->
 		<h3 class="font-blue no-margin">breaks left</h3>
-		<a href="break" onclick="return confirmBreak()">
+		<a href="break" onclick="doNothing()">
 			<div class="btn-group no-margin" role="group" aria-label="First group" id="breaks-left">
 			<!-- number of breaks added here  -->
 		 	</div>
@@ -138,6 +138,19 @@
 		<br>
 	<!-- space under submit button so it scrolls if doesnt fit screen -->
 	</div>
+
+
+	<!-- Hidden Forms submissions -->
+	<form action="timer/session" method="post" id="toTimer">
+		<input type="hidden" name="breaks" value="{{breaks}}">
+		<!-- <input type="hidden" id="time_passed" name="total_minutes_spent" value="{{breaks_total}}"> -->
+		<!-- extra stuff for passing session -->
+		<input type="hidden" name="subject" value="{{subject}}">
+		<input type="hidden" name="assignment" value="{{assignment}}">
+		<input type="hidden" id="hours_left" name="hour" value="0">
+		<input type="hidden" id="mins_left" name="minute" value="0">
+	</form>
+
 
 
 <script>
@@ -184,6 +197,11 @@ function startCountdown(){ //counts down 5 min to next study session
 	  if (distance < 0) {
 	    clearInterval(x);
 	    document.getElementById("countdown").innerHTML = "DONE";
+
+	    var readable = totalToReadable({{totalMinsLeft}});
+	    document.getElementById("hours_left").value = readable[0];
+	    document.getElementById("minutes_left").value = readable[1];
+	    document.getElementById("toTimer").submit();
 	  }
 	}, 1000);
 }
@@ -193,9 +211,15 @@ function confirmLeave(){
 	//TODO Change so that leave will log current time or something
 }
 
-function confirmBreak(){
-	return confirm('You are in the middle of a session, are you sure you want to take a break early?');
-	//TODO Change so that leave will log current time or something
+function doNothing(){
+	this.preventDefault();
+}
+
+//out of total minutes, how many hour/min
+function totalToReadable(total){
+	var h = Math.floor(total/60);
+	var m = Math.floor(total%60);
+	return [h,m];
 }
 
 
