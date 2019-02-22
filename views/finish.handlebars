@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 	<meta charset="utf-8">
-	<title>start timer</title>
+	<title>good job!</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
@@ -103,33 +103,18 @@
 	<!-- Actual Page -->
 	<div class="container" style="text-align:center">
 
-		<h2 class="font-pink pad-10 no-margin" >{{subject}}</h2>
+		<h2 class="font-pink pad-10 no-margin" >good job!</h2><br>
+		<h2 class="font-pink pad-10 no-margin" >you've finished {{hours}} hours and {{minutes}} minutes of</h1>
+		<h1 class="font-blue pad-10 no-margin" id="assignment">{{subject}}: {{assignment}}</h1>
 
-		<!-- Timer (circular border, time caption, countdown timer) -->
-		<div id="circle-div" class="font-pink">
-			<div id="circle-div2">
-				<p style="font-size:20px; margin:0">time until break</p><!--add the circle animations instead of text?-->
-				<p id="countdown" class="no-margin"></p>
-			</div>
-		</div>
-
-		<h1 class="font-blue pad-10 no-margin" id="assignment">{{assignment}}</h1>
-
-		<!-- breaks -->
-		<h3 class="font-blue no-margin">breaks</h3>
-		<!-- <a href="" onclick="return confirmBreak()"> -->
-			<div class="btn-group no-margin" role="group" aria-label="First group" id="breaks-left" onclick="confirmBreak()">
-			<!-- number of breaks added here  -->
-		 	</div>
-	 	<!-- </a> -->
 
  	</div>
 
- 	<!-- End Session Btn -->
+ 	<!-- End Break Btn -->
  	<div id="end-session-btn">
-		<a href='index' onclick="return confirmLeave()">
+		<a href="#" onclick="confirmStudy()">
 			<span class="glyphicon glyphicon-arrow-right font-gray" style="float:right; font-size: 40px"></span>
-		<br><h3 class="font-blue">end session</h3></a>
+		<br><h3 class="font-blue">continue studying</h3></a>
 	
 	</div>
 
@@ -139,41 +124,28 @@
 	<!-- space under submit button so it scrolls if doesnt fit screen -->
 	</div>
 
+
+	<!-- delete i think  -->
 	<!-- Hidden Forms submissions -->
-	<!-- To Break Screen -->
-	<form action="break" method="post" id="toBreak">
-		<input type="hidden" name="breaks_before" value="{{breaks}}">
-		<input type="hidden" id="time_passed" name="total_minutes_spent" value="{{breaks_total}}">
+	<form action="timer" method="post" id="toTimer">
+		<input type="hidden" name="breaks" value="{{breaks}}">
+		<!-- <input type="hidden" id="time_passed" name="total_minutes_spent" value="{{breaks_total}}"> -->
 		<!-- extra stuff for passing session -->
 		<input type="hidden" name="subject" value="{{subject}}">
 		<input type="hidden" name="assignment" value="{{assignment}}">
-		<input type="hidden" name="total_time_set" value="{{total_time_set}}">
-		<input type="hidden" id="totalMinsLeft" name="total_mins_left" value="0">
-	</form>
-
-	<!-- To the Finishing Page -->
-	<form action="finish" method="post" id="toFinish">
-		<input type="hidden" name="subject" value="{{subject}}">
-		<input type="hidden" name="assignment" value="{{assignment}}">
-		<input type="hidden" name="total_time_set" value="{{total_time_set}}">
+		<input type="hidden" id="hours_left" name="hour" value="0">
+		<input type="hidden" id="mins_left" name="minute" value="0">
 	</form>
 
 
 
 <script>
 
-
-var currHours;
-var currMinutes;
-
 $( document ).ready(function() {
     populateBreaks();
     startCountdown();
-    currHours = 0;
-    currMinutes = 0;
 });
 
-/* pre-loading : show as many buttons as there are breaks left */
 function populateBreaks(){
 	//TODO fix bc needs to be dynamic as breaks are spent?
 	//removed btn-secondary from button class to remove black onclick animation
@@ -182,15 +154,13 @@ function populateBreaks(){
 	}
 }
 
-/* Constant countdown timer */
-function startCountdown(){ //currently countdown to next break
+function startCountdown(){ //counts down 5 min to next study session
 
 	// Set the date we're counting down to
 	var countDownDate = new Date();
 	// countDownDate.setHours(countDownDate.getHours()+{{total_hr}});
 	// countDownDate.setMinutes(countDownDate.getMinutes()+{{total_min}});
-	countDownDate.setHours(countDownDate.getHours()+{{breaks_hr}});
-	countDownDate.setMinutes(countDownDate.getMinutes()+{{breaks_min}});
+	countDownDate.setMinutes(countDownDate.getMinutes()+5);
 	countDownDate = countDownDate.getTime();
 
 	// Update the count down every 1 second
@@ -203,72 +173,49 @@ function startCountdown(){ //currently countdown to next break
 	  var distance = countDownDate - now;
 
 	  // Time calculations for days, hours, minutes and seconds
-	  var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
 	  var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
 	  var seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
-	  currHours = hours; currMinutes = minutes; 
-
-	  // Display the result in the element with id="demo"
-	  document.getElementById("countdown").innerHTML = "  " + hours + "h "
-	  + minutes + "m " + seconds + "s";
+	  // Display the result in the element with id "countdown"
+	  document.getElementById("countdown").innerHTML = "  " + minutes + "m " + seconds + "s";
 
 	  // If the count down is finished, write some text 
 	  if (distance < 0) {
 	    clearInterval(x);
 	    document.getElementById("countdown").innerHTML = "DONE";
 
-	    if ({{breaks}}==0){
-	    	//no more breaks, you're all done!
-	    	document.getElementById("toFinish").submit();
-	    }
-
-	    //when timer is over, send form over to break page
-
-	    document.getElementById("totalMinsLeft").value = ({{total_time_set}} - {{breaks_total}});
-	    document.getElementById("toBreak").submit();
-
-	    //TODO : edit json to be total time - break time {breaks, breaks_hr, breaks_min} hidden form?
-	    //on both end and navigation away, add functionality
+	    submitStudy(); //submit form
 	  }
 	}, 1000);
 }
 
-
-/**** LEAVING PAGE FROM BUTTONS *****/
-
-function populateEarlyForm(){
-	//session ended early, populate with right values
-	var totalBefore = ({{breaks_hr}}*60)+{{breaks_min}};
-	var totalAfter = (currHours*60)+currMinutes;
-	console.log("Before: "+totalBefore);
-	console.log("After: "+totalAfter);
-	var update = totalBefore - totalAfter;
-	if (update<0){update = 0;}
-
-	document.getElementById("time_passed").value = update;
-	document.getElementById("totalMinsLeft").value = ({{total_time_set}} - update);
+//TODO inconsistent leave statements and form submissions... deal with it
+function confirmStudy(){
+	var c = confirm('Are you sure you want to skip the rest of your break and continue studying?');
+	if (c){
+		submitStudy();
+	}
 
 }
 
-/* leaving timer to break by taking break early */
-function confirmBreak(){
-	var c = confirm('You are in the middle of a session, are you sure you want to take a break early?');
-	if (c){
-		//if leave, populate form to post to break page
-		//when timer is over, send form over to break page
-		populateEarlyForm();
-	    document.getElementById("toBreak").submit();
-	}
-	//TODO Change so that leave will log current time or something
+function submitStudy(){
+	var readable = totalToReadable({{totalMinsLeft}});
+    document.getElementById("hours_left").value = readable[0];
+    document.getElementById("mins_left").value = readable[1];
+    document.getElementById("toTimer").submit();
 }
 
 /* leaving timer from end session button or navbar */
 function confirmLeave(){ 
 	return confirm('You are in the middle of a session, are you sure you want to leave? Your data will be lost');
-	//TODO Change so that leave will log current time or something
 }
 
+//out of total minutes, how many hour/min
+function totalToReadable(total){
+	var h = Math.floor(total/60);
+	var m = Math.floor(total%60);
+	return [h,m];
+}
 
 
 </script>

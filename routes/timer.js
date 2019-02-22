@@ -1,19 +1,7 @@
 
 /*
- * GET timer page.
+ * POST timer page.
  */
-
-// var currentTask = require('../current.json');
-
-// exports.view = function(req, res){
-//    res.render('timer', currentTask);
-// //  res.sendFile(path.join(__dirname+'/main_timer.html'));
-// };
-
-exports.continue = function(request, response){
-
-
-}
 
 
 exports.view = function(request, response) {    

@@ -19,6 +19,8 @@ var settings = require('./routes/main_settings');
 var timer = require('./routes/timer');
 var breaks = require('./routes/break');
 var new_subject = require('./routes/new_subject');
+var finish = require('./routes/finish');
+//can clean up code to have multiple routes in same js file
 // Example route
 // var user = require('./routes/user');
 
@@ -85,6 +87,7 @@ app.post('/main_settings', function (req, res) {
 });
 
 app.post('/timer/session', timer.continue);
+app.post('/finish', finish.view);
 // app.get('/current', current.changeCurrent); //add task to current json
 // Example route
 // app.get('/users', user.list);
