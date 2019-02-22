@@ -103,7 +103,7 @@
 	<!-- Actual Page -->
 	<div class="container" style="text-align:center">
 
-		<h2 class="font-pink pad-10 no-margin" >good job!</h2><br>
+		<h2 class="font-pink pad-10 no-margin" style="margin-top:10%" >good job!</h2><br>
 		<h2 class="font-pink pad-10 no-margin" >you've finished {{hours}} hours and {{minutes}} minutes of</h1>
 		<h1 class="font-blue pad-10 no-margin" id="assignment">{{subject}}: {{assignment}}</h1>
 
@@ -112,9 +112,9 @@
 
  	<!-- End Break Btn -->
  	<div id="end-session-btn">
-		<a href="#" onclick="confirmStudy()">
+		<a href="index">
 			<span class="glyphicon glyphicon-arrow-right font-gray" style="float:right; font-size: 40px"></span>
-		<br><h3 class="font-blue">continue studying</h3></a>
+		<br><h3 class="font-blue">go home</h3></a>
 	
 	</div>
 
@@ -141,53 +141,6 @@
 
 <script>
 
-$( document ).ready(function() {
-    populateBreaks();
-    startCountdown();
-});
-
-function populateBreaks(){
-	//TODO fix bc needs to be dynamic as breaks are spent?
-	//removed btn-secondary from button class to remove black onclick animation
-	for (var i = 0; i < {{breaks}}; i++){
-		$('#breaks-left').append('<button type="button" class="btn break-btn"><span class="glyphicon glyphicon-star"></span></button>');
-	}
-}
-
-function startCountdown(){ //counts down 5 min to next study session
-
-	// Set the date we're counting down to
-	var countDownDate = new Date();
-	// countDownDate.setHours(countDownDate.getHours()+{{total_hr}});
-	// countDownDate.setMinutes(countDownDate.getMinutes()+{{total_min}});
-	countDownDate.setMinutes(countDownDate.getMinutes()+5);
-	countDownDate = countDownDate.getTime();
-
-	// Update the count down every 1 second
-	var x = setInterval(function() {
-
-	  // Get todays date and time
-	  var now = new Date().getTime();
-
-	  // Find the distance between now and the count down date
-	  var distance = countDownDate - now;
-
-	  // Time calculations for days, hours, minutes and seconds
-	  var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-	  var seconds = Math.floor((distance % (1000 * 60)) / 1000);
-
-	  // Display the result in the element with id "countdown"
-	  document.getElementById("countdown").innerHTML = "  " + minutes + "m " + seconds + "s";
-
-	  // If the count down is finished, write some text 
-	  if (distance < 0) {
-	    clearInterval(x);
-	    document.getElementById("countdown").innerHTML = "DONE";
-
-	    submitStudy(); //submit form
-	  }
-	}, 1000);
-}
 
 //TODO inconsistent leave statements and form submissions... deal with it
 function confirmStudy(){

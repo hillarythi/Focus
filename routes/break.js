@@ -28,8 +28,11 @@ exports.view = function(request, response) { 
 
 	//stuff actually used in breaks
 	var new_break = {};
-	new_break["breaks"] = subtract_b-1;
-
+	if (subtract_b>0){
+		new_break["breaks"] = subtract_b-1;
+	}else{
+		new_break["breaks"] = 0;
+	}
 
 	//passing rest of session stuff 
 	var subject = request.body.subject;

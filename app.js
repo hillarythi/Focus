@@ -59,6 +59,7 @@ app.get('/main_timer', new_timer.view);
 app.post('/timer', timer.view);
 app.get('/new_subject', new_subject.view)
 app.post('/break', breaks.view);
+app.post('/finish', finish.view);
 
 app.use(bodyParser.urlencoded({
 	extended: true
@@ -86,7 +87,7 @@ app.post('/main_settings', function (req, res) {
 	data.snoozeLength = req.body.snooze_length;
 });
 
-app.post('/finish', finish.view);
+
 // app.get('/current', current.changeCurrent); //add task to current json
 // Example route
 // app.get('/users', user.list);

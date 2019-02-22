@@ -95,10 +95,10 @@
 <body>
 	<!-- NAVBAR -->
 	<ul class="navbar border-top dusty-gray">
-		<li class="border-right"><a href="main_timer" class="glyphicon glyphicon-plus"></a></li>
-		<li class="border-right"><a href="main_todo" class="glyphicon glyphicon-th-list"></a></li>
-		<li class="border-right"><a href="main_log" class="glyphicon glyphicon-time"></a></li>
-		<li><a href="main_settings" class="glyphicon glyphicon-cog"></a></li>
+		<li class="border-right"><a href="main_timer" class="glyphicon glyphicon-plus" onclick="return confirmLeave()"></a></li>
+		<li class="border-right"><a href="main_todo" class="glyphicon glyphicon-th-list" onclick="return confirmLeave()"></a></li>
+		<li class="border-right"><a href="main_log" class="glyphicon glyphicon-time" onclick="return confirmLeave()"></a></li>
+		<li><a href="main_settings" class="glyphicon glyphicon-cog" onclick="return confirmLeave()"></a></li>
 	</ul>
 
 
@@ -111,7 +111,7 @@
 
 	<!-- Top left back button -->
 	<div class="container center-page">
-	<a href='index'><span class="glyphicon glyphicon-chevron-left title"></span></a>
+	<a href='index' onclick="return confirmLeave()"><span class="glyphicon glyphicon-chevron-left title"></span></a>
 	<br><br>
 
 	<!-- can do <li id="\{\{@index\}\}"> -->
@@ -360,7 +360,7 @@ function validateForm(){
 	}
 	if ( (t2==0) && (t3<15)){
 		alert("Please set your timer to at least 15 minutes.");
-		return false;
+		// return false;
 	}
 	return true;
 }
@@ -382,6 +382,11 @@ function fillForm(){
 	// document.invisible.submit();
 	// document.forms[0].submit();
 	// $('#send').submit();
+}
+
+
+function confirmLeave(){ 
+	return confirm('Are you sure you want to leave this page? Your data will be lost');
 }
 
 //add more functions about break calculation stuff?
