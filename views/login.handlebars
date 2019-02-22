@@ -8,6 +8,7 @@
 	<!-- bootstrap, js-->
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+	<script src="/js/facebook.js"></script>
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css">
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 	<!-- fonts -->
@@ -77,13 +78,17 @@
 		}
 
 	</style>
-
 </head>
 <body>
 
 <div class="center-page">
 	<p id="app-name">focus</p>
 	<br><br>
+
+	<fb:login-button
+		scope="public_profile,email"
+		onlogin="checkLoginState();">
+	</fb:login-button>
 
 	<!-- <form action="index" onsubmit="return checkLogin()"> -->
 
@@ -99,6 +104,11 @@
 		<!-- <a href="index" type="submit" class="btn btn-primary">Log In</a> -->
 	  <input type="submit" class="btn-primary" value="Submit">
 	</form>
+	<p class="facebooklogin">
+		Or log in through Facebook
+		<fb:login-button scope="public_profile,email" onlogin="checkLoginState();">
+		</fb:login-button>
+	</p>
 </div>
 
 

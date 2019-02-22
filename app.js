@@ -86,7 +86,6 @@ app.post('/main_settings', function (req, res) {
 	data.snoozeLength = req.body.snooze_length;
 });
 
-app.post('/timer/session', timer.continue);
 app.post('/finish', finish.view);
 // app.get('/current', current.changeCurrent); //add task to current json
 // Example route
