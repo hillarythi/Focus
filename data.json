@@ -3,7 +3,7 @@
   {
     "name": "MATH 183",
     "tasks": [ {
-      "name":"Study for Midterm"
+      "name":"Study For Midterm"
     },
     {
       "name":"Do Homework 1"
@@ -37,11 +37,13 @@
   "completed": [
   {
     "subject": "ECE 109",
-    "task": "Do homework 2"
+    "task": "Do Homework 2",
+	"time": "120"
   },
   {
     "subject": "COGS 120",
-    "task": "Do Lab 4"
+    "task": "Do Lab 4",
+	"time": "30"
   }
   ],
   "breakLength": 15,

@@ -9,6 +9,15 @@
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css">
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 	<style>
+	:root {
+  		--dusty-pink: rgb(212,171,179);
+  		--dusty-blue: rgb(153,195,203);
+  		--dusty-gray: rgb(104,124,135);
+	}
+	body{
+		font-family: 'Fira Sans', sans-serif;
+		font-weight: lighter !important; /*not working*/
+	}
 	.navbar {
 	    width:100%;
 	    margin:0px auto;
@@ -30,39 +39,97 @@
 	a:hover{
 		text-decoration:none;
 	}
-	.top-bar{
-		position: fixed;
-		text-align:center;
-		width: 100%;
+	.font-pink{
+		color: var(--dusty-pink);
 	}
-	.list-item{
-		height: 220px;
-		width: 99%;
-		margin: 0 auto;
+	.font-blue{
+		color: var(--dusty-blue);
 	}
-	.dusty-gray{
-		background-color: rgb(104,124,135);
+	.font-gray{
+		color: var(--dusty-gray);
+	}
+	.font-white{
+		color: white !important;
+	}
+	.bg-gray{
+		background-color: var(--dusty-gray);
+	}
+	.bg-pink{
+		background-color: var(--dusty-pink);
+	}
+	.pad-10{
+		padding: 10% 0%;
+	}
+	.pad-5{
+		padding: 5% 0;
+	}
+	.no-margin{
+		margin: 0;
+	}
+	
+	.display-log{
+		border-radius:0 ;
+		margin: 5% 5%;
+		border: 1px solid white;
+		font-size:20px;
+		/*border-top: 1px solid gray;*/
+	}
+	
+	h2 .glyphicon{
+		font-size: 30px;
+		float:left;
+		padding-left:10px;
+	}
+	hr{
+		margin:0;
+		border-color:gray;
 	}
 	</style>
 </head>
 <body>
 
 	<!-- NAVBAR -->
-	<ul class="navbar border-top dusty-gray">
+	<ul class="navbar border-top bg-gray">
 		<li class="border-right"><a href="main_timer" class="glyphicon glyphicon-plus"></a></li>
 		<li class="border-right"><a href="main_todo" class="glyphicon glyphicon-th-list"></a></li>
 		<li class="border-right"><a href="main_log" class="glyphicon glyphicon-time"></a></li>
 		<li><a href="main_settings" class="glyphicon glyphicon-cog"></a></li>
 	</ul>
 
-	<!-- Title Bar -->
-	<div class="top-bar">
-		<div class = "card"><h5>Completed Tasks</h5></div>
-	</div>
-        <div class="list item" style="padding-top: 42px">
-		{{#each completed}}
-		<a role="button" aria-pressed="true" class="btn btn-default btn-block home-icon"> {{task}} - {{subject}}</a>
-		{{/each}}
-        </div>
+	
+	<!-- Top left back button + title-->
+	<h2 class="font-blue pad-10 no-margin" style="text-align:center; padding-right:38px">
+		<a href='index'><span class="glyphicon glyphicon-chevron-left font-blue"></span></a>
+	completed</h2>
+
+	<label class="font-pink container" style="font-size:25px">today</label>
+	<hr>
+
+	{{#each completed}}
+		<div class="display-log">
+			<p class="no-margin" style="font-size:small;">{{subject}}</p>
+			<p class="no-margin" style="display:inline">{{task}}</p><p style="display:inline; float:right" class="time-studied">{{time}}</p>
+		</div>
+		<hr>
+	{{/each}}
+
+<!-- <a role="button" aria-pressed="true" class="btn btn-default btn-block"> {{task}} - {{subject}}</a> -->
+
+<script>
+	$(document).ready(function(){
+		//puts total minutes into readable h:m:s time
+		$(".time-studied").each(function(){
+			var totalMins = parseInt($(this).html());
+			var h = Math.floor(totalMins/60);
+			var m = Math.floor(totalMins%60);
+			h = ("0" + h).slice(-2);
+			m = ("0" + m).slice(-2);
+			$(this).html(h+":"+m+":00");
+		});
+	});
+
+</script>
+
+
 </body>
 </html>

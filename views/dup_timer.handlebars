@@ -10,7 +10,7 @@
 	<!-- fonts -->
 	<link href="https://fonts.googleapis.com/css?family=Fira+Sans" rel="stylesheet">
 
-	<title>start task</title>
+	<title>test app</title>
 	<style>
 	body{
 		font-family: 'Fira Sans', sans-serif;
@@ -87,18 +87,16 @@
 	}
 	
 	</style>
-
-	
 </head>
 
 
 <body>
 	<!-- NAVBAR -->
 	<ul class="navbar border-top dusty-gray">
-		<li class="border-right"><a href="main_timer" class="glyphicon glyphicon-plus" onclick="return confirmLeave()"></a></li>
-		<li class="border-right"><a href="main_todo" class="glyphicon glyphicon-th-list" onclick="return confirmLeave()"></a></li>
-		<li class="border-right"><a href="main_log" class="glyphicon glyphicon-time" onclick="return confirmLeave()"></a></li>
-		<li><a href="main_settings" class="glyphicon glyphicon-cog" onclick="return confirmLeave()"></a></li>
+		<li class="border-right"><a href="main_timer" class="glyphicon glyphicon-plus"></a></li>
+		<li class="border-right"><a href="main_todo" class="glyphicon glyphicon-th-list"></a></li>
+		<li class="border-right"><a href="main_log" class="glyphicon glyphicon-time"></a></li>
+		<li><a href="main_settings" class="glyphicon glyphicon-cog"></a></li>
 	</ul>
 
 
@@ -111,12 +109,26 @@
 
 	<!-- Top left back button -->
 	<div class="container center-page">
-	<a href='index' onclick="return confirmLeave()"><span class="glyphicon glyphicon-chevron-left title"></span></a>
+	<a href='index'><span class="glyphicon glyphicon-chevron-left title"></span></a>
 	<br><br>
 
-	<!-- can do <li id="\{\{@index\}\}"> -->
-	<!-- class will be only instance, using as second id -->
+	<!-- OVERALL TASK -->
+	<!-- <p class="title">task</p>
+	<div class="dropdown fixed-length">
+	  <button class="btn btn-default dropdown-toggle" type="button" id="dropAssignment" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">Task </button>
+	  <ul class="dropdown-menu" aria-labelledby="dropTest">
+            {{#each subjects}}
+              <li class="dropdown-header">{{name}}</li>
+              {{#each tasks}}
+              <li><a href="#">{{name}}</a></li>
+              {{/each}}
+            {{/each}}
+	  </ul>
+	</div>
+	<br> -->
 
+	<!-- can do <li id="{{@index}}"> -->
+	<!-- class will be only instance, using as second id -->
 
 	<!-- Class / subject -->
 	<div id="show_subject">
@@ -124,27 +136,32 @@
 		<div class="dropdown fixed-length">
 		  <button class="btn btn-default dropdown-toggle" type="button" id="dropSubject" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">subject </button>
 		  <ul class="dropdown-menu" aria-labelledby="dropSubject">
-	         {{#each subjects}}
-	         	<!-- change id here  -->
-		    	<li id="{{@index}}"><a href="#" id="{{makeIdHandle name}}">{{name}}</a></li>
-	         {{/each}}
+		    <!-- {{#each subjects}} -->
+		    	<!-- <li class="{{name}}" id="{{@index}}"><a href="#">{{name}}</a></li> -->
+	        <!-- {{/each}} -->
 		  </ul>
 		</div>
 	</div>
 	<br>
 
+	<!-- need an on change above to edit tihs -->
 
 	<!-- Task / assignment -->
 	<div id="show_assignment" style="display:none">
 		<p class="title">assignment</p>
 		<div class="dropdown fixed-length">
 		  <button class="btn btn-default dropdown-toggle" type="button" id="dropAssignment" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">assignment </button>
-		  <ul class="dropdown-menu" aria-labelledby="dropAssignment" id="addTasks">
-		  	<!-- dynamically populate in js from subject above -->
-		  </ul>	
+		  <ul class="dropdown-menu" aria-labelledby="dropAssignment">
+		    <span>{{subjects.[1]}}</span>
+		    	<span id="edit-tasks">{{subjects.[1]}}<span>
+		    		<li><a href="#">{{name}}</a></li> 
+		    	{{/each}}
+	        
+		  </ul>
 		</div>
 	</div>
 	<br>
+	<!-- Add New option? -->
 
 
 	<!-- Select Time / time length-->
@@ -206,16 +223,16 @@
 		
 		<!-- invisible form to send data -->
 
-		<form action="timer" method="post" name="invisible" id="send" onsubmit="return validateForm();">
+		<form action="timer" method="get" name="invisible" id="send" onsubmit="return validateForm();">
 			<input type="hidden" id="subject" name="subject">
 			<input type="hidden" id="assignment" name="assignment">
 			<input type="hidden" id="hour" name="hour">
 			<input type="hidden" id="minute" name="minute">
 			<input type="hidden" id="breaks" name="breaks">
-			<input type="hidden" id="totalTime" name="totalTimeSet">
 			<!-- <input type="submit" value="Submit" id="other" name="what" onclick="fillForm()"> -->
 			<button onclick="fillForm()" style="float:right"><span class="glyphicon glyphicon-arrow-right right"></button>
 		</form>
+
 
 
 		<!-- <a href='timer' onclick="fillForm()"><span class="glyphicon glyphicon-arrow-right right"></span></a> -->
@@ -224,17 +241,7 @@
 			<p class="right title">let's study!</p>
 	</div>
 
-	 <!-- super inefficient -->
-  <div id="hiddenTasks" style="display:none">
-   {{#each tasks}}
-  	<ul id="task{{@index}}">asdf
-  		{{#each this}}
-  		<li>{{name}}</li>
-  		{{/each}}
-  	</ul>
-  	{{/each}}
-  </div>
-
+	
 
 
 </div>
@@ -254,72 +261,35 @@ $(document).ready( ()=>{
 	$("#show_breaks").one( 'click', () => {  display("#show_submit"); } );
 
 
-    //when new subject is selected or changed
-	$("body").on('DOMSubtreeModified', "#dropSubject", displayNewTasks);
+	//when new subject is selected
+	//$("body").on('DOMSubtreeModified', "#dropAssignment", displayTasks);
+
+
+	// $("#show_subject").click(display("#show_assignment"));
+	// $("#show_assignment").one("click", display("#show_time"));
+	// $("#show_time").one("click", display("#show_breaks"));
+	// $("#show_breaks").one("click", display("#show_submit"));
 
 });
 
-
-function makeIdLocal(taskName){
-	return taskName.replace(/\s/g,''); 
-}
-
-
-var displayNewTasks = function(){
-
-	//current subject selected
-	var currSubject = $("#dropSubject").html();
-	if (currSubject == ""){
-		//first fires due to domsubtree modified, do nothing
-		return;
-	}
-
-	//reverse-lookup string of current selected subject
-	//which is id, and find the corresponding index in array
-	var currId = "#"+makeIdLocal(currSubject);
-	var currIndex = $(currId).parent().attr('id');
-
-	//grabs the corresponding task list of current selected subject
-	//(is the outer hidden unordered list tag with id of 'task#')
-	var lookupTasks = "#task"+currIndex;
-
-
-	//clears all list items in #addTasks, so we can replace with new tasks
-	$("#addTasks").html("");
-
-	//clear previously chosen assignment (#addTasks's parent's first element)
-	$("#addTasks").parent().find('.btn').html("assignment");
-	$("#addTasks").parent().find('.btn').css("background-color","rgb(212,171,179)");
-	$("#addTasks").parent().find('.btn').val(""); //reset so form cant submit cause empty
-	
-
-	//TODO find a way to amke it so if previously selected subject is same, dont reset assignemnts
-
-	for (var i = 0; i < $(lookupTasks+ " li").length ; i++){
-		var taskItem= $($(lookupTasks).children()[i]); //li
-		var taskString = taskItem.text();
-		var taskCompleteTag = '<li><a href="#">' + taskString + '</a></li>';
-		$("#addTasks").append( taskCompleteTag );
-	}
-
-	//resets the click event for changing dropdown text
-	$("#addTasks li a").click(changeText);
-
-	//append new task, important to add this after above click bonding
-	$("#addTasks").append('<li><a href="new_subject" onclick="return routeNewTask();">+ new task</a></li>');
-}
-
-/* Confirms leave upon clicking "+ Add New" task, will route to new_subject page to add to todo list */
-function routeNewTask(){
-	return confirm("Are you sure you want to leave this page create a new task? Your changes will not be saved.");
-}
-
-
-
+// var displayTasks = function(){
+// 	var currSubject = $("#dropAssignment").html();
+// 	var currIndex = $("."+currSubject).attr('id');
+// 	$("#edit-tasks").html("{{#each subjects.["+currIndex+"].tasks}}");
+// 	//{{#each subjects.[1].tasks}}</
+// }
 var display = function(next){
 	$(next).css('display', 'block');
 }
 
+
+
+// $(".dropdown-menu li a").click(function(){
+// 	$(this).parents(".dropdown").find('.btn').html($(this).text()+' ');
+// 	// $(this).parents(".dropdown").find('.btn').val($(this).data('value'));
+// 	$(this).parents(".dropdown").find('.btn').val($(this).text());
+// 	$(this).parents(".dropdown").find('.btn').css("background-color","rgb(209, 98, 118)");
+// });
 
 
 /* Set as click event, so a selection will be displayed and colored */
@@ -332,11 +302,11 @@ function changeText(){
 
 /* Dynamic coloring for break selection */
 function selectTime(n){
-	//resets all buttons to original color
+	//resets to original color
 	document.getElementById("breaks").value = n;
 	$(".btn-secondary").css("background-color","rgb(212,171,179)");
 
-	//highlights new selected amount
+	//highlights selected amount
 	for (var i = 0; i < n; i++){
 		$('.break-btn').eq(i).css("background-color","rgb(209, 98, 118)");
 	}
@@ -349,44 +319,30 @@ function validateForm(){
 	var t2 = document.getElementById("hour").value;
 	var t3 = document.getElementById("minute").value;
 	var t4 = document.getElementById("breaks").value;
-	var t5 = document.getElementById("totalTime").value;
 	if (t1 == "" || t1 == null || 
 		t2 == "" || t2 == null || 
 		t3 == "" || t3 == null || 
-		t4 == "" || t4 == null ||
-		t5 == "" || t5 == null){
+		t4 == "" || t4 == null){
 		alert("Please fill in all categories.");
 		return false;
 	}
 	if ( (t2==0) && (t3<15)){
 		alert("Please set your timer to at least 15 minutes.");
-		// return false;
+		return false;
 	}
 	return true;
 }
 
-
 /* Fills out invisible form fields before submitting to timer */
 function fillForm(){
-	document.getElementById("subject").value = document.getElementById("dropSubject").value;
+//	document.getElementById("subject").value = document.getElementById("dropSubject").value;
 	document.getElementById("assignment").value = document.getElementById("dropAssignment").value;
 	document.getElementById("hour").value = document.getElementById("dropHour").value;
 	document.getElementById("minute").value = document.getElementById("dropMinute").value;
-	var h = document.getElementById("hour").value;
-	var m = document.getElementById("minute").value;
-	document.getElementById("totalTime").value = (parseInt(h)*60) + parseInt(m);
-	console.log("fill form");
-	console.log("h: " + h);
-	console.log("m: " + m);
 
 	// document.invisible.submit();
 	// document.forms[0].submit();
 	// $('#send').submit();
-}
-
-
-function confirmLeave(){ 
-	return confirm('Are you sure you want to leave this page? Your data will be lost');
 }
 
 //add more functions about break calculation stuff?
