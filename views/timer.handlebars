@@ -92,12 +92,12 @@
 	<!-- NAVBAR -->
 	<ul class="navbar border-top bg-gray">
 		<li class="border-right">
-			<a href="main_timer" class="glyphicon glyphicon-plus" onClick="return confirmLeave()"></a></li>
+			<a href="main_timer" class="glyphicon glyphicon-plus" onclick="return confirmLeave()"></a></li>
 		<li class="border-right">
-			<a href="main_todo" class="glyphicon glyphicon-th-list" onClick="return confirmLeave()"></a></li>
+			<a href="main_todo" class="glyphicon glyphicon-th-list" onclick="return confirmLeave()"></a></li>
 		<li class="border-right">
-			<a href="main_log" class="glyphicon glyphicon-time" onClick="return confirmLeave()"></a></li>
-		<li><a href="main_settings" class="glyphicon glyphicon-cog" onClick="return confirmLeave()"></a></li>
+			<a href="main_log" class="glyphicon glyphicon-time" onclick="return confirmLeave()"></a></li>
+		<li><a href="main_settings" class="glyphicon glyphicon-cog" onclick="return confirmLeave()"></a></li>
 	</ul>
 
 	<!-- Actual Page -->
@@ -228,6 +228,7 @@ function startCountdown(){ //currently countdown to next break
 	    else{
 		    //when timer is over, send form over to break page
 		    document.getElementById("totalMinsLeft").value = ({{total_time_set}} - {{breaks_total}});
+		    alert("it's time to take a break, let's go!");
 		    document.getElementById("toBreak").submit();
 
 		}

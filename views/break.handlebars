@@ -198,7 +198,7 @@ function startCountdown(){ //counts down 5 min to next study session
 	  if (distance < 0) {
 	    clearInterval(x);
 	    document.getElementById("countdown").innerHTML = "DONE";
-
+	    alert("it's time to focus, let's get work done!");
 	    submitStudy(); //submit form
 	  }
 	}, 1000);
