@@ -42,6 +42,9 @@ exports.view = function(request, response) { 
 	new_break["totalTimeSet"] = totalTimeSet; //total minutes initially set by user
 	new_break["totalMinsLeft"] = totalMinsLeft;//total minutes left in study session
 
+	console.log("break render:");
+	console.log(new_break);
+
 	//maybe send a total time left to breaks? 
 	response.render('break', new_break);
 }

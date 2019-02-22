@@ -212,6 +212,7 @@
 			<input type="hidden" id="hour" name="hour">
 			<input type="hidden" id="minute" name="minute">
 			<input type="hidden" id="breaks" name="breaks">
+			<input type="hidden" id="totalTime" name="totalTimeSet">
 			<!-- <input type="submit" value="Submit" id="other" name="what" onclick="fillForm()"> -->
 			<button onclick="fillForm()" style="float:right"><span class="glyphicon glyphicon-arrow-right right"></button>
 		</form>
@@ -348,10 +349,12 @@ function validateForm(){
 	var t2 = document.getElementById("hour").value;
 	var t3 = document.getElementById("minute").value;
 	var t4 = document.getElementById("breaks").value;
+	var t5 = document.getElementById("totalTime").value;
 	if (t1 == "" || t1 == null || 
 		t2 == "" || t2 == null || 
 		t3 == "" || t3 == null || 
-		t4 == "" || t4 == null){
+		t4 == "" || t4 == null ||
+		t5 == "" || t5 == null){
 		alert("Please fill in all categories.");
 		return false;
 	}
@@ -369,6 +372,12 @@ function fillForm(){
 	document.getElementById("assignment").value = document.getElementById("dropAssignment").value;
 	document.getElementById("hour").value = document.getElementById("dropHour").value;
 	document.getElementById("minute").value = document.getElementById("dropMinute").value;
+	var h = document.getElementById("hour").value;
+	var m = document.getElementById("minute").value;
+	document.getElementById("totalTime").value = (parseInt(h)*60) + parseInt(m);
+	console.log("fill form");
+	console.log("h: " + h);
+	console.log("m: " + m);
 
 	// document.invisible.submit();
 	// document.forms[0].submit();
