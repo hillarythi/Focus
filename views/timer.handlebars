@@ -108,7 +108,7 @@
 		<!-- Timer (circular border, time caption, countdown timer) -->
 		<div id="circle-div" class="font-pink">
 			<div id="circle-div2">
-				<p style="font-size:20px; margin:0">time until break</p><!--add the circle animations instead of text?-->
+				<p style="font-size:20px; margin:0">time until <span id="lastSession">break</span></p><!--add the circle animations instead of text?-->
 				<p id="countdown" class="no-margin"></p>
 			</div>
 		</div>
@@ -135,7 +135,7 @@
 
 	<!-- Extra White Space -->
 	<div style="margin: 20%">
-		<br>
+	<br>
 	<!-- space under submit button so it scrolls if doesnt fit screen -->
 	</div>
 
@@ -162,7 +162,6 @@
 
 <script>
 
-
 var currHours;
 var currMinutes;
 
@@ -171,6 +170,9 @@ $( document ).ready(function() {
     startCountdown();
     currHours = 0;
     currMinutes = 0;
+    if ({{breaks}}==0){
+    	document.getElementById('lastSession').innerHTML = "end";
+    }
 });
 
 /* pre-loading : show as many buttons as there are breaks left */
@@ -216,18 +218,19 @@ function startCountdown(){ //currently countdown to next break
 	  // If the count down is finished, write some text 
 	  if (distance < 0) {
 	    clearInterval(x);
-	    document.getElementById("countdown").innerHTML = "DONE";
 
-	    if ({{breaks}}==0){
+	    document.getElementById("countdown").innerHTML = "DONE";
+	  	
+	    if ({{breaks}}<1){
 	    	//no more breaks, you're all done!
 	    	document.getElementById("toFinish").submit();
 	    }
+	    else{
+		    //when timer is over, send form over to break page
+		    document.getElementById("totalMinsLeft").value = ({{total_time_set}} - {{breaks_total}});
+		    document.getElementById("toBreak").submit();
 
-	    //when timer is over, send form over to break page
-
-	    document.getElementById("totalMinsLeft").value = ({{total_time_set}} - {{breaks_total}});
-	    document.getElementById("toBreak").submit();
-
+		}
 	    //TODO : edit json to be total time - break time {breaks, breaks_hr, breaks_min} hidden form?
 	    //on both end and navigation away, add functionality
 	  }
