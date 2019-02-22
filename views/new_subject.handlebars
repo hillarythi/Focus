@@ -63,7 +63,7 @@
 	</ul>
 	<!-- Title -->
 	<div class="center-page">
-		<a href='main_todo'><span class="glyphicon glyphicon-chevron-left title"></span></a>
+		<a id="back_button" href='main_todo'><span class="glyphicon glyphicon-chevron-left title"></span></a>
 		<br><br>
 		<!--form method="post" action="/new_subject">		
 			<div class="form-group">
@@ -81,15 +81,19 @@
 				<input type="text" class="form-control" name="subject_name" placeholder="Subject Name" style='margin-bottom:10px'>
 			</div>
 			<button id="add_task" type="button" class="btn btn-default btn-block"> +Add Task </button>
-			<button type="submit" class="btn btn-primary">Submit</button>
+			<button id="submit" type="submit" class="btn btn-primary">Submit</button>
 		</form>
 	</div>
 
 	<script>
 		$('#add_task').click(append_task);
 		function append_task() { 
-			console.log("button clicked");
 			$("#subj_info").append('<input type="text" class="form-control" name="task[]" placeholder="Task">');
+		}
+		$('#submit').click(navigate_back);
+		function navigate_back() {
+			console.log("submit clicked");
+			window.location.assign("../main_todo");
 		}
 	</script>
 	<!--script>	
