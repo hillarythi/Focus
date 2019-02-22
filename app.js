@@ -70,6 +70,8 @@ app.post('/new_subject', function (req, res) {
 	data.subjects.push(newSubj);
 	console.log(data);
 });
+
+app.post('/timer/session', timer.continue);
 // app.get('/current', current.changeCurrent); //add task to current json
 // Example route
 // app.get('/users', user.list);
