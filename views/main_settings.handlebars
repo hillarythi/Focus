@@ -59,7 +59,7 @@
 	<div class="container center-page">
 	<a href='/'><span class="glyphicon glyphicon-chevron-left"></span></a>
 	<br><br>
-	<p>Break Length (in minutes)</p>
+	<!--p>Break Length (in minutes)</p>
 	<div class="dropdown fixed-length">
 		<button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">Length</button>
 		<ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
@@ -84,16 +84,19 @@
 			<li><a href="#">15</a></li>
 		</ul>
 	</div>
-	<br>
+	<br-->
+
+	<form method="post" action="/main_settings">
+		<div class="form-group" id="break_length">
+			<label for="break_length">Break Length (in minutes)</label>
+			<input type="number" class="form-control" name="break_length" placeholder="{{breakLength}}" style='margin-bottom:10px'>
+			<label for="snooze_length">Snooze Length (in minutes)</label>
+			<input type="number" class="form-control" name="snooze_length" placeholder="{{snoozeLength}}" style='margin-bottom:10px'>
+		</div>
+		<button type="submit" class="btn btn-primary">Save</button>
+	</form>
 	</div>
 
-<script>
-	
-$(".dropdown-menu li a").click(function(){
-	$(this).parents(".dropdown").find('.btn').html($(this).text()+' ');
-	$(this).parents(".dropdown").find('.btn').val($(this).data('value'));
-});
-</script>
 
 </body>
 

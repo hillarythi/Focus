@@ -43,5 +43,7 @@
     "subject": "COGS 120",
     "task": "Do Lab 4"
   }
-  ]
+  ],
+  "breakLength": 15,
+  "snoozeLength": 5
 }

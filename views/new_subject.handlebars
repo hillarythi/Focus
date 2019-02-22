@@ -86,11 +86,9 @@
 	</div>
 
 	<script>
-		var task_count = 0;
 		$('#add_task').click(append_task);
 		function append_task() { 
 			console.log("button clicked");
-			task_count++;
 			$("#subj_info").append('<input type="text" class="form-control" name="task[]" placeholder="Task">');
 		}
 	</script>
