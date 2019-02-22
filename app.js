@@ -64,11 +64,19 @@ app.use(bodyParser.urlencoded({
 app.use(bodyParser.json());
 
 app.post('/new_subject', function (req, res) {
+	var i;
+	var tasks = req.body.task;
+	for (i = 0; i < req.body.task.length; i++) {
+		var new_task = {'name': req.body.task[i]};
+		tasks[i] = new_task;
+	}
 	var newSubj = {
-		'name': req.body.subject_name
+		'name': req.body.subject_name,
+		'tasks': tasks
 	};
 	data.subjects.push(newSubj);
 	console.log(data);
+	console.log(data.subjects);
 });
 
 app.post('/timer/session', timer.continue);

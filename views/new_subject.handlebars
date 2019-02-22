@@ -63,6 +63,8 @@
 	</ul>
 	<!-- Title -->
 	<div class="center-page">
+		<a href='main_todo'><span class="glyphicon glyphicon-chevron-left title"></span></a>
+		<br><br>
 		<!--form method="post" action="/new_subject">		
 			<div class="form-group">
 				<input type="text" class="form control" name="subject_name" placeholder="Subject name">
@@ -76,19 +78,22 @@
 		<form method="post" action="/new_subject">
   			<div class="form-group" id="subj_info">
     				<label for="subject_name">Enter subject information</label>
-				<input type="text" class="form-control" name="subject_name" placeholder="Subject Name">
+				<input type="text" class="form-control" name="subject_name" placeholder="Subject Name" style='margin-bottom:10px'>
 			</div>
-			<button id="add_task" type="button" class="btn btn-default btn-block home-icon"> +Add Task </button>
+			<button id="add_task" type="button" class="btn btn-default btn-block"> +Add Task </button>
 			<button type="submit" class="btn btn-primary">Submit</button>
 		</form>
 	</div>
 
-	<!--script>
+	<script>
+		var task_count = 0;
 		$('#add_task').click(append_task);
 		function append_task() { 
-			$("subj_info").append('<input type="text" class="form-control" name="task" placeholder="Task">')
+			console.log("button clicked");
+			task_count++;
+			$("#subj_info").append('<input type="text" class="form-control" name="task[]" placeholder="Task">');
 		}
-	</script-->
+	</script>
 	<!--script>	
 	$(".dropdown-menu li a").click(function(){
 		$(this).parents(".dropdown").find('.btn').html($(this).text()+' ');
