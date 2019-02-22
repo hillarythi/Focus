@@ -47,7 +47,7 @@
 	.center-page{
 		position: fixed;
 		top: 10%;
-		left: 15%;
+		left: 5%;
 		width: 70%; /* width of everything */
 		/*transform: translate(-50%, -50%);*/
 	}
@@ -84,6 +84,13 @@
 		width:80%;
 		bottom:10%;
 		left:10%;
+	}
+	.fixed-length{
+		width:135%;
+		font-size:200%;
+	}
+	div p{
+		font-size:20px;
 	}
 	
 	</style>
@@ -131,7 +138,7 @@
 		  </ul>
 		</div>
 	</div>
-	<br>
+	<br><br>
 
 
 	<!-- Task / assignment -->
@@ -144,12 +151,12 @@
 		  </ul>	
 		</div>
 	</div>
-	<br>
+	<br><br>
 
 
 	<!-- Select Time / time length-->
 	<div id="show_time" style="display:none">
-		<p class="title">time length</p>
+		<p class="title" style="padding-bottom: 10px">time length</p>
 		<div class="dropdown" style="display:inline">
 		  <button class="btn btn-default dropdown-toggle" type="button" id="dropHour" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">0 </button><span class="title"> hr</span>
 		  <ul class="dropdown-menu" aria-labelledby="dropHour">
@@ -180,7 +187,7 @@
 		  </ul>
 		</div>
 	</div>
-	<br>
+	<br><br>
 
 
 	<!-- Breaks -->
@@ -199,7 +206,7 @@
 		  </div>
 		</div>
 	</div>
-	<br>
+	<br><br>
 
 	<div id="show_submit" style="display:none">
 		<a href='/'><span class="glyphicon glyphicon-arrow-left left"></span></a>
@@ -360,7 +367,7 @@ function validateForm(){
 	}
 	if ( (t2==0) && (t3<15)){
 		alert("Please set your timer to at least 15 minutes.");
-		// return false;
+		return false;
 	}
 	return true;
 }
