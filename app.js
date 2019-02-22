@@ -8,6 +8,8 @@ var http = require('http');
 var path = require('path');
 var handlebars = require('express3-handlebars')
 
+var data = require('./data.json');
+
 var login = require('./routes/login');
 var index = require('./routes/index');
 var new_timer = require('./routes/main_timer');
@@ -38,6 +40,8 @@ app.use(app.router);
 app.use(express.static(path.join(__dirname, 'public')));
 //app.use(express.static(__dirname));
 
+const bodyParser = require("body-parser")
+
 // development only
 if ('development' == app.get('env')) {
   app.use(express.errorHandler());
@@ -46,12 +50,26 @@ if ('development' == app.get('env')) {
 app.get('/', login.view);
 app.get('/index', index.view);
 app.get('/main_todo', todo.view);
+app.post('/main_todo', todo.view);
 app.get('/main_log', log.view);
 app.get('/main_settings', settings.view);
 app.get('/main_timer', new_timer.view);
 app.post('/timer', timer.view);
 app.get('/new_subject', new_subject.view)
 app.post('/break', breaks.view);
+
+app.use(bodyParser.urlencoded({
+	extended: true
+}));
+app.use(bodyParser.json());
+
+app.post('/new_subject', function (req, res) {
+	var newSubj = {
+		'name': req.body.subject_name
+	};
+	data.subjects.push(newSubj);
+	console.log(data);
+});
 // app.get('/current', current.changeCurrent); //add task to current json
 // Example route
 // app.get('/users', user.list);

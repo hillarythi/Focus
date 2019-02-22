@@ -45,6 +45,12 @@
 	.dusty-gray{
 		background-color: rgb(104,124,135);
 	}
+	.center-page{
+		position: fixed;
+		top: 10%;
+		left: 15%;
+		width: 70%;
+	}
 	</style>
 </head>
 <body>
@@ -53,25 +59,43 @@
 		<li class="border-right"><a href="main_timer" class="glyphicon glyphicon-plus"></a></li>
 		<li class="border-right"><a href="main_todo" class="glyphicon glyphicon-th-list"></a></li>
 		<li class="border-right"><a href="main_log" class="glyphicon glyphicon-time"></a></li>
-		<li><a href="main_settings" class="glyphicon glyphicon-cog"></a></li>
+-		<li><a href="main_settings" class="glyphicon glyphicon-cog"></a></li>
 	</ul>
 	<!-- Title -->
-	<div class="top-bar">
-		<div class="form-group"><input class="form-control" id="subjectTitle" placeholder="Subject name"></div>
-	</div>
-	<!-- Checklist Items -->
-	<div class="list-item" style="padding-top: 42px">
-		<button type="button" class="btn btn-default btn-block home-icon"> +Add Task </button>
+	<div class="center-page">
+		<!--form method="post" action="/new_subject">		
+			<div class="form-group">
+				<input type="text" class="form control" name="subject_name" placeholder="Subject name">
+				<input type="submit" value="Submit">
+			</div>
+		</form-->
+		<!--form method="post" action="/new_subject">
+			<input type="text" name="subject_name">
+			<input type="submit" value="Submit">
+		</form-->	
+		<form method="post" action="/new_subject">
+  			<div class="form-group" id="subj_info">
+    				<label for="subject_name">Enter subject information</label>
+				<input type="text" class="form-control" name="subject_name" placeholder="Subject Name">
+			</div>
+			<button id="add_task" type="button" class="btn btn-default btn-block home-icon"> +Add Task </button>
+			<button type="submit" class="btn btn-primary">Submit</button>
+		</form>
 	</div>
 
-	<script>	
+	<!--script>
+		$('#add_task').click(append_task);
+		function append_task() { 
+			$("subj_info").append('<input type="text" class="form-control" name="task" placeholder="Task">')
+		}
+	</script-->
+	<!--script>	
 	$(".dropdown-menu li a").click(function(){
 		$(this).parents(".dropdown").find('.btn').html($(this).text()+' ');
 		$(this).parents(".dropdown").find('.btn').val($(this).data('value'));
 	});
-	</script>
+	</script-->
 
 </body>
 </html>
-
 
