@@ -82,21 +82,35 @@
 		padding-left:10px;
 	}
 
+
+	.form-control{
+		padding: 30px 10px;
+		color:black;
+		/*change color to show not yet added?*/
+	}
+	.form-control:focus{
+		color:gray;
+	}
+	.form-control::placeholder{
+		color:gray;
+	}
+
+
 	</style>
 </head>
 <body>
 	<!-- NAVBAR -->
 	<ul class="navbar border-top bg-gray">
-		<li class="border-right"><a href="main_timer" class="glyphicon glyphicon-plus"></a></li>
-		<li class="border-right"><a href="main_todo" class="glyphicon glyphicon-th-list"></a></li>
-		<li class="border-right"><a href="main_log" class="glyphicon glyphicon-time"></a></li>
-		<li><a href="main_settings" class="glyphicon glyphicon-cog"></a></li>
+		<li class="border-right"><a href="main_timer" class="glyphicon glyphicon-plus" onclick="return confirmLeave()"></a></li>
+		<li class="border-right"><a href="main_todo" class="glyphicon glyphicon-th-list" onclick="return confirmLeave()"></a></li>
+		<li class="border-right"><a href="main_log" class="glyphicon glyphicon-time" onclick="return confirmLeave()"></a></li>
+		<li><a href="main_settings" class="glyphicon glyphicon-cog" onclick="return confirmLeave()"></a></li>
 	</ul>
 	
 
 	<!-- Top left back button + title-->
 	<h2 class="font-blue pad-10 no-margin" style="text-align:center; padding-right:38px">
-		<a href='index'><span class="glyphicon glyphicon-chevron-left font-blue"></span></a>
+		<a href='index' onclick="return confirmLeave()"	><span class="glyphicon glyphicon-chevron-left font-blue"></span></a>
 	to do</h2>
 
 	<!-- subject list  -->
@@ -104,17 +118,55 @@
 		<!-- TODO link to tasks here  -->
 		<a role="button" aria-pressed="true" class="btn btn-default btn-block bg-pink font-white"> {{name}} </a>
 	{{/each}}
-	
+
+
+	<!-- form for adding new subject when needed -->
+	<form method="post" action="main_todo" id="new_subj_form" style="display:none">
+  			<input type="text" class="form-control btn btn-default btn-block " style="background-color:var(--dusty-pink)" name="subject_name" placeholder="subject name" id="add_new">
+  			<div class="container">
+  				<button class="btn btn-default btn-block" style="display:inline" onclick="return checkFilled()"> done </button>
+				<button class="btn btn-default btn-block" onclick="return cancel()"> cancel </button>
+			</div>
+	</form>
+
+	<!-- add new subject button  -->
 	<div class="container">
-		<a href="new_subject" role="button" aria-pressed="true" class="btn btn-default btn-block actual-btn"> + add new </a>
+		<button class="btn btn-default btn-block" onclick="inputNew()" id="add_btn"> + add new subject </button>
 	</div>
 
 	<br><br><br><br>
-	<div id="stick-bottom">
-		<!-- <p>Click into the subject you want to check!</p> -->
-	</div>
 
 
+<script>
+
+function cancel(){
+	$("#new_subj_form").css("display","none");
+	$("#add_btn").css("display", "block");
+	$("#add_new").val("");
+	return false;
+}
+function inputNew(){
+	$("#new_subj_form").css("display","block");
+	$("#add_btn").css("display", "none");
+}
+function checkFilled(){
+	if ( $("#add_new").val() == "" ){
+		alert("Subject cannot be empty.");
+		return false;
+	}
+
+	$("#new_subj_form").submit();
+	return true;
+}
+function confirmLeave() {
+	if ( $("#add_new").val() != "" ){
+		return confirm("Are you sure you want to navigate away? Your edits will not be saved.");
+	}else{
+		return true;
+	}
+}
+
+</script>
 
 
 </body>

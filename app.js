@@ -50,7 +50,8 @@ if ('development' == app.get('env')) {
 app.get('/', login.view);
 app.get('/index', index.view);
 app.get('/main_todo', todo.view);
-app.post('/main_todo', todo.added);
+//app.post('/main_todo', todo.added);
+app.post('/main_todo',todo.add);
 app.get('/main_log', log.view);
 app.get('/main_settings', settings.view);
 app.post('/main_settings', settings.added);
