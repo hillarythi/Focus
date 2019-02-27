@@ -46,6 +46,5 @@
 	"time": "30"
   }
   ],
-  "breakLength": 15,
-  "snoozeLength": 5
+  "breakLength":3
 }
