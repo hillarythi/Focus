@@ -9,6 +9,7 @@
 
 // "sub_breaks, sub_min, sub_hr" in body, edit json and move to breaks
 
+var data = require('../data.json');
 
 //currently for early break
 exports.view = function(request, response) {    
@@ -47,6 +48,25 @@ exports.view = function(request, response) { 
 
 	console.log("break render:");
 	console.log(new_break);
+
+	//updating log
+	console.log("updating database:");
+	var found = false;
+	for(var i = 0; i < data.completed.length; i++) {
+		if (data.completed[i].subject === subject && data.completed[i].task === assignment) {
+			data.completed[i].time = totalTimeSet - totalMinsLeft;
+			found = true;
+			break;
+		}
+	}
+	if(!found) {
+		var newTask = {
+			'subject': subject,
+			'task': assignment,
+				'time': totalTimeSet - totalMinsLeft
+		}
+		data.completed.push(newTask);
+	};
 
 	//maybe send a total time left to breaks? 
 	response.render('break', new_break);

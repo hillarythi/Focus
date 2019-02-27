@@ -18,6 +18,25 @@ exports.view = function(request, response) { 
 	new_display["hours"] = readableTime[0];
 	new_display["minutes"] = readableTime[1];
 
+	//updating log
+	console.log("updating database:");
+	var found = false;
+	for(var i = 0; i < data.completed.length; i++) {
+		if (data.completed[i].subject === subject && data.completed[i].task === assignment) {
+			data.completed[i].time = total_time
+			found = true;
+			break;
+		}
+	}
+	if(!found) {
+		var newTask = {
+			'subject': subject,
+			'task': assignment,
+				'time': total_time
+		}
+		data.completed.push(newTask);
+	};
+
 	response.render('finish',new_display);
 }
 
