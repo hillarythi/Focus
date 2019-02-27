@@ -110,34 +110,29 @@
 
 	<!-- Top left back button + title-->
 	<h2 class="font-blue pad-10 no-margin" style="text-align:center; padding-right:38px">
-		<a href='index' onclick="return confirmLeave()"	><span class="glyphicon glyphicon-chevron-left font-blue"></span></a>
-	to do</h2>
+		<a href='main_todo' onclick="return confirmLeave()"	><span class="glyphicon glyphicon-chevron-left font-blue"></span></a>
+	{{name}} </h2>
 
 	<!-- subject list  -->
-	{{#each subjects}}
+	{{#each tasks}}
 		<!-- TODO link to tasks here  -->
-		<a role="button" aria-pressed="true" class="btn btn-default btn-block bg-pink font-white" onclick="viewTasks(this)">{{name}}</a>
+		<a role="button" aria-pressed="true" class="btn btn-default btn-block bg-pink font-white"> {{name}} </a>
 	{{/each}}
 
 
 	<!-- form for adding new subject when needed -->
-	<form method="post" action="main_todo" id="new_subj_form" style="display:none">
-  			<input type="text" class="form-control btn btn-default btn-block " style="background-color:var(--dusty-pink)" name="subject_name" placeholder="subject name" id="add_new">
+	<form method="post" action="tasks" id="new_task_form" style="display:none">
+  			<input type="text" class="form-control btn btn-default btn-block " style="background-color:var(--dusty-pink)" name="task_name" placeholder="task name" id="add_new">
+  			<input type="hidden" name="subj_name" value="{{name}}">
   			<div class="container">
   				<button class="btn btn-default btn-block" style="display:inline" onclick="return checkFilled()"> done </button>
 				<button class="btn btn-default btn-block" onclick="return cancel()"> cancel </button>
 			</div>
 	</form>
 
-	<!-- hidden form for viewing tasks -->
-	<form method="get" action="tasks" id="view_tasks_form">
-  		<input type="hidden" name="subject" id="view_subject">
-	</form>
-
-
 	<!-- add new subject button  -->
 	<div class="container">
-		<button class="btn btn-default btn-block" onclick="inputNew()" id="add_btn"> + add new subject </button>
+		<button class="btn btn-default btn-block" onclick="inputNew()" id="add_btn"> + add new task </button>
 	</div>
 
 	<br><br><br><br>
@@ -146,22 +141,22 @@
 <script>
 
 function cancel(){
-	$("#new_subj_form").css("display","none");
+	$("#new_task_form").css("display","none");
 	$("#add_btn").css("display", "block");
 	$("#add_new").val("");
 	return false;
 }
 function inputNew(){
-	$("#new_subj_form").css("display","block");
+	$("#new_task_form").css("display","block");
 	$("#add_btn").css("display", "none");
 }
 function checkFilled(){
 	if ( $("#add_new").val() == "" ){
-		alert("Subject cannot be empty.");
+		alert("Task cannot be empty.");
 		return false;
 	}
 
-	$("#new_subj_form").submit();
+	$("#new_task_form").submit();
 	return true;
 }
 function confirmLeave() {
@@ -170,10 +165,6 @@ function confirmLeave() {
 	}else{
 		return true;
 	}
-}
-function viewTasks(subj){
-	$("#view_subject").val(subj.innerHTML);
-	$("#view_tasks_form").submit();
 }
 
 </script>

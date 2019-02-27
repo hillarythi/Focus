@@ -26,7 +26,7 @@ exports.add = function (req,res){
 
     var newSubj = {
 		'name': req.body.subject_name,
-		'tasks': {}
+		'tasks': []
 	};
 	data.subjects.push(newSubj);
 	res.render('main_todo', data);

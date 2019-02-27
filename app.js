@@ -19,6 +19,7 @@ var timer = require('./routes/timer');
 var breaks = require('./routes/break');
 var new_subject = require('./routes/new_subject');
 var finish = require('./routes/finish');
+var tasks = require('./routes/tasks');
 //can clean up code to have multiple routes in same js file
 
 
@@ -60,6 +61,8 @@ app.post('/timer', timer.view);
 app.get('/new_subject', new_subject.view);
 app.post('/break', breaks.view);
 app.post('/finish', finish.view);
+app.get('/tasks', tasks.view);
+app.post('/tasks', tasks.add);
 
 app.use(bodyParser.urlencoded({
 	extended: true
