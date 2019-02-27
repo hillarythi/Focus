@@ -16,20 +16,20 @@ exports.view = function(req, res){
 
 exports.add = function (req,res){
 
-	var newSubj = {
+	//if new subject already exists, don't add anything
+	for(var i = 0; i < data.subjects.length; i++) {
+    	if (data.subjects[i]["name"].toUpperCase() == req.body.subject_name.toUpperCase()){
+    		res.render('main_todo', data);
+    		return;
+    	}
+    }
+
+    var newSubj = {
 		'name': req.body.subject_name,
 		'tasks': {}
 	};
 	data.subjects.push(newSubj);
-
-
-	console.log("add");
-	console.log(data.subjects);
-
-	res.render('main_todo', {
-		"subjects":data.subjects
-	});
-
+	res.render('main_todo', data);
 };
 	
 
