@@ -116,11 +116,11 @@
 	<!-- subject list  -->
 	{{#each tasks}}
 		<!-- TODO link to tasks here  -->
-		<a role="button" aria-pressed="true" class="btn btn-default btn-block bg-pink font-white"> {{name}} </a>
+		<a role="button" aria-pressed="true" class="btn btn-default btn-block bg-pink font-white" onclick="startTimer(this)">{{name}}</a>
 	{{/each}}
 
 
-	<!-- form for adding new subject when needed -->
+	<!-- form for adding new tasks when needed -->
 	<form method="post" action="tasks" id="new_task_form" style="display:none">
   			<input type="text" class="form-control btn btn-default btn-block " style="background-color:var(--dusty-pink)" name="task_name" placeholder="task name" id="add_new">
   			<input type="hidden" name="subj_name" value="{{name}}">
@@ -129,6 +129,14 @@
 				<button class="btn btn-default btn-block" onclick="return cancel()"> cancel </button>
 			</div>
 	</form>
+
+
+	<!-- hidden form for starting a new timer -->
+	<form method="post" action="main_timer" id="start_timer_form">
+  		<input type="hidden" name="subject" id="subject_timer">
+  		<input type="hidden" name="task" id="task_timer">
+	</form>
+
 
 	<!-- add new subject button  -->
 	<div class="container">
@@ -165,6 +173,11 @@ function confirmLeave() {
 	}else{
 		return true;
 	}
+}
+function startTimer(task){
+	$("#subject_timer").val("{{name}}");
+	$("#task_timer").val(task.innerHTML);
+	$("#start_timer_form").submit();
 }
 
 </script>

@@ -253,6 +253,28 @@
 $(document).ready( ()=>{
 	//add event listeners
 
+	console.log("populated");
+		console.log({{toString populated}});
+
+	if ({{toString populated}}){
+		//if true, prepopulate 
+
+		//preselect subject
+		$('#dropSubject').html("{{curr_subj}}");
+		$('#dropSubject').val("{{curr_subj}}");
+		$('#dropSubject').css("background-color","rgb(209, 98, 118)");
+
+		//display the choices for curr subject and preselect
+		window["displayNewTasks"]();
+		$('#dropAssignment').html("{{curr_task}}");
+		$('#dropAssignment').val("{{curr_task}}");
+		$('#dropAssignment').css("background-color","rgb(209, 98, 118)");
+
+		//display the hidden ones because first two already populated
+		$('#show_assignment').css("display","block");
+		$('#show_time').css("display","block");
+	}
+
 	//main dropdown text is changed when selected
 	$(".dropdown-menu li a").click(changeText);
 
@@ -271,7 +293,6 @@ $(document).ready( ()=>{
 function makeIdLocal(taskName){
 	return taskName.replace(/\s/g,''); 
 }
-
 
 var displayNewTasks = function(){
 

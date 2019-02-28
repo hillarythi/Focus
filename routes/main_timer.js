@@ -17,14 +17,49 @@ exports.view = function(req, res){
    console.log(subjects);
    console.log("TASKS");
    console.log(tasks);
+
+   res.render('main_timer',
+    {
+     "subjects": subjects,
+     "tasks": tasks,
+     "populated": false,
+     "helpers": {
+            makeIdHandle: function (taskName) { 
+            	return taskName.replace(/\s/g,'');
+            },
+            toString: function (v) { 
+              return '' + v;
+            }
+        }
+   }
+   );
+};
+
+exports.fill = function(req,res){
+
+   var subjects=data.subjects
+   var tasks = subjects.map( function(s) {
+     return s.tasks;
+  });
+
+   console.log("RENDER FILL");
+   console.log(req.body.subject + " " + req.body.task);
+
    res.render('main_timer', {
      "subjects": subjects,
      "tasks": tasks,
+     "populated": true,
+     "curr_subj": req.body.subject,
+     "curr_task": req.body.task,
      "helpers": {
             makeIdHandle: function (taskName) { 
-            	return taskName.replace(/\s/g,''); ; 
+              return taskName.replace(/\s/g,'');
+            },
+            toString: function (v) { 
+              return '' + v;
             }
         }
    });
-//  res.sendFile(path.join(__dirname+'/main_timer.html'));
-};
+
+
+}

@@ -57,6 +57,7 @@ app.get('/main_log', log.view);
 app.get('/main_settings', settings.view);
 app.post('/main_settings', settings.added);
 app.get('/main_timer', new_timer.view);
+app.post('/main_timer', new_timer.fill);
 app.post('/timer', timer.view);
 app.get('/new_subject', new_subject.view);
 app.post('/break', breaks.view);
