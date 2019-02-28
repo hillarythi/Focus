@@ -116,7 +116,7 @@
 	<!-- subject list  -->
 	{{#each tasks}}
 		<!-- TODO link to tasks here  -->
-		<a role="button" aria-pressed="true" class="btn btn-default btn-block bg-pink font-white" onclick="startTimer(this)">{{name}}</a>
+		<a role="button" aria-pressed="true" class="btn btn-default btn-block bg-pink font-white" onclick="return confirmStartTimer(this)">{{name}}</a>
 	{{/each}}
 
 
@@ -174,10 +174,16 @@ function confirmLeave() {
 		return true;
 	}
 }
-function startTimer(task){
-	$("#subject_timer").val("{{name}}");
-	$("#task_timer").val(task.innerHTML);
-	$("#start_timer_form").submit();
+function confirmStartTimer(task){
+	var c = confirm("Do you want to start a timer for this task right now?");
+	if (!c){
+		return false;
+	}else{
+		$("#subject_timer").val("{{name}}");
+		$("#task_timer").val(task.innerHTML);
+		$("#start_timer_form").submit();
+		return true;
+	}
 }
 
 </script>
