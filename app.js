@@ -11,6 +11,7 @@ var handlebars = require('express3-handlebars')
 
 var login = require('./routes/login');
 var index = require('./routes/index');
+var tutorial = require('./routes/tutorial');
 var new_timer = require('./routes/main_timer');
 var log = require('./routes/main_log');
 var todo = require('./routes/main_todo');
@@ -50,6 +51,8 @@ if ('development' == app.get('env')) {
 
 app.get('/', login.view);
 app.get('/index', index.view);
+app.get('/tutorial',tutorial.view);
+app.get('/tutorial/:page',tutorial.view);
 app.get('/main_todo', todo.view);
 //app.post('/main_todo', todo.added);
 app.post('/main_todo',todo.add);
