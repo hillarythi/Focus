@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<title>break timer</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	<!-- fonts -->
+	<link href="https://fonts.googleapis.com/css?family=Fira+Sans" rel="stylesheet">
+	<style>
+	:root {
+  		--dusty-pink: rgb(212,171,179);
+  		--dusty-blue: rgb(153,195,203);
+  		--dusty-gray: rgb(104,124,135);
+	}
+	body{
+		font-family: 'Fira Sans', sans-serif;
+		font-weight: lighter !important; /*not working*/
+	}
+	.navbar {
+	    width:100%;
+	    margin:0px auto;
+	    bottom: 0;
+	    padding:10 0px;
+	    position: fixed;
+	    text-align:center;
+	}
+	.navbar li { 
+	    display:inline-block;
+	    width:24%; 
+	    margin:0;
+	    padding:0;
+	}
+	.navbar .glyphicon{
+		font-size:200%;
+		color:white;
+	}
+	a:hover{
+		text-decoration:none;
+	}
+
+	.pad-10{
+		padding: 10% 0%;
+	}
+	.no-margin{
+		margin: 0;
+	}
+	#circle-div{ 
+		/*TODO  : center circle :( currently iphonex */
+		width:300px;
+		height:300px;
+		margin-left: 8%;
+		border: 2px solid rgb(153,195,203);
+		border-radius:50%;
+		text-align: center;
+		font-size:50px;
+	}
+	#circle-div2{
+		padding-top:35%;
+	}
+	.font-pink{
+		color: var(--dusty-pink);
+	}
+	.font-blue{
+		color: var(--dusty-blue);
+	}
+	.font-gray{
+		color: var(--dusty-gray);
+	}
+	.bg-gray{
+		background-color: var(--dusty-gray);
+	}
+	.break-btn{
+		font-size:200%;
+		background-color: var(--dusty-pink);
+		color:white;
+	}
+
+	/*for exit button/arrow*/
+	#end-session-btn {
+		padding-top: 15%;
+		float:right;
+		padding-right:10%;
+	}
+
+	</style>
+</head>
+<body>
+	<!-- NAVBAR -->
+	<ul class="navbar border-top bg-gray">
+		<li class="border-right">
+			<a href="main_timer_B" class="glyphicon glyphicon-plus" onClick="return confirmLeave()"></a></li>
+		<li class="border-right">
+			<a href="main_todo_B" class="glyphicon glyphicon-th-list" onClick="return confirmLeave()"></a></li>
+		<li class="border-right">
+			<a href="main_log_B" class="glyphicon glyphicon-time" onClick="return confirmLeave()"></a></li>
+		<li><a href="main_settings_B" class="glyphicon glyphicon-cog" onClick="return confirmLeave()"></a></li>
+	</ul>
+
+	<!-- Actual Page -->
+	<div class="container" style="text-align:center">
+
+		<h2 class="font-pink pad-10 no-margin" >break time!</h2>
+
+		<!-- Timer (circular border, time caption, countdown timer) -->
+		<div id="circle-div" class="font-pink">
+			<div id="circle-div2">
+				<div style="font-size:20px; margin:0">you've earned it!</div><!--add the circle animations instead of text?-->
+				<p id="countdown" class="no-margin"></p>
+			</div>
+		</div>
+
+		<h1 class="font-blue pad-10 no-margin" id="assignment">{{assignment}}</h1>
+
+		<!-- breaks -->
+		<h3 class="font-blue no-margin">breaks left</h3>
+		<a href="#">
+			<div class="btn-group no-margin" role="group" aria-label="First group" id="breaks-left">
+			<!-- number of breaks added here  -->
+		 	</div>
+	 	</a>
+
+ 	</div>
+
+ 	<!-- End Break Btn -->
+ 	<div id="end-session-btn">
+		<a href="#" onclick="confirmStudy()">
+			<span class="glyphicon glyphicon-arrow-right font-gray" style="float:right; font-size: 40px"></span>
+		<br><h3 class="font-blue">continue studying</h3></a>
+	
+	</div>
+
+	<!-- Extra White Space -->
+	<div style="margin: 20%">
+		<br>
+	<!-- space under submit button so it scrolls if doesnt fit screen -->
+	</div>
+
+
+	<!-- Hidden Forms submissions -->
+	<form action="timer_B" method="post" id="toTimer">
+		<input type="hidden" name="breaks" value="{{breaks}}">
+		<!-- <input type="hidden" id="time_passed" name="total_minutes_spent" value="{{breaks_total}}"> -->
+		<!-- extra stuff for passing session -->
+		<input type="hidden" name="totalTimeSet" value="{{totalTimeSet}}">
+		<input type="hidden" name="subject" value="{{subject}}">
+		<input type="hidden" name="assignment" value="{{assignment}}">
+		<input type="hidden" id="hours_left" name="hour" value="0">
+		<input type="hidden" id="mins_left" name="minute" value="0">
+	</form>
+
+
+
+<script>
+
+$( document ).ready(function() {
+    populateBreaks();
+    startCountdown();
+});
+
+function populateBreaks(){
+	//TODO fix bc needs to be dynamic as breaks are spent?
+	//removed btn-secondary from button class to remove black onclick animation
+	for (var i = 0; i < {{breaks}}; i++){
+		$('#breaks-left').append('<button type="button" class="btn break-btn"><span class="glyphicon glyphicon-star"></span></button>');
+	}
+}
+
+function startCountdown(){ //counts down to next study session
+
+	// Set the date we're counting down to
+	var countDownDate = new Date();
+	// countDownDate.setHours(countDownDate.getHours()+{{total_hr}});
+	// countDownDate.setMinutes(countDownDate.getMinutes()+{{total_min}});
+	countDownDate.setMinutes(countDownDate.getMinutes()+5);
+	countDownDate = countDownDate.getTime();
+
+	// Update the count down every 1 second
+	var x = setInterval(function() {
+
+	  // Get todays date and time
+	  var now = new Date().getTime();
+
+	  // Find the distance between now and the count down date
+	  var distance = countDownDate - now;
+
+	  // Time calculations for days, hours, minutes and seconds
+	  var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+	  var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+	  // Display the result in the element with id "countdown"
+	  document.getElementById("countdown").innerHTML = "  " + minutes + "m " + seconds + "s";
+
+	  // If the count down is finished, write some text 
+	  if (distance < 0) {
+	    clearInterval(x);
+	    document.getElementById("countdown").innerHTML = "DONE";
+	    alert("it's time to focus, let's get work done!");
+	    submitStudy(); //submit form
+	  }
+	}, 1000);
+}
+
+//TODO inconsistent leave statements and form submissions... deal with it
+function confirmStudy(){
+	var c = confirm('Are you sure you want to skip the rest of your break and continue studying?');
+	if (c){
+		submitStudy();
+	}
+
+}
+
+function submitStudy(){
+	var readable = totalToReadable({{totalMinsLeft}});
+    document.getElementById("hours_left").value = readable[0];
+    document.getElementById("mins_left").value = readable[1];
+    document.getElementById("toTimer").submit();
+}
+
+/* leaving timer from end session button or navbar */
+function confirmLeave(){ 
+	return confirm('You are in the middle of a session, are you sure you want to leave? Your data will be lost');
+}
+
+//out of total minutes, how many hour/min
+function totalToReadable(total){
+	var h = Math.floor(total/60);
+	var m = Math.floor(total%60);
+	return [h,m];
+}
+
+
+</script>
+
+
+
+</body>
+</html>
+

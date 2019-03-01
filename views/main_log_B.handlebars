@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<title>log</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	<style>
+	:root {
+  		--dusty-pink: rgb(212,171,179);
+  		--dusty-blue: rgb(153,195,203);
+  		--dusty-gray: rgb(104,124,135);
+	}
+	body{
+		font-family: 'Fira Sans', sans-serif;
+		font-weight: lighter !important; /*not working*/
+	}
+	.navbar {
+	    width:100%;
+	    margin:0px auto;
+	    bottom: 0;
+	    padding:10 0px;
+	    position: fixed;
+	    text-align:center;
+	}
+	.navbar li { 
+	    display:inline-block;
+	    width:24%; 
+	    margin:0;
+	    padding:0;
+	}
+	.navbar .glyphicon{
+		font-size:200%;
+		color:white;
+	}
+	a:hover{
+		text-decoration:none;
+	}
+	.font-pink{
+		color: var(--dusty-pink);
+	}
+	.font-blue{
+		color: var(--dusty-blue);
+	}
+	.font-gray{
+		color: var(--dusty-gray);
+	}
+	.font-white{
+		color: white !important;
+	}
+	.bg-gray{
+		background-color: var(--dusty-gray);
+	}
+	.bg-pink{
+		background-color: var(--dusty-pink);
+	}
+	.pad-10{
+		padding: 10% 0%;
+	}
+	.pad-5{
+		padding: 5% 0;
+	}
+	.no-margin{
+		margin: 0;
+	}
+	
+	.display-log{
+		border-radius:0 ;
+		margin: 5% 5%;
+		border: 1px solid white;
+		font-size:20px;
+		/*border-top: 1px solid gray;*/
+	}
+	
+	h2 .glyphicon{
+		font-size: 30px;
+		float:left;
+		padding-left:10px;
+	}
+	hr{
+		margin:0;
+		border-color:gray;
+	}
+	</style>
+</head>
+<body>
+
+	<!-- NAVBAR -->
+	<ul class="navbar border-top bg-gray">
+		<li class="border-right"><a href="main_timer_B" class="glyphicon glyphicon-plus"></a></li>
+		<li class="border-right"><a href="main_todo_B" class="glyphicon glyphicon-th-list"></a></li>
+		<li class="border-right"><a href="main_log_B" class="glyphicon glyphicon-time"></a></li>
+		<li><a href="main_settings_B" class="glyphicon glyphicon-cog"></a></li>
+	</ul>
+
+	
+	<!-- Top left back button + title-->
+	<h2 class="font-blue pad-10 no-margin" style="text-align:center; padding-right:38px">
+		<a href='main_timer_B'><span class="glyphicon glyphicon-chevron-left font-blue"></span></a>
+	completed</h2>
+
+	<label class="font-pink container" style="font-size:25px">today</label>
+	<hr>
+
+	{{#each completed}}
+		<div class="display-log">
+			<p class="no-margin" style="font-size:small;">{{subject}}</p>
+			<p class="no-margin" style="display:inline">{{task}}</p><p style="display:inline; float:right" class="time-studied">{{time}}</p>
+		</div>
+		<hr>
+	{{/each}}
+
+<!-- <a role="button" aria-pressed="true" class="btn btn-default btn-block"> {{task}} - {{subject}}</a> -->
+
+<script>
+	$(document).ready(function(){
+		//puts total minutes into readable h:m:s time
+		$(".time-studied").each(function(){
+			var totalMins = parseInt($(this).html());
+			var h = Math.floor(totalMins/60);
+			var m = Math.floor(totalMins%60);
+			h = ("0" + h).slice(-2);
+			m = ("0" + m).slice(-2);
+			$(this).html(h+":"+m+":00");
+		});
+	});
+
+</script>
+
+
+</body>
+</html>

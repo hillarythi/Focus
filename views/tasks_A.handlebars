@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<title>to-do</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	<!-- fonts -->
+	<link href="https://fonts.googleapis.com/css?family=Fira+Sans" rel="stylesheet">
+	<style>
+	:root {
+  		--dusty-pink: rgb(212,171,179);
+  		--dusty-blue: rgb(153,195,203);
+  		--dusty-gray: rgb(104,124,135);
+	}
+	body{
+		font-family: 'Fira Sans', sans-serif;
+		font-weight: lighter !important; /*not working*/
+	}
+	.navbar {
+	    width:100%;
+	    margin:0px auto;
+	    bottom: 0;
+	    padding:10 0px;
+	    position: fixed;
+	    text-align:center;
+	}
+	.navbar li { 
+	    display:inline-block;
+	    width:24%; 
+	    margin:0;
+	    padding:0;
+	}
+	.navbar .glyphicon{
+		font-size:200%;
+		color:white;
+	}
+	a:hover{
+		text-decoration:none;
+	}
+	.font-pink{
+		color: var(--dusty-pink);
+	}
+	.font-blue{
+		color: var(--dusty-blue);
+	}
+	.font-gray{
+		color: var(--dusty-gray);
+	}
+	.font-white{
+		color: white !important;
+	}
+	.bg-gray{
+		background-color: var(--dusty-gray);
+	}
+	.bg-pink{
+		background-color: var(--dusty-pink);
+	}
+	.pad-10{
+		padding: 10% 0%;
+	}
+	.no-margin{
+		margin: 0;
+	}
+	
+	.btn-block{
+		border-radius:0 ;
+		padding: 5% 0;
+		margin-bottom: 4%;
+		border-top: 1px solid gray;
+		border-bottom: 1px solid gray;
+
+		font-size:20px;
+	}
+	
+	h2 .glyphicon{
+		font-size: 30px;
+		float:left;
+		padding-left:10px;
+	}
+
+
+	.form-control{
+		padding: 30px 10px;
+		color:black;
+		/*change color to show not yet added?*/
+	}
+	.form-control:focus{
+		color:gray;
+	}
+	.form-control::placeholder{
+		color:gray;
+	}
+
+
+	</style>
+</head>
+<body>
+	<!-- NAVBAR -->
+	<ul class="navbar border-top bg-gray">
+		<li class="border-right"><a href="main_timer_A" class="glyphicon glyphicon-plus" onclick="return confirmLeave()"></a></li>
+		<li class="border-right"><a href="main_todo_A" class="glyphicon glyphicon-th-list" onclick="return confirmLeave()"></a></li>
+		<li class="border-right"><a href="main_log_A" class="glyphicon glyphicon-time" onclick="return confirmLeave()"></a></li>
+		<li><a href="main_settings_A" class="glyphicon glyphicon-cog" onclick="return confirmLeave()"></a></li>
+	</ul>
+	
+
+	<!-- Top left back button + title-->
+	<h2 class="font-blue pad-10 no-margin" style="text-align:center; padding-right:38px">
+		<a href='main_todo_A' onclick="return confirmLeave()"	><span class="glyphicon glyphicon-chevron-left font-blue"></span></a>
+	{{name}} </h2>
+
+	<!-- subject list  -->
+	{{#each tasks}}
+		<!-- TODO link to tasks here  -->
+		<a role="button" aria-pressed="true" class="btn btn-default btn-block bg-pink font-white" onclick="return confirmStartTimer(this)">{{name}}</a>
+	{{/each}}
+
+
+	<!-- form for adding new tasks when needed -->
+	<form method="post" action="tasks_A" id="new_task_form" style="display:none">
+  			<input type="text" class="form-control btn btn-default btn-block " style="background-color:var(--dusty-pink)" name="task_name" placeholder="task name" id="add_new">
+  			<input type="hidden" name="subj_name" value="{{name}}">
+  			<div class="container">
+  				<button class="btn btn-default btn-block" style="display:inline" onclick="return checkFilled()"> done </button>
+				<button class="btn btn-default btn-block" onclick="return cancel()"> cancel </button>
+			</div>
+	</form>
+
+
+	<!-- hidden form for starting a new timer -->
+	<form method="post" action="main_timer_A" id="start_timer_form">
+  		<input type="hidden" name="subject" id="subject_timer">
+  		<input type="hidden" name="task" id="task_timer">
+	</form>
+
+
+	<!-- add new subject button  -->
+	<div class="container">
+		<button class="btn btn-default btn-block" onclick="inputNew()" id="add_btn"> + add new task </button>
+	</div>
+
+	<br><br><br><br>
+
+
+<script>
+
+function cancel(){
+	$("#new_task_form").css("display","none");
+	$("#add_btn").css("display", "block");
+	$("#add_new").val("");
+	return false;
+}
+function inputNew(){
+	$("#new_task_form").css("display","block");
+	$("#add_btn").css("display", "none");
+}
+function checkFilled(){
+	if ( $("#add_new").val() == "" ){
+		alert("Task cannot be empty.");
+		return false;
+	}
+
+	$("#new_task_form").submit();
+	return true;
+}
+function confirmLeave() {
+	if ( $("#add_new").val() != "" ){
+		return confirm("Are you sure you want to navigate away? Your edits will not be saved.");
+	}else{
+		return true;
+	}
+}
+function confirmStartTimer(task){
+	var c = confirm("Do you want to start a timer for this task right now?");
+	if (!c){
+		return false;
+	}else{
+		$("#subject_timer").val("{{name}}");
+		$("#task_timer").val(task.innerHTML);
+		$("#start_timer_form").submit();
+		return true;
+	}
+}
+
+</script>
+
+
+</body>
+</html>
+
+

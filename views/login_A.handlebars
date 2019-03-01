@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<title>Login</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<!-- bootstrap, js-->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	<!-- fonts -->
+	<link href="https://fonts.googleapis.com/css?family=Fira+Sans" rel="stylesheet">
+	
+	<style>
+		body{
+			font-family: 'Fira Sans', sans-serif;
+			font-weight: lighter !important; /*not working*/
+		}
+		.icon-text{
+			font-size: 80px;
+		}
+		.right{
+			margin-left: 18px;
+		}
+		.left{
+			margin-right: 18px;
+		}
+		.top{
+			margin-bottom: 40px;
+		}
+		.left{
+			/*margin-top: 20px;*/ 
+			/* for some reason makes the buttons unaligned when both top and left have margins */
+		}
+		.center-page{
+		  display: flex;
+		  flex-direction: column;
+		  justify-content: center;
+		  align-items: center;
+		  text-align: center;
+		  min-height: 100vh;
+		  transform: translate(0%, -10%);
+		}
+		.glyphicon, .btn{
+			font-size:400%;
+			color:white;
+		}
+		#app-name{
+			/*position: fixed;*/
+			text-align:center;
+			top: 10%;
+			left: 30%; 
+			font-size: 50px;
+			color:gray;
+		}
+
+		.dusty-pink{
+			background-color: rgb(212,171,179);
+		}
+		.dusty-blue{
+			background-color: rgb(153,195,203);
+		}
+		.space{
+			margin-top: 10%;
+		}
+		#login-form{
+			/*position: fixed;*/
+			top: 30%;
+			/*left: 30%; */
+			/*font-size: 50px;*/
+			/*color:gray;*/
+			text-align:center;
+			vertical-align:center;
+		}
+
+	</style>
+
+	<!-- facebook login -->
+	{{> facebook}}
+	<script src="/js/facebook.js"></script>
+
+</head>
+<body>
+
+<div class="center-page">
+	<p id="app-name">focus</p>
+	<br><br>
+
+
+	<!-- <form action="index" onsubmit="return checkLogin()"> -->
+
+	<form action="tutorial_A/1">
+	  <div class="form-group">
+	    <label for="exampleFormControlInput1" style="float:left">Email</label>
+	    <input type="email" id="login-email" class="form-control" placeholder="ixd@gmail.com">
+  	  </div>
+  	  <div class="form-group">
+	    <label for="exampleFormControlInput2" style="float:left">Password</label>
+	    <input type="password" id="login-password" class="form-control" placeholder="cse170">
+  	  </div>
+		<!-- <a href="index" type="submit" class="btn btn-primary">Log In</a> -->
+	  <input type="submit" class="btn-primary" value="Submit">
+	</form>
+	<br>
+	<br>
+	<p class="facebookLogin">Or log in through Facebook</p>
+	<fb:login-button scope="public_profile,email" onlogin="checkLoginState();">
+	</fb:login-button>
+	
+</div>
+
+
+
+	
+<script>
+
+$(".home-icon").width('10%');	
+$(".home-icon").height( $(".home-icon").width() );
+
+function checkLogin(){
+	var e = $("#login-email").value;
+	var p = $("#login-password").value;
+	console.log( "e" + e);
+	if ( e == "ixd@gmail.com" && p == "cse170" ){
+		return true;
+	}
+	return false;
+}
+
+
+</script>
+
+
+</body>
+</html>
+
