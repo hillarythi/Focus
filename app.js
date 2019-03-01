@@ -24,6 +24,7 @@ var tasks_A = require('./routes/tasks_A');
 //can clean up code to have multiple routes in same js file
 
 var login_B = require('./routes/login_B');
+var index_B = require('./routes/index_B');
 var tutorial_B = require('./routes/tutorial_B');
 var new_timer_B = require('./routes/main_timer_B');
 var log_B = require('./routes/main_log_B');
@@ -83,6 +84,7 @@ app.get('/tasks_A', tasks_A.view);
 app.post('/tasks_A', tasks_A.add);
 
 app.get('/login_B', login_B.view);
+app.get('/index_B', index_B.view);
 app.get('/tutorial_B',tutorial_B.view);
 app.get('/tutorial_B/:page',tutorial_B.view);
 app.get('/main_todo_B', todo_B.view);

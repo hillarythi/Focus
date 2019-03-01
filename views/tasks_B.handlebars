@@ -59,6 +59,9 @@
 	.bg-pink{
 		background-color: var(--dusty-pink);
 	}
+	.bg-blue{
+		background-color: var(--dusty-blue);
+	}
 	.pad-10{
 		padding: 10% 0%;
 	}
@@ -99,13 +102,10 @@
 	</style>
 </head>
 <body>
-	<!-- NAVBAR -->
-	<ul class="navbar border-top bg-gray">
-		<li class="border-right"><a href="main_timer_B" class="glyphicon glyphicon-plus" onclick="return confirmLeave()"></a></li>
-		<li class="border-right"><a href="main_todo_B" class="glyphicon glyphicon-th-list" onclick="return confirmLeave()"></a></li>
-		<li class="border-right"><a href="main_log_B" class="glyphicon glyphicon-time" onclick="return confirmLeave()"></a></li>
-		<li><a href="main_settings_B" class="glyphicon glyphicon-cog" onclick="return confirmLeave()"></a></li>
-	</ul>
+	<!-- HOME BUTTON -->
+	<div class="navbar border-top bg-blue">
+		<a href="index_B" class="glyphicon glyphicon-home" onclick="return confirmLeave()"></a>
+	</div>
 	
 
 	<!-- Top left back button + title-->

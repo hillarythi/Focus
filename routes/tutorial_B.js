@@ -25,7 +25,7 @@ exports.view = function(req, res){
   }
   else if(page == 5){
   	toLoad['currentPage'] += "tutorial5.jpg";
-  	toLoad['nextPage'] = "../../main_timer_B";
+  	toLoad['nextPage'] = "../../index_B";
   } else{
   //else, just load tutorial page 1
   	toLoad['currentPage'] += "tutorial1.jpg";

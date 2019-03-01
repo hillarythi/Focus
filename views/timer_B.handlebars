@@ -73,6 +73,9 @@
 	.bg-gray{
 		background-color: var(--dusty-gray);
 	}
+	.bg-blue{
+		background-color: var(--dusty-blue);
+	}
 	.break-btn{
 		font-size:200%;
 		background-color: var(--dusty-pink);
@@ -89,16 +92,10 @@
 	</style>
 </head>
 <body>
-	<!-- NAVBAR -->
-	<ul class="navbar border-top bg-gray">
-		<li class="border-right">
-			<a href="main_timer_B" class="glyphicon glyphicon-plus" onclick="return confirmLeave()"></a></li>
-		<li class="border-right">
-			<a href="main_todo_B" class="glyphicon glyphicon-th-list" onclick="return confirmLeave()"></a></li>
-		<li class="border-right">
-			<a href="main_log_B" class="glyphicon glyphicon-time" onclick="return confirmLeave()"></a></li>
-		<li><a href="main_settings_B" class="glyphicon glyphicon-cog" onclick="return confirmLeave()"></a></li>
-	</ul>
+	<!-- HOME BUTTON -->
+	<div class="navbar border-top bg-blue">
+		<a href="index_B" class="glyphicon glyphicon-home" onclick="return confirmLeave()"></a>
+	</div>
 
 	<!-- Actual Page -->
 	<div class="container" style="text-align:center">

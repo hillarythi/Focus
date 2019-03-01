@@ -10,6 +10,11 @@
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 
 	<style>
+	:root {
+  		--dusty-pink: rgb(212,171,179);
+  		--dusty-blue: rgb(153,195,203);
+  		--dusty-gray: rgb(104,124,135);
+	}
 	.navbar {
 	    width:100%;
 	    margin:0px auto;
@@ -43,18 +48,18 @@
 	.dusty-gray{
 		background-color: rgb(104,124,135);
 	}
+	.bg-blue{
+		background-color: var(--dusty-blue);
+	}
 	
 	</style>
 </head>
 <body>
 
-	<!-- NAVBAR -->
-	<ul class="navbar border-top dusty-gray">
-		<li class="border-right"><a href="main_timer_B" class="glyphicon glyphicon-plus"></a></li>
-		<li class="border-right"><a href="main_todo_B" class="glyphicon glyphicon-th-list"></a></li>
-		<li class="border-right"><a href="main_log_B" class="glyphicon glyphicon-time"></a></li>
-		<li><a href="main_settings_B" class="glyphicon glyphicon-cog"></a></li>
-	</ul>
+	<!-- HOME BUTTON -->
+	<div class="navbar border-top bg-blue">
+		<a href="index_B" class="glyphicon glyphicon-home"></a>
+	</div>
 
 	<div class="container center-page">
 	<a href='main_timer_B'><span class="glyphicon glyphicon-chevron-left"></span></a>

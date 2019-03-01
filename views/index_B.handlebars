@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<title>Home</title>
+	<!-- <meta name="viewport" content="width=device-width, initial-scale=1"> -->
+
+	<!-- bootstrap, js-->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	<!-- fonts -->
+	<link href="https://fonts.googleapis.com/css?family=Fira+Sans" rel="stylesheet">
+	<title>Home</title>
+	
+	<style>
+		body{
+			font-family: 'Fira Sans', sans-serif;
+			font-weight: lighter !important; /*not working*/
+		}
+		.icon-text{
+			font-size: 80px;
+		}
+		.right{
+			margin-left: 18px;
+		}
+		.left{
+			margin-right: 18px;
+		}
+		.top{
+			margin-bottom: 40px;
+		}
+		.left{
+			/*margin-top: 20px;*/ 
+			/* for some reason makes the buttons unaligned when both top and left have margins */
+		}
+		.center-page{
+			text-align:center;
+			transform: translate(2px,60%);
+		}
+		.glyphicon, .btn{
+			font-size:400%;
+			color:white;
+		}
+		#app-name{
+			position: fixed;
+			top: 10%;
+			left: 38%; /* hard coding this part? */
+			font-size: 100px;
+			color:gray;
+		}
+
+		.dusty-pink{
+			background-color: rgb(212,171,179);
+		}
+		.dusty-blue{
+			background-color: rgb(153,195,203);
+		}
+
+	</style>
+
+</head>
+<body>
+
+	<p id="app-name">focus</p>
+
+	<!-- Home Four Icons -->
+	<div class="center-page">
+	<a href="main_timer_B">
+		<button type="button" class="btn btn-default btn-lg home-icon left top dusty-pink">
+	  		<span class="glyphicon glyphicon-plus" aria-hidden="true"></span><br><span class="icon-text">new</span>
+		</button>
+	</a>
+
+	<a href="main_todo_B">
+		<button type="button" class="btn btn-default btn-lg home-icon right top dusty-blue">
+	  		<span class="glyphicon glyphicon-th-list" aria-hidden="true"></span><br><span class="icon-text">to-do</span>
+		</button>
+	</a>
+
+	<br>
+
+	<a href="main_log_B">
+		<button type="button" class="btn btn-default btn-lg home-icon left bottom dusty-blue">
+	  		<span class="glyphicon glyphicon-time" aria-hidden="true"></span><br><span class="icon-text">log</span>
+		</button>
+	</a>
+
+	<a href="main_settings_B">
+		<button type="button" class="btn btn-default btn-lg home-icon right bottom dusty-pink">
+	  		<span class="glyphicon glyphicon-cog" aria-hidden="true"></span><br><span class="icon-text">settings</span>
+		</button>
+	</a>
+	
+	</div>
+
+	
+<script>
+
+$(".home-icon").width('10%');	
+$(".home-icon").height( $(".home-icon").width() );
+
+
+</script>
+
+
+</body>
+</html>
+
