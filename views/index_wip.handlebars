@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<title>Home</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<!-- bootstrap, js-->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	<!-- fonts -->
+	<link href="https://fonts.googleapis.com/css?family=Fira+Sans" rel="stylesheet">
+	
+	<style>
+		body{
+			font-family: 'Fira Sans', sans-serif;
+			font-weight: lighter !important; /*not working*/
+		}
+		.icon-text{
+			/*font-size: 80px;*/
+		}
+		.right{
+			/*margin-left: 18px;*/
+			float:right;
+		}
+		.left{
+			/*margin-right: 18px;*/
+			float:left;
+		}
+		.top{
+			/*margin-bottom: 40px;*/
+		}
+		.left{
+			/*margin-top: 20px; */
+			/* for some reason makes the buttons unaligned when both top and left have margins */
+		}
+		.center-page{
+			text-align:center;
+			/*transform: translate(2px,60%);*/
+			/*vertical-align: center;*/
+		}
+		.glyphicon{
+			font-size: 40px;
+    		font-size: 25vw;
+			color:white;
+		}
+		.btn{
+			font-size: 40px;
+    		font-size: 8vw;
+			color:white;
+		}
+		.btn-default{
+			/*border:none;*/
+		}
+		#app-name{
+			/*position: fixed;
+			top: 10%;
+			left: 38%;  hard coding this part? 
+			font-size: 100px;*/
+			color:gray;
+
+
+			padding: 10% 0%;
+			margin:0%;
+			text-align:center; 
+		}
+
+		.dusty-pink{
+			background-color: rgb(212,171,179);
+		}
+		.dusty-blue{
+			background-color: rgb(153,195,203);
+		}
+
+	</style>
+
+</head>
+<body>
+
+	<h1 id="app-name">focus</h1>
+
+	<!-- Home Four Icons -->
+	<div class="center-page">
+
+	<span style="display:inline">
+	<a href="main_timer">
+		<button type="button" class="btn  btn-lg home-icon left top dusty-pink">
+	  		<span class="glyphicon glyphicon-plus" aria-hidden="true"></span><br><span class="icon-text">new</span>
+		</button>
+	</a>
+
+	<a href="main_todo">
+		<button type="button" class="btn btn-lg home-icon right top dusty-blue">
+	  		<span class="glyphicon glyphicon-th-list" aria-hidden="true"></span><br><span class="icon-text">to-do</span>
+		</button>
+	</a>
+	</span>
+
+<!-- 	<a href="main_timer">
+		<button type="button" class="btn btn-default btn-lg home-icon left top dusty-pink">
+	  		<span class="glyphicon glyphicon-plus" aria-hidden="true"></span><br><span class="icon-text">new</span>
+		</button>
+	</a>
+
+	<a href="main_todo">
+		<button type="button" class="btn btn-default btn-lg home-icon right top dusty-blue">
+	  		<span class="glyphicon glyphicon-th-list" aria-hidden="true"></span><br><span class="icon-text">to-do</span>
+		</button>
+	</a> -->
+
+	<br>
+
+	<a href="main_log">
+		<button type="button" class="btn btn-default btn-lg home-icon left bottom dusty-blue">
+	  		<span class="glyphicon glyphicon-time" aria-hidden="true"></span><br><span class="icon-text">log</span>
+		</button>
+	</a>
+
+	<a href="main_settings">
+		<button type="button" class="btn btn-default btn-lg home-icon right bottom dusty-pink">
+	  		<span class="glyphicon glyphicon-cog" aria-hidden="true"></span><br><span class="icon-text">settings</span>
+		</button>
+	</a>
+	
+	</div>
+
+	
+<script>
+
+var body_width = $(document.body).width();
+console.log("bodywidth: " + body_width);
+
+$(".home-icon").width(body_width*.38);	
+$(".home-icon").height( $(".home-icon").width() );
+
+var space = body_width*.015;
+// $(".right").css({'margin-left': space } );
+$(".right").css({'margin-right': space } );
+$(".left").css({'margin-left': space } );
+$(".left").css({'margin-right': space } );
+// $(".top").css({'margin-bottom': space*2 });
+// $(".bottom").css({'margin-top': space*2 });
+
+
+</script>
+
+
+</body>
+</html>
+
