@@ -23,19 +23,21 @@ exports.view = function(request, response) { 
 	console.log("updating database:");
 	var found = false;
 	for(var i = 0; i < data.completed.length; i++) {
-		if (data.completed[i].subject === subject && data.completed[i].task === assignment) {
-			data.completed[i].time = total_time
+		if (data.completed[i].subject === finish_subject && data.completed[i].task === finish_assignment) {
+			data.completed[i].time = total_time;
 			found = true;
 			break;
 		}
 	}
 	if(!found) {
 		var newTask = {
-			'subject': subject,
-			'task': assignment,
+			'subject': finish_subject,
+			'task': finish_assignment,
 				'time': total_time
 		}
 		data.completed.push(newTask);
+		console.log("completed pushed:");
+		console.log(newTask);
 	};
 
 	response.render('finish',new_display);

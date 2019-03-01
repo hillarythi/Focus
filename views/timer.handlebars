@@ -20,6 +20,9 @@
 		font-family: 'Fira Sans', sans-serif;
 		font-weight: lighter !important; /*not working*/
 	}
+	.glyphicon-arrow-right{
+		z-index: -1;
+	}
 	.navbar {
 	    width:100%;
 	    margin:0px auto;
@@ -37,6 +40,7 @@
 	.navbar .glyphicon{
 		font-size:200%;
 		color:white;
+		z-index:5;
 	}
 	a:hover{
 		text-decoration:none;
@@ -127,11 +131,11 @@
 
  	<!-- End Session Btn -->
  	<div id="end-session-btn">
-		<a href='index' onclick="return confirmLeave()">
-			<span class="glyphicon glyphicon-arrow-right font-gray" style="float:right; font-size: 40px"></span>
+		<a href="#" onclick="return confirmEnd()"><span class="glyphicon glyphicon-arrow-right font-gray" style="float:right; font-size: 40px"></span>
 		<br><h3 class="font-blue">end session</h3></a>
 	
 	</div>
+
 
 	<!-- Extra White Space -->
 	<div style="margin: 20%">
@@ -155,7 +159,7 @@
 	<form action="finish" method="post" id="toFinish">
 		<input type="hidden" name="subject" value="{{subject}}">
 		<input type="hidden" name="assignment" value="{{assignment}}">
-		<input type="hidden" name="total_time_set" value="{{total_time_set}}">
+		<input type="hidden" name="total_time_set" id="total_time" value="{{total_time_set}}">
 	</form>
 
 
@@ -240,18 +244,22 @@ function startCountdown(){ //currently countdown to next break
 
 
 /**** LEAVING PAGE FROM BUTTONS *****/
-
-function populateEarlyForm(){
-	//session ended early, populate with right values
+function getTimePassed(){
+	//session ended early, get how much time has passed since
 	var totalBefore = ({{breaks_hr}}*60)+{{breaks_min}};
 	var totalAfter = (currHours*60)+currMinutes;
 	console.log("Before: "+totalBefore);
 	console.log("After: "+totalAfter);
 	var update = totalBefore - totalAfter;
 	if (update<0){update = 0;}
+	return update;
+}
 
-	document.getElementById("time_passed").value = update;
-	document.getElementById("totalMinsLeft").value = ({{total_time_set}} - update);
+function populateEarlyForm(){
+	//session ended early, populate with right values
+	var timePassed = getTimePassed();
+	document.getElementById("time_passed").value = timePassed;
+	document.getElementById("totalMinsLeft").value = ({{total_time_set}} - timePassed);
 
 }
 
@@ -273,7 +281,15 @@ function confirmLeave(){
 	//TODO Change so that leave will log current time or something
 }
 
+/* ending session */
+function confirmEnd(){ 
+	var c = confirm('Are you sure you want to end your session? ');
+	if (c){
+		$('#total_time').val({{total_time_set}}-({{total_hr}}*60)-{{total_min}}+getTimePassed() );
+	    document.getElementById("toFinish").submit();
 
+	}
+}
 
 </script>
 

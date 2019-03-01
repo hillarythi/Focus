@@ -243,6 +243,11 @@
   	{{/each}}
   </div>
 
+  <!-- invisible form to send to + new task page -->
+	<form action="tasks" method="get" id="toTasks_form">
+		<input type="hidden" id="toTask_subject" name="subject">
+	</form>
+
 
 
 </div>
@@ -335,13 +340,28 @@ var displayNewTasks = function(){
 	$("#addTasks li a").click(changeText);
 
 	//append new task, important to add this after above click bonding
-	$("#addTasks").append('<li><a href="main_todo" onclick="return routeNewTask();">+ new task</a></li>');
+	$("#addTasks").append('<li><a href="#" onclick="return routeNewTask();">+ new task</a></li>');
 }
 
 /* Confirms leave upon clicking "+ Add New" task, will route to new_subject page to add to todo list */
 function routeNewTask(){
-	return confirm("Are you sure you want to leave this page create a new task? Your changes will not be saved.");
+	var c = confirm("Are you sure you want to leave this page create a new task? Your changes will not be saved.");
+
+	if (!c){ return false; }
+	else{
+		//get current subject you want to add new task to
+		var currSubject = $("#dropSubject").val();
+		$("#toTask_subject").val(currSubject);
+		$("#toTasks_form").submit();
+		
+		//   <!-- invisible form to send to + new task page -->
+		// <form action="tasks" method="get" id="toTasks_form">
+		// 	<input type="hidden" id="toTask_subject" name="subject">
+		// </form>
+	}
+
 }
+
 
 
 

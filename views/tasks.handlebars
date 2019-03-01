@@ -163,6 +163,13 @@ function checkFilled(){
 		alert("Task cannot be empty.");
 		return false;
 	}
+	//check for bad input
+	if (  ($("#add_new").val().indexOf('<') > -1) || ($("#add_new").val().indexOf('>') > -1)){
+		alert("You've entered invalid input, please try again.");
+		//reset field
+		$("#add_new").val("");
+		return false;
+	}
 
 	$("#new_task_form").submit();
 	return true;
