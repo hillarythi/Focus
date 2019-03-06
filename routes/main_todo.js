@@ -33,6 +33,16 @@ exports.add = function (req,res){
 };
 	
 
+// exports.del = function(req, res){
+
+// console.log("DELETED");
+//   var subjects = data.subjects;
+//   res.render('main_todo', {
+//     "subjects": subjects
+//   });
+// };
+
+
 //for adding subject and tasks at once from new_subject_task page, can delete later
 exports.added = function (req, res) {
 	var i;
@@ -52,3 +62,4 @@ exports.added = function (req, res) {
 		"subjects":data.subjects
 	});
 };
+

@@ -99,7 +99,18 @@
 	div p{
 		font-size:20px;
 	}
-	
+
+	.btn-block{
+		border-radius:0 ;
+		border: 1px solid gray;
+		font-size:20px;
+	}
+	.btn-block-time{
+		border-radius:0 ;
+		border: 1px solid gray;
+		font-size:20px;
+	}
+
 	</style>
 
 	
@@ -140,7 +151,7 @@
 	<div id="show_subject">
 		<p class="title">subject</p>
 		<div class="dropdown fixed-length">
-		  <button class="btn btn-default dropdown-toggle" type="button" id="dropSubject" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">subject </button>
+		  <button class="btn btn-default btn-block dropdown-toggle" type="button" id="dropSubject" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">subject </button>
 		  <ul class="dropdown-menu" aria-labelledby="dropSubject">
 	         {{#each subjects}}
 	         	<!-- change id here  -->
@@ -156,7 +167,7 @@
 	<div id="show_assignment" style="display:none">
 		<p class="title">assignment</p>
 		<div class="dropdown fixed-length">
-		  <button class="btn btn-default dropdown-toggle" type="button" id="dropAssignment" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">assignment </button>
+		  <button class="btn btn-default btn-block dropdown-toggle" type="button" id="dropAssignment" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">assignment </button>
 		  <ul class="dropdown-menu" aria-labelledby="dropAssignment" id="addTasks">
 		  	<!-- dynamically populate in js from subject above -->
 		  </ul>	
@@ -168,8 +179,11 @@
 	<!-- Select Time / time length-->
 	<div id="show_time" style="display:none">
 		<p class="title" style="padding-bottom: 10px">time length</p>
-		<div class="dropdown" style="display:inline">
-		  <button class="btn btn-default dropdown-toggle" type="button" id="dropHour" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">0 </button><span class="title"> hr</span>
+
+		<div class="dropdown" style="display:inline; float:left">
+
+		  <button class="btn btn-default btn-block-time dropdown-toggle" type="button" id="dropHour" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">0 </button>
+		  <span class="title" style="font-size:20px"> hr</span>
 		  <ul class="dropdown-menu" aria-labelledby="dropHour">
 		    <li><a href="#">0</a></li>
 		    <li><a href="#">1</a></li>
@@ -178,10 +192,11 @@
 		    <li><a href="#">4</a></li>
 		  </ul>
 		</div>
-		&nbsp;&nbsp;
-
-		<div class="dropdown" style="display:inline">
-		  <button class="btn btn-default dropdown-toggle" type="button" id="dropMinute" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">0 </button> <span class="title">min</span>
+		
+	
+		<div class="dropdown" style="display:inline; float:right">
+		  <button class="btn btn-default btn-block-time dropdown-toggle" type="button" id="dropMinute" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">0 </button> 
+		  <span class="title" style="font-size:20px"> min</span>
 		  <ul class="dropdown-menu" aria-labelledby="dropMinute">
 		  	<li><a href="#">0</a></li>
 		    <li><a href="#">5</a></li>
@@ -198,7 +213,7 @@
 		  </ul>
 		</div>
 	</div>
-	<br>
+	<br><br><br><br>
 
 
 	<!-- Breaks -->
@@ -207,11 +222,11 @@
 		<div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
 		  <div class="btn-group mr-2" role="group" aria-label="First group">
 		 
-		    <button type="button" class="btn btn-secondary break-btn" onclick="selectTime(1)">1</button>
-		    <button type="button" class="btn btn-secondary break-btn" onclick="selectTime(2)">2</button>
-		    <button type="button" class="btn btn-secondary break-btn" onclick="selectTime(3)">3</button>
-		    <button type="button" class="btn btn-secondary break-btn" onclick="selectTime(4)">4</button>
-		    <button type="button" class="btn btn-secondary break-btn" onclick="selectTime(5)">5</button>
+		    <button type="button" class="btn btn-secondary  break-btn" onclick="selectTime(1)">1</button>
+		    <button type="button" class="btn btn-secondary  break-btn" onclick="selectTime(2)">2</button>
+		    <button type="button" class="btn btn-secondary  break-btn" onclick="selectTime(3)">3</button>
+		    <button type="button" class="btn btn-secondary  break-btn" onclick="selectTime(4)">4</button>
+		    <button type="button" class="btn btn-secondary  break-btn" onclick="selectTime(5)">5</button>
 		    <!-- <button type="button" class="btn btn-secondary break-btn" onclick="selectTime(6)">6</button> -->
 		    <!-- can add back more breaks, can't get them to align rn in timer.handlebars -->
 		  </div>

@@ -49,7 +49,7 @@ if ('development' == app.get('env')) {
   app.use(express.errorHandler());
 }
 
-app.get('/', login.view);
+app.get('/', index.view); //TODO change back to login.view
 app.get('/index', index.view);
 app.get('/tutorial',tutorial.view);
 app.get('/tutorial/:page',tutorial.view);
@@ -67,6 +67,8 @@ app.post('/break', breaks.view);
 app.post('/finish', finish.view);
 app.get('/tasks', tasks.view);
 app.post('/tasks', tasks.add);
+app.get('/edit_tasks', tasks.edit);
+
 
 app.use(bodyParser.urlencoded({
 	extended: true
