@@ -77,19 +77,16 @@ exports.edit = function(req, res){
 //task deletion, just deletes from data
 exports.delete = function(req,res){
 
-    console.log(" DATA BEFORE : "  + JSON.stringify(data));
-
-    console.log("deleting task: " + req.body.delete + " from subject: "  + req.body.subject);
+    // console.log("deleting task: " + req.body.delete + " from subject: "  + req.body.subject);
 
      //find task list of corresponding query subject
     for(var i = 0; i < data.subjects.length; i++) {
         if (data.subjects[i]["name"].toUpperCase() == req.body.subject.toUpperCase()){
             for (var j = 0; j < data.subjects[i].tasks.length; j++){
                 if (data.subjects[i].tasks[j]["name"] == req.body.delete){
-                    console.log("match! " + data.subjects[i].tasks[j]["name"]);
-                    // delete data.subjects[i].tasks[j];
+                    // console.log("match! " + data.subjects[i].tasks[j]["name"]);
+                    // deletes that element
                     data.subjects[i].tasks.splice(j,1);
-                    console.log(" DATA AFTER : "  + JSON.stringify(data));
                     return;
                 } //if
             } //for

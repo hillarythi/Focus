@@ -147,9 +147,9 @@
 	</form>
 
 
-	<!-- hidden form for starting -->
-	<form method="get" action="deleteSubject" id="delete_subject_form">
-		<input type="hidden" name="subject" value="{{name}}" id="delete_subject">
+	<!-- Hidden form for deleting entire list, loads main_todo after  -->
+	<form method="post" action="deleteSubject" id="delete_subject_form">
+		<input type="hidden" name="subject" value="{{name}}">
 	</form>
 
 
@@ -230,12 +230,16 @@ function confirmLeave() {
 	}
 }
 function confirmChanges() {
-		var new_subject = $("#edited_subject").val();
-		if (new_subject==""){
-			alert("Changes not saved. No subjects or tasks may be empty.");
-			return false;
-		}
-		//TODO ALL INPUTS NEED TO BE RECORDED AND SANITIZEd
+		// $("input").each( function(text){
+
+
+
+		// });
+		// if (new_subject==""){
+		// 	alert("Changes not saved. No subjects or tasks may be empty.");
+		// 	return false;
+		// }
+		// //TODO ALL INPUTS NEED TO BE RECORDED AND SANITIZEd
 
 		$("#edited_subject_form").val(new_subject);
 		$("#back_to_subject_form").submit();
@@ -277,9 +281,6 @@ function confirmDelete(item){
 function confirmDeleteList(){
 	var c = confirm("Are you sure you want to delete this subject list and all it's tasks?");
 	if (c){
-		//delete task and lists
-
-		$("#delete_subject").val("");
 		$("#delete_subject_form").submit();
 		return true;
 	}else{

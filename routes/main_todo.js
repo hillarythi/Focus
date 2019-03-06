@@ -1,7 +1,7 @@
 
 
 /*
- * GET /POST todo/checklist page.
+ * TODO PAGE: view, add new subject, delete a subject,
  */
 
 var data = require('../data.json');
@@ -35,30 +35,17 @@ exports.add = function (req,res){
 //delete a subject list
 exports.delete = function(req, res){
 
-	console.log("DELETED");
-	//req.query.subject
-	//delete subject + all tasks
+	// console.log("DELETING "+ req.body.subject + " LIST");
+
+    for(var i = 0; i < data.subjects.length; i++) {
+        if (data.subjects[i]["name"].toUpperCase() == req.body.subject.toUpperCase()){
+            //removes subject from json array
+            data.subjects.splice(i,1);
+        } //if
+    } //for
+
+    //route to getting main_todo page
 	res.redirect('/main_todo');
 };
 
-
-//for adding subject and tasks at once from new_subject_task page, can delete later
-exports.added = function (req, res) {
-	var i;
-	if (typeof req.body.task !== 'undefined') {
-		var tasks = req.body.task;
-		for (i = 0; i < req.body.task.length; i++) {
-			var new_task = {'name': req.body.task[i]};
-			tasks[i] = new_task;
-		}
-	}
-	var newSubj = {
-		'name': req.body.subject_name,
-		'tasks': tasks
-	};
-	data.subjects.push(newSubj);
-	res.render('main_todo', {
-		"subjects":data.subjects
-	});
-};
 
