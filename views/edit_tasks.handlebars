@@ -121,16 +121,16 @@
 		<!-- back button -->
 		<a href='main_todo' onclick="return confirmLeave()"><span class="glyphicon glyphicon-chevron-left font-blue"></span></a>
 		<!-- subject name -->
-		&nbsp;&nbsp;&nbsp;&nbsp;<input type="text" value="{{name}}" style="width:60%; text-align:center" id="edited_subject">
+		&nbsp;&nbsp;&nbsp;&nbsp;<input type="text" class="type_input" value="{{name}}" style="width:60%; text-align:center" id="edited_subject">
 		<!-- confirm edit button -->
-		<span class="glyphicon glyphicon-ok font-blue" style="float:right" onclick="return confirmChanges()">&nbsp;</span>
+		<span class="glyphicon glyphicon-ok font-blue" style="float:right" onclick="confirmChanges()">&nbsp;</span>
 	</h2>
 
 	<!-- subject list  -->
 	{{#each tasks}}
 		<!-- TODO link to tasks here  -->
 		<div class="btn-block btn-default bg-pink "> 
-			<input type="text" class="btn font-white" style="font-size:20px; width: 80%" value="{{name}}" orig="{{name}}"></input>
+			<input type="text" class="btn font-white type_input task_input" style="font-size:20px; width: 80%" value="{{name}}" orig="{{name}}"></input>
 				<span class="glyphicon glyphicon-trash" style="color:white; font-size:150%; float:right; padding-right:10%; padding-top: 2%" onclick="confirmDelete(this)"></span>
 		</div>
 	{{/each}}
@@ -230,39 +230,92 @@ function confirmLeave() {
 	}
 }
 function confirmChanges() {
-		// $("input").each( function(text){
+
+		/**checks for valid input**/
+		var goodInput = false;
+
+		$(".type_input").each( function(){
+
+			if ($(this).parent().css("display") == "none"){
+				console.log("ignore deleted field: check good input");
+				return;
+			}
+
+			//check for empty
+			alert($(this).val());
+			if ( $(this).val() == "" ){
+				alert("Fields cannot be empty.");
+				goodInput = false;
+				return false;
+			}
+			//check for bad script input
+			if (  ($(this).val().indexOf('<') > -1) || ($(this).val().indexOf('>') > -1)){
+				alert("You've entered invalid input, please try again.");
+				//reset field
+				$(this).val("");
+				goodInput = false;
+				return false;
+			}
+			goodInput = true;
+			return true;
+
+		});
 
 
+		/** if good input, add fields to json object and send request back to change data **/
+		if (goodInput){
 
-		// });
-		// if (new_subject==""){
-		// 	alert("Changes not saved. No subjects or tasks may be empty.");
-		// 	return false;
-		// }
-		// //TODO ALL INPUTS NEED TO BE RECORDED AND SANITIZEd
+			var new_subject = $('#edited_subject').val();
 
-		$("#edited_subject_form").val(new_subject);
-		$("#back_to_subject_form").submit();
-		return;
+
+			var new_list = { 
+				"old_subject": "{{name}}",
+				"list": {
+					"name" : new_subject,
+					"tasks": []
+				}
+			};
+
+			//for each non-hidden task-inputbox, add to tasks
+			$(".task_input").each( function(){
+				//if hidden, is deleted item so ignore
+				if ($(this).parent().css("display") == "none"){
+					console.log("ignore deleted field: populate");
+					return;
+				}else{
+					//push task item to new_list
+					new_list["list"]["tasks"].push( {"name": $(this).val() });
+				}
+			});
+
+			
+			//send request back through xml, then send get request with new subject name to tasks subject="query"
+			var xhr = new XMLHttpRequest();
+			xhr.open('post', 'updateList');
+			xhr.setRequestHeader('Content-Type', 'application/json');
+			console.log("payload" + JSON.stringify(new_list));
+			xhr.onerror = function(){ alert("Edit request failed. Please refresh and try again."); } 
+			xhr.send(JSON.stringify(new_list));
+			return true;
+		}else{
+			return false;
+		}
+
+
 }
 
+//confirms and executes deletion of one task item
 function confirmDelete(item){
-	var c = confirm("Your task will be permanently deleted.");
-	if (c){
 
-		// <div class="btn-block btn-default bg-pink "> 
-		// 	<input type="text" class="btn font-white" style="font-size:20px; width: 80%" value="{{name}}"></input>
-		// 		<span class="glyphicon glyphicon-trash" style="color:white; font-size:150%; float:right; padding-right:10%; padding-top: 2%" onclick="confirmDelete(this)"></span>
-		// </div>
-
-		//hide parent div
+	if ( confirm("Your task will be permanently deleted.") ){
+		
+		//hide parent div, so user thinks its deleted
 		$(item).parent().css("display", "none");
 
-		//get original task name so we can delete
+		//get original task name so we can delete from database
 		var task_name = $(item).prev().attr("orig");
-		console.log("task name" + task_name);
 
-		//this.parent hide, send xml request to delete?
+		//send xml request to delete from database
 		var xhr = new XMLHttpRequest();
 		xhr.open('post', 'deleteTask');
 		xhr.setRequestHeader('Content-Type', 'application/json');
@@ -270,21 +323,14 @@ function confirmDelete(item){
 			"delete": task_name,
 			"subject": "{{name}}"
 		};
-		console.log("payload" + payload);
 		xhr.send(JSON.stringify(payload));
-
-		return true;
-	}else{
-		return false;
-	} 
+	}
 }
+
+//confirms and executes deletion of entire task list
 function confirmDeleteList(){
-	var c = confirm("Are you sure you want to delete this subject list and all it's tasks?");
-	if (c){
+	if ( confirm("Are you sure you want to delete this subject list and all it's tasks?") ){
 		$("#delete_subject_form").submit();
-		return true;
-	}else{
-		return false;
 	}
 }
 

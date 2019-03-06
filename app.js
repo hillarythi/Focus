@@ -71,7 +71,7 @@ app.get('/edit_tasks', tasks.edit);
 
 app.post('/deleteSubject', todo.delete); //deletes subject list from todo (including all tasks)
 app.post('/deleteTask', tasks.delete); //deletes one task as just post request, no change in rendering
-
+app.post('/updateList', tasks.update); //updates everything in list with what user edited, including subject+alltasks
 
 app.use(bodyParser.urlencoded({
 	extended: true

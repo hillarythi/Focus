@@ -1,11 +1,11 @@
 
 
 /*
- * GET /POST todo/checklist page.
+ * TASK LIST OPERATIONS: view, add, edit, delete, update
  */
 
 
- //get "subject" through query this time, might be helpful for user
+//gets "subject" through query this time, might be visually helpful for user
 const url = require('url');
 var data = require('../data.json');
 
@@ -26,7 +26,7 @@ exports.view = function(req, res){
 };
 
 
-//added new task
+//adds new task to task list
 exports.add = function (req,res){
     var newTask = { 'name': req.body.task_name };
 	// data.subjects[req.body.subj_name]["tasks"].push(newTask);
@@ -50,11 +50,12 @@ exports.add = function (req,res){
     }
  	//error should never get here
     console.log("error grabbing tasks for add");
-    res.render('tasks');
+    res.redirect('main_todo');
 
 };
 
 
+//displays edit mode for the task list
 exports.edit = function(req, res){
   
     //find task list of corresponding query subject
@@ -68,13 +69,12 @@ exports.edit = function(req, res){
 
     //error should never get here
     console.log("error grabbing tasks for edit");
-    res.render('tasks');
+    res.redirect('main_todo');
 };
 
 
 
-
-//task deletion, just deletes from data
+//task deletion from list, just deletes from data
 exports.delete = function(req,res){
 
     // console.log("deleting task: " + req.body.delete + " from subject: "  + req.body.subject);
@@ -82,16 +82,44 @@ exports.delete = function(req,res){
      //find task list of corresponding query subject
     for(var i = 0; i < data.subjects.length; i++) {
         if (data.subjects[i]["name"].toUpperCase() == req.body.subject.toUpperCase()){
+
+            //for that subject, go through tasks to find task we want to delete
             for (var j = 0; j < data.subjects[i].tasks.length; j++){
                 if (data.subjects[i].tasks[j]["name"] == req.body.delete){
-                    // console.log("match! " + data.subjects[i].tasks[j]["name"]);
                     // deletes that element
                     data.subjects[i].tasks.splice(j,1);
                     return;
                 } //if
             } //for
+
         } //if
     } //for
+
+
+};
+
+
+
+//task list update, just replaces data
+exports.update = function(req,res){
+
+    // console.log("editing old list: " + req.body.old_subject + " which is now: "  + req.body.list.name);
+
+    //find task list of corresponding query subject
+    for(var i = 0; i < data.subjects.length; i++) {
+        if (data.subjects[i]["name"].toUpperCase() == req.body.old_subject.toUpperCase()){
+            data.subjects[i] = req.body.list;
+        }
+    } 
+
+    //send get request with new subject name to /tasks with query subject=[newsubjectname]
+    res.redirect(url.format({
+        pathname:"tasks",
+        query: {
+          "subject": req.body.list.name
+        }    
+    }) );
+
 
 
 };
