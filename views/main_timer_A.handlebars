@@ -422,11 +422,16 @@ function fillForm(){
 	// $('#send').submit();
 }
 
-
 function confirmLeave(){ 
-	return confirm('Are you sure you want to leave this page? Your data will be lost');
-}
+	var l = confirm('Are you sure you want to leave this page? Your data will be lost');
+	
+	if(l) {
 
+		ga("send", "event", "button", "click");
+		return true; 
+	}
+	return false;
+}
 //add more functions about break calculation stuff?
 
 </script>

@@ -277,8 +277,14 @@ function confirmBreak(){
 
 /* leaving timer from end session button or navbar */
 function confirmLeave(){ 
-	return confirm('You are in the middle of a session, are you sure you want to leave? Your data will be lost');
-	//TODO Change so that leave will log current time or something
+	var l = confirm('You are in the middle of a session, are you sure you want to leave? Your data will be lost');
+	
+	if(l) {
+
+		ga("send", "event", "button", "click");
+		return true; 
+	}
+	return false;
 }
 
 

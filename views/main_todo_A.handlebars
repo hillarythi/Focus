@@ -179,6 +179,7 @@ function confirmLeave() {
 	if ( $("#add_new").val() != "" ){
 		return confirm("Are you sure you want to navigate away? Your edits will not be saved.");
 	}else{
+		ga("send", "event", "button", "click");
 		return true;
 	}
 }
