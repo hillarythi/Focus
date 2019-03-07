@@ -12,7 +12,7 @@ exports.view = function(req, res){
  */
 function initializePage() {
   // your code here	
-	$(".btn btn-default btn-lg home-icon left top dusty-pink").click(buttonClick);
+	$(".btn").click(buttonClick);
 }
 
 function buttonClick(e) { 
