@@ -20,25 +20,44 @@ exports.view = function(request, response) { 
 	new_display["minutes"] = readableTime[1];
 
 	//updating log
-	console.log("updating database:");
-	var found = false;
-	for(var i = 0; i < data.completed.length; i++) {
-		if (data.completed[i].subject === finish_subject && data.completed[i].task === finish_assignment) {
-			data.completed[i].time = total_time;
-			found = true;
-			break;
-		}
+	// console.log("updating database:");
+	// var found = false;
+	// for(var i = 0; i < data.completed.length; i++) {
+	// 	if (data.completed[i].subject === finish_subject && data.completed[i].task === finish_assignment) {
+	// 		data.completed[i].time = total_time;
+	// 		found = true;
+	// 		break;
+	// 	}
+	// }
+	// if(!found) {
+	var newTask = {
+		'subject': finish_subject,
+		'task': finish_assignment,
+		'time': total_time
 	}
-	if(!found) {
-		var newTask = {
-			'subject': finish_subject,
-			'task': finish_assignment,
-				'time': total_time
-		}
-		data.completed.push(newTask);
-		console.log("completed pushed:");
-		console.log(newTask);
-	};
+	data.completed.push(newTask);
+	console.log("completed pushed:");
+	console.log(newTask);
+	// };
+
+	//task deletion from list, just deletes from data
+    // console.log("deleting task: " + req.body.delete + " from subject: "  + req.body.subject);
+
+    //find task list of corresponding query subject
+    for(var i = 0; i < data.subjects.length; i++) {
+        if (data.subjects[i]["name"].toUpperCase() == request.body.subject.toUpperCase()){
+
+            //for that subject, go through tasks to find task we want to delete
+            for (var j = 0; j < data.subjects[i].tasks.length; j++){
+                if (data.subjects[i].tasks[j]["name"] == request.body.assignment){
+                    // deletes that element
+                    data.subjects[i].tasks.splice(j,1);
+                    break;
+                } //if
+            } //for
+            break;
+        } //if
+    } //for
 
 	response.render('finish',new_display);
 }

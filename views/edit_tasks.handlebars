@@ -14,7 +14,7 @@
  	 <!-- <script src="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script> -->
 
 	<!-- fonts -->
-	<link href="https://fonts.googleapis.com/css?family=Fira+Sans" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Fira+Sans:300" rel="stylesheet">
 	<style>
 	:root {
   		--dusty-pink: rgb(212,171,179);
@@ -23,7 +23,6 @@
 	}
 	body{
 		font-family: 'Fira Sans', sans-serif;
-		font-weight: lighter !important; /*not working*/
 	}
 	.navbar {
 	    width:100%;
@@ -169,36 +168,6 @@
 
 <script>
 
-$( document ).ready(function() {
-    //populate input texts
-    // initGestures();
-    // console.log(screen);
-
-});
-
-	// init jQuery gestures  
-	// function initGestures() {
-	// 	// add gestures listener here
-	// 	$(function(){http://andymatthews.net/code/swipebutton/row-click.html
-	// 		$("input").on( "swipeleft", swipeleftHandler );
-
-
-	// 		function swipeleftHandler(event){
-	// 			//get the id of the event source
-	// 			var targetIDPrefix = event.target.id;
-	// 			console.log("got prefix: "+targetIDPrefix);
-
-	// 			 $(this).next().animate({width: 'toggle'});
-
-	// 			// alert("you want to delete?)");
-	// 			//do some delete animation
-	// 			// $("#" + targetIDPrefix + "-bio").show();
-	// 		}
-
-	// 	});
-	// }
-
-
 function cancel(){
 	$("#new_task_form").css("display","none");
 	$("#add_btn").css("display", "block");
@@ -242,7 +211,7 @@ function confirmChanges() {
 			}
 
 			//check for empty
-			alert($(this).val());
+			//alert($(this).val());
 			if ( $(this).val() == "" ){
 				alert("Fields cannot be empty.");
 				goodInput = false;
