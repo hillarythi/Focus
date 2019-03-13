@@ -19,17 +19,6 @@ exports.view = function(request, response) { 
 	new_display["hours"] = readableTime[0];
 	new_display["minutes"] = readableTime[1];
 
-	//updating log
-	// console.log("updating database:");
-	// var found = false;
-	// for(var i = 0; i < data.completed.length; i++) {
-	// 	if (data.completed[i].subject === finish_subject && data.completed[i].task === finish_assignment) {
-	// 		data.completed[i].time = total_time;
-	// 		found = true;
-	// 		break;
-	// 	}
-	// }
-	// if(!found) {
 	var newTask = {
 		'subject': finish_subject,
 		'task': finish_assignment,
@@ -38,11 +27,10 @@ exports.view = function(request, response) { 
 	data.completed.push(newTask);
 	console.log("completed pushed:");
 	console.log(newTask);
-	// };
 
-	//task deletion from list, just deletes from data
-    // console.log("deleting task: " + req.body.delete + " from subject: "  + req.body.subject);
-
+	
+	//task deletion from todo list, just deletes from data
+	
     //find task list of corresponding query subject
     for(var i = 0; i < data.subjects.length; i++) {
         if (data.subjects[i]["name"].toUpperCase() == request.body.subject.toUpperCase()){

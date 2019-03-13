@@ -8,8 +8,18 @@
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css">
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-
+<!-- fonts -->
+	<link href="https://fonts.googleapis.com/css?family=Fira+Sans:300" rel="stylesheet">
+	
 	<style>
+	:root {
+  		--dusty-pink: rgb(212,171,179);
+  		--dusty-blue: rgb(153,195,203);
+  		--dusty-gray: rgb(104,124,135);
+	}
+	body{
+		font-family: 'Fira Sans', sans-serif;
+	}
 	.navbar {
 	    width:100%;
 	    margin:0px auto;
@@ -28,37 +38,87 @@
 		font-size:200%;
 		color:white;
 	}
-	.center-page{
-		position: fixed;
-		top: 10%;
-		left: 15%;
-		width: 70%;
-	}
-	.fixed-length button{
-		width: 100%;
-	}
 	a:hover{
 		text-decoration:none;
 	}
-	.dusty-gray{
-		background-color: rgb(104,124,135);
+	.font-pink{
+		color: var(--dusty-pink);
+	}
+	.font-blue{
+		color: var(--dusty-blue);
+	}
+	.font-gray{
+		color: var(--dusty-gray);
+	}
+	.font-white{
+		color: white !important;
+	}
+	.bg-gray{
+		background-color: var(--dusty-gray);
+	}
+	.bg-pink{
+		background-color: var(--dusty-pink);
+	}
+	.bg-blue{
+		background-color: var(--dusty-blue);
+	}
+	.pad-10{
+		padding: 10% 0%;
+	}
+	.no-margin{
+		margin: 0;
 	}
 	
+	.btn-block{
+		border-radius:0 ;
+		padding: 5% 0;
+		margin-bottom: 7%;
+
+		border: 1px solid gray;
+		font-size:20px;
+	}
+	
+	h2 .glyphicon{
+		font-size: 30px;
+		float:left;
+		padding-left:10px;
+	}
+
+
+	.form-control{
+		padding: 30px 10px;
+		color:black;
+		/*change color to show not yet added?*/
+	}
+	.form-control:focus{
+		color:gray;
+	}
+	.form-control::placeholder{
+		color:gray;
+	}
+
+	#break_length_form{
+		color:gray;
+		font-weight: bold;
+	}
+
 	</style>
 </head>
 <body>
-
 	<!-- NAVBAR -->
-	<ul class="navbar border-top dusty-gray">
-		<li class="border-right"><a href="main_timer" class="glyphicon glyphicon-plus"></a></li>
-		<li class="border-right"><a href="main_todo" class="glyphicon glyphicon-th-list"></a></li>
-		<li class="border-right"><a href="main_log" class="glyphicon glyphicon-time"></a></li>
-		<li><a href="main_settings" class="glyphicon glyphicon-cog"></a></li>
+	<ul class="navbar border-top bg-gray">
+		<li class="border-right"><a href="main_timer" class="glyphicon glyphicon-plus" onclick="return confirmLeave()"></a></li>
+		<li class="border-right"><a href="main_todo" class="glyphicon glyphicon-th-list" onclick="return confirmLeave()"></a></li>
+		<li class="border-right"><a href="main_log" class="glyphicon glyphicon-time" onclick="return confirmLeave()"></a></li>
+		<li><a href="main_settings" class="glyphicon glyphicon-cog" onclick="return confirmLeave()"></a></li>
 	</ul>
+	
+	
+	<!-- Top left back button + title-->
+	<h2 class="font-blue pad-10 no-margin" style="text-align:center; padding-right:38px">
+		<a href='#' onclick="confirmLeave()"><span class="glyphicon glyphicon-chevron-left font-blue"></span></a>
+	settings</h2>
 
-	<div class="container center-page">
-	<a href='index'><span class="glyphicon glyphicon-chevron-left"></span></a>
-	<br><br>
 	<!--p>Break Length (in minutes)</p>
 	<div class="dropdown fixed-length">
 		<button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">Length</button>
@@ -86,22 +146,58 @@
 	</div>
 	<br-->
 
-	<form method="post" action="/main_settings">
-		<div class="form-group" id="break_length">
-			<label for="break_length">Break Length (in minutes)</label>
-			<input type="number" class="form-control" name="break_length" placeholder="{{breakLength}}" style='margin-bottom:10px'>
-			
-			<!--label for="snooze_length">Snooze Length (in minutes)</label>
-			<input type="number" class="form-control" name="snooze_length" placeholder="{{snoozeLength}}" style='margin-bottom:10px'-->
+	<div class="container">
+		<button role="button" aria-pressed="true" class="btn btn-default btn-block bg-pink font-white" id="break_toggle">break time</button>
+
+		<div class="btn-block btn-default" id="showBreak" style="display:none"> 
+			<form method="post" action="main_settings" id="break_length_form">
+				<input type="number" class="btn font-pink type_input task_input" name="break_length" style="font-size:20px; width: 80%" value="{{breakLength}}" id="break_length">mins
+			</form>
 		</div>
-		<button type="submit" class="btn btn-primary">Save</button>
-		<br>
-		<br>
-		<a href="/" type="button" class="btn btn-block btn-primary">Log Out</a>
-	</form>
+
+
+
+		<a role="button" aria-pressed="true" class="btn btn-default btn-block bg-blue font-white" href="tutorial/1">tutorial</a>
+
+		<a role="button" aria-pressed="true" class="btn btn-default btn-block bg-pink font-white" onclick="viewTasks(this)">about us</a>
+
+		<a role="button" aria-pressed="true" class="btn btn-default btn-block bg-blue font-white" onclick="viewTasks(this)">log out</a>
 	</div>
 
 
+
+<script>
+	function confirmLeave(){
+		var val = $("#break_length").val();
+		if (val == ""){
+			//is empty value, automatically set to 5 min
+			$("#break_length").val(5);
+		}
+		if (val != parseInt(val, 10)){
+			//is not integer
+			alert("Please input integers only.");
+		}else{
+			//break number is ok, check valid integer 
+			if ( val > 60 ){
+				alert("Please keep break time under 60 minutes");
+			}else if( val < 1 ){
+				alert("Please set break time to at least 1 minute");
+			}else{
+				//continue to submit
+				$("#break_length_form").submit();
+			}
+		}
+	}
+
+	$(document).ready(function(){
+	  $("#break_toggle").click(function(){
+	    $("#showBreak").slideToggle("slow");
+	  });
+	});
+
+</script>
+
 </body>
+
 
 </html>
