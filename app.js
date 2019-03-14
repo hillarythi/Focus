@@ -10,6 +10,7 @@ var handlebars = require('express3-handlebars')
 
 
 var login = require('./routes/login');
+var signup = require('./routes/signup');
 var index = require('./routes/index');
 var tutorial = require('./routes/tutorial');
 var new_timer = require('./routes/main_timer');
@@ -50,6 +51,7 @@ if ('development' == app.get('env')) {
 }
 
 app.get('/', index.view); //TODO change back to login.view
+app.get('/signup', signup.view);
 app.get('/index', index.view);
 app.get('/tutorial',tutorial.view);
 app.get('/tutorial/:page',tutorial.view);

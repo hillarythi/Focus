@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 	<meta charset="utf-8">
-	<title>Login</title>
+	<title>Sign up</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 
 	<!-- bootstrap, js-->
@@ -84,32 +84,30 @@
 <body>
 
 <div class="center-page">
-	<p id="app-name">focus</p>
-	<br><br>
+	<h2 class="pad-10 no-margin" style="text-align:center; padding-right:38px">
+		<a href='/'><span class="glyphicon glyphicon-chevron-left"></span></a>
+	sign up</h2>
 
 
 	<!-- <form action="index" onsubmit="return checkLogin()"> -->
 
-	<form action="tutorial/1">
+	<form action="/">
 	  <div class="form-group">
 	    <label for="exampleFormControlInput1" style="float:left">Email</label>
-	    <input type="email" id="login-email" class="form-control" placeholder="ixd@gmail.com">
+	    <input type="email" id="login-email" class="form-control">
   	  </div>
   	  <div class="form-group">
 	    <label for="exampleFormControlInput2" style="float:left">Password</label>
-	    <input type="password" id="login-password" class="form-control" placeholder="cse170">
+	    <input type="password" id="login-password" class="form-control">
+  	  </div>
+  	  <div class="form-group">
+	    <label for="exampleFormControlInput3" style="float:left">Confirm Password</label>
+	    <input type="password" id="login-password" class="form-control">
   	  </div>
 		<!-- <a href="index" type="submit" class="btn btn-primary">Log In</a> -->
 	  <input type="submit" class="btn-primary" value="Submit">
-	  <br>
-	  <br>
-	  <a href="signup" role="button">Sign Up</a>
 	</form>
 	<br>
-	<br>
-	<p class="facebookLogin">Or log in through Facebook</p>
-	<fb:login-button scope="public_profile,email" onlogin="checkLoginState();">
-	</fb:login-button>
 	
 </div>
 
