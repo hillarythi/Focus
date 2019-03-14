@@ -34,16 +34,27 @@
     ]
   }
   ],
+  "current":
+  {
+    "subject": "current subject",
+    "assignment": "current assignment",
+    "total_time_set": 0,
+    "total_hr": 0,
+    "breaks": 0,
+    "breaks_hr": 0,
+    "breaks_min":0,
+    "breaks_total":0
+  },
   "completed": [
   {
     "subject": "ECE 109",
     "task": "Do Homework 2",
-	"time": "120"
+    "time": "120"
   },
   {
     "subject": "COGS 120",
     "task": "Do Lab 4",
-	"time": "30"
+	  "time": "30"
   }
   ],
   "breakLength":3

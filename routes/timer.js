@@ -2,12 +2,20 @@
 /*
  * POST timer page.
  */
+ var data = require('../data.json');
 
 
-exports.view = function(request, response) {    
+exports.view = function(request,response){
+	console.log("CURRENT task rendering about to display timer: ");
+	console.log(data.current);
+	response.render('timer',data.current);
+}
+
+exports.update = function(request, response) {    
 	// Your code goes here
-	console.log("TIMER REQUEST");
+	console.log("TIMER UPDATE PAGE before display timer: ");
 	console.log(request.body);
+
 	var new_total_time = request.body.totalTimeSet;
 	var new_subject = request.body.subject;
 	var new_assignment = request.body.assignment;
@@ -23,23 +31,20 @@ exports.view = function(request, response) { 
 	// var new_totalMins = readableToTotal(new_hr, new_min);
 	var readableTime = totalToReadable(new_total_time); //tuple
 
-	var new_task = {};
-	new_task["subject"] = new_subject;
-	new_task["assignment"] = new_assignment;
-	new_task["total_time_set"] = new_total_time; //total time in general
-	new_task["total_hr"] = readableTime[0]; //total hours left
-	new_task["total_min"] = readableTime[1]; //total minutes left
-	new_task["breaks"] = parseInt(new_breaks);	// breaks left
-	new_task["breaks_hr"] = breakCalculations[0];  //hours left till break
-	new_task["breaks_min"] = breakCalculations[1]; // + mins left till break
-	new_task["breaks_total"] = breakCalculations[2]; //total minutes till break
+	data.current["subject"] = new_subject;
+	data.current["assignment"] = new_assignment;
+	data.current["total_time_set"] = new_total_time; //total time in general
+	data.current["total_hr"] = readableTime[0]; //total hours left
+	data.current["total_min"] = readableTime[1]; //total minutes left
+	data.current["breaks"] = parseInt(new_breaks);	// breaks left
+	data.current["breaks_hr"] = breakCalculations[0];  //hours left till break
+	data.current["breaks_min"] = breakCalculations[1]; // + mins left till break
+	data.current["breaks_total"] = breakCalculations[2]; //total minutes till break
 
 	console.log("HOUR IS: " + new_hr + " MIN: " + new_min);
-	console.log("TIMER render: ");
-	console.log(new_task);
 
 	// current.tasks.push(new_task);
-	response.render('timer',new_task);
+	// response.render('timer',data.current);
 }
 
 function readableToTotal(h, m){

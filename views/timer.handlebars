@@ -144,7 +144,7 @@
 
 	<!-- Hidden Forms submissions -->
 	<!-- To Break Screen -->
-	<form action="break" method="post" id="toBreak">
+	<form action="break" method="get" id="toBreak">
 		<input type="hidden" name="breaks_before" value="{{breaks}}">
 		<input type="hidden" id="time_passed" name="total_minutes_spent" value="{{breaks_total}}">
 		<!-- extra stuff for passing session -->
@@ -269,6 +269,22 @@ function confirmBreak(){
 		//if leave, populate form to post to break page
 		//when timer is over, send form over to break page
 		populateEarlyForm();
+
+		//xml request
+		var update_json = { 
+			"total_min": document.getElementById("totalMinsLeft").value,
+			"total_minutes_spent": document.getElementById("time_passed").value //total time passed
+		};
+
+		var xhr = new XMLHttpRequest();
+		xhr.open('post', 'break');
+		xhr.setRequestHeader('Content-Type', 'application/json');
+		console.log("xml timer to break payload" + JSON.stringify(update_json));
+		xhr.onerror = function(){ alert("Edit request failed. Please refresh and try again."); } 
+		xhr.send(JSON.stringify(update_json));
+
+
+
 	    document.getElementById("toBreak").submit();
 	}
 	//TODO Change so that leave will log current time or something

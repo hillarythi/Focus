@@ -238,7 +238,7 @@
 		
 		<!-- invisible form to send data -->
 
-		<form action="timer" method="post" name="invisible" id="send" onsubmit="return validateForm();">
+		<form action="timer" method="get" name="invisible" id="send" onsubmit="return validateForm();">
 			<input type="hidden" id="subject" name="subject">
 			<input type="hidden" id="assignment" name="assignment">
 			<input type="hidden" id="hour" name="hour">
@@ -435,6 +435,25 @@ function validateForm(){
 		alert("Please set your timer to at least 15 minutes.");
 		return false;
 	}
+
+	//send xml post request to put things in current
+
+	var new_list = { 
+		"totalTimeSet": document.getElementById("totalTime").value,
+		"subject": document.getElementById("dropSubject").value,
+		"assignment": document.getElementById("assignment").value,
+		"hour": document.getElementById("hour").value ,
+		"minute": document.getElementById("minute").value,
+		"breaks": document.getElementById("breaks").value 
+	};
+
+	var xhr = new XMLHttpRequest();
+	xhr.open('post', 'timer');
+	xhr.setRequestHeader('Content-Type', 'application/json');
+	console.log("xml timer payload" + JSON.stringify(new_list));
+	xhr.onerror = function(){ alert("Edit request failed. Please refresh and try again."); } 
+	xhr.send(JSON.stringify(new_list));
+
 	return true;
 }
 

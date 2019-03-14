@@ -140,11 +140,11 @@
 
 
 	<!-- Hidden Forms submissions -->
-	<form action="timer" method="post" id="toTimer">
+	<form action="timer" method="get" id="toTimer">
 		<input type="hidden" name="breaks" value="{{breaks}}">
 		<!-- <input type="hidden" id="time_passed" name="total_minutes_spent" value="{{breaks_total}}"> -->
 		<!-- extra stuff for passing session -->
-		<input type="hidden" name="totalTimeSet" value="{{totalTimeSet}}">
+		<input type="hidden" name="totalTimeSet" value="{{total_time_set}}">
 		<input type="hidden" name="subject" value="{{subject}}">
 		<input type="hidden" name="assignment" value="{{assignment}}">
 		<input type="hidden" id="hours_left" name="hour" value="0">
@@ -213,9 +213,28 @@ function confirmStudy(){
 }
 
 function submitStudy(){
-	var readable = totalToReadable({{totalMinsLeft}});
+	var readable = totalToReadable({{total_min}});
     document.getElementById("hours_left").value = readable[0];
     document.getElementById("mins_left").value = readable[1];
+
+
+    var update_timer = { 
+		"hour": document.getElementById("hours_left").value,
+		"minute": document.getElementById("mins_left").value,
+		"totalTimeSet": "{{total_time_set}}",
+		"subject": "{{subject}}",
+		"assignment": "{{assignment}}",
+		"breaks": "{{breaks}}"
+	};
+
+	var xhr = new XMLHttpRequest();
+	xhr.open('post', 'timer');
+	xhr.setRequestHeader('Content-Type', 'application/json');
+	console.log("xml break->timer payload" + JSON.stringify(update_timer));
+	xhr.onerror = function(){ alert("Edit request failed. Please refresh and try again."); } 
+	xhr.send(JSON.stringify(update_timer));
+
+
     document.getElementById("toTimer").submit();
 }
 
