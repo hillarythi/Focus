@@ -50,13 +50,12 @@ if ('development' == app.get('env')) {
   app.use(express.errorHandler());
 }
 
-app.get('/', index.view); //TODO change back to login.view
+app.get('/', login.view); 
 app.get('/signup', signup.view);
 app.get('/index', index.view);
 app.get('/tutorial',tutorial.view);
 app.get('/tutorial/:page',tutorial.view);
 app.get('/main_todo', todo.view);
-//app.post('/main_todo', todo.added);
 app.post('/main_todo',todo.add);
 app.get('/main_log', log.view);
 app.get('/main_settings', settings.view);
