@@ -162,9 +162,9 @@
 
 		<a role="button" aria-pressed="true" class="btn btn-default btn-block bg-blue font-white" href="tutorial/1">tutorial</a>
 
-		<a role="button" aria-pressed="true" class="btn btn-default btn-block bg-pink font-white" onclick="viewTasks(this)">about us</a>
+		<a role="button" aria-pressed="true" class="btn btn-default btn-block bg-pink font-white" onclick="aboutUs()">about us</a>
 
-		<a role="button" aria-pressed="true" class="btn btn-default btn-block bg-blue font-white" onclick="viewTasks(this)">log out</a>
+		<a role="button" href="/" aria-pressed="true" class="btn btn-default btn-block bg-blue font-white" onclick="logout()">log out</a>
 	</div>
 
 
@@ -190,6 +190,14 @@
 				$("#break_length_form").submit();
 			}
 		}
+	}
+
+	function aboutUs(){
+		alert("'About Us' coming soon!");
+	}
+
+	function logout(){
+		alert("logged out!");
 	}
 
 	$(document).ready(function(){
