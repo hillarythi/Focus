@@ -15,6 +15,10 @@
 
 	<!-- fonts -->
 	<link href="https://fonts.googleapis.com/css?family=Fira+Sans:300" rel="stylesheet">
+	<!-- icons -->
+	<link rel='stylesheet' href='https://use.fontawesome.com/releases/v5.7.0/css/all.css' integrity='sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ' crossorigin='anonymous'>
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+	
 	<style>
 	:root {
   		--dusty-pink: rgb(212,171,179);
@@ -28,7 +32,7 @@
 	    width:100%;
 	    margin:0px auto;
 	    bottom: 0;
-	    padding:10 0px;
+	    padding: 0;
 	    position: fixed;
 	    text-align:center;
 	}
@@ -38,8 +42,8 @@
 	    margin:0;
 	    padding:0;
 	}
-	.navbar .glyphicon{
-		font-size:200%;
+	.material-icons, .fas, .glyphicon{
+		font-size:240%;
 		color:white;
 	}
 	a:hover{
@@ -62,6 +66,9 @@
 	}
 	.bg-pink{
 		background-color: var(--dusty-pink);
+	}
+	.bg-blue{
+		background-color: var(--dusty-blue);
 	}
 	.pad-10{
 		padding: 10% 0%;
@@ -98,19 +105,17 @@
 	.form-control::placeholder{
 		color:gray;
 	}
-	input{
-		/*display:inline;*/
-	}
 
 
 	</style>
 </head>
 <body>
+
 	<!-- NAVBAR -->
-	<ul class="navbar border-top bg-gray">
-		<li class="border-right"><a href="main_timer" class="glyphicon glyphicon-plus" onclick="return confirmLeave()"></a></li>
-		<li class="border-right"><a href="main_todo" class="glyphicon glyphicon-th-list" onclick="return confirmLeave()"></a></li>
-		<li class="border-right"><a href="main_log" class="glyphicon glyphicon-time" onclick="return confirmLeave()"></a></li>
+	<ul class="navbar border-top bg-blue">
+		<li class="border-right"><a href="main_timer" onclick="return confirmLeave()"><span class="material-icons">add_alarm</span></a></li>
+		<li class="border-right"><a href="main_todo" onclick="return confirmLeave()"><span class="fas fa-tasks" aria-hidden="true"></span></a></li>
+		<li class="border-right"><a href="main_log" onclick="return confirmLeave()"><span class="fas fa-history" aria-hidden="true"></span></a></li>
 		<li><a href="main_settings" class="glyphicon glyphicon-cog" onclick="return confirmLeave()"></a></li>
 	</ul>
 	
@@ -118,7 +123,7 @@
 	<!-- Top left back button + title + top right confirm edit button-->
 	<h2 class="font-blue pad-10 no-margin" style="text-align:center; padding-bottom:8%">
 		<!-- back button -->
-		<a href='main_todo' onclick="return confirmLeave()"><span class="glyphicon glyphicon-chevron-left font-blue"></span></a>
+		<a href='#' onclick="confirmBack()"><span class="glyphicon glyphicon-chevron-left font-blue"></span></a>
 		<!-- subject name -->
 		&nbsp;&nbsp;&nbsp;&nbsp;<input type="text" class="type_input" value="{{name}}" style="width:60%; text-align:center" id="edited_subject">
 		<!-- confirm edit button -->
@@ -135,27 +140,16 @@
 	{{/each}}
 
 
-	<!-- form for adding new tasks when needed -->
-	<form method="post" action="tasks" id="new_task_form" style="display:none">
-  			<input type="text" class="form-control btn btn-default btn-block " style="background-color:var(--dusty-pink)" name="task_name" placeholder="task name" id="add_new">
-  			<input type="hidden" name="subj_name" value="{{name}}">
-  			<div class="container">
-  				<button class="btn btn-default btn-block" style="display:inline" onclick="return checkFilled()"> done </button>
-				<button class="btn btn-default btn-block" onclick="return cancel()"> cancel </button>
-			</div>
-	</form>
-
 
 	<!-- Hidden form for deleting entire list, loads main_todo after  -->
 	<form method="post" action="deleteSubject" id="delete_subject_form">
 		<input type="hidden" name="subject" value="{{name}}">
 	</form>
 
-
-	<!-- hidden form for confirming subject, loading task page  -->
-	<form method="get" action="tasks" id="back_to_subject_form">
-		<input type="hidden" name="subject" id="edited_subject_form">
-	</form>
+	<!-- Hidden form for going back to task page -->
+	<form method="get" action="tasks" id="get_task_list">
+		<input type="hidden" name="subject" value="{{name}}" id="get_task_name">
+	</form>	
 
 
 	<!-- add new subject button  -->
@@ -168,38 +162,19 @@
 
 <script>
 
-function cancel(){
-	$("#new_task_form").css("display","none");
-	$("#add_btn").css("display", "block");
-	$("#add_new").val("");
-	return false;
-}
-
-function checkFilled(){
-	if ( $("#add_new").val() == "" ){
-		alert("Task cannot be empty.");
-		return false;
-	}
-	//check for bad input
-	if (  ($("#add_new").val().indexOf('<') > -1) || ($("#add_new").val().indexOf('>') > -1)){
-		alert("You've entered invalid input, please try again.");
-		//reset field
-		$("#add_new").val("");
-		return false;
-	}
-
-	$("#new_task_form").submit();
-	return true;
-}
 function confirmLeave() {
-	if ( $("#add_new").val() != "" ){
-		return confirm("Are you sure you want to navigate away? Your unsaved changes will be lost.");
-	}else{
+	return (confirm("Are you sure you want to navigate away? Your unsaved changes will be lost."));
+}
+function confirmBack(){
+	if (confirm("Are you sure you want to navigate away? Your unsaved changes will be lost.")){
+		$("#get_task_list").submit();
 		return true;
+	}else{
+		return false;
 	}
 }
-function confirmChanges() {
 
+function confirmChanges() {
 		/**checks for valid input**/
 		var goodInput = false;
 
@@ -265,7 +240,12 @@ function confirmChanges() {
 			console.log("payload" + JSON.stringify(new_list));
 			xhr.onerror = function(){ alert("Edit request failed. Please refresh and try again."); } 
 			xhr.send(JSON.stringify(new_list));
+			xhr.onload = function(){
+				$("#get_task_name").val(new_subject);
+				$("#get_task_list").submit();
+			}
 			return true;
+
 		}else{
 			return false;
 		}

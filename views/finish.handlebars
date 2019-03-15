@@ -8,8 +8,13 @@
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css">
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	
 	<!-- fonts -->
-	<link href="https://fonts.googleapis.com/css?family=Fira+Sans:300" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Fira+Sans:200" rel="stylesheet">
+	<!-- icons -->
+	<link rel='stylesheet' href='https://use.fontawesome.com/releases/v5.7.0/css/all.css' integrity='sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ' crossorigin='anonymous'>
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+	
 	<style>
 	:root {
   		--dusty-pink: rgb(212,171,179);
@@ -23,7 +28,7 @@
 	    width:100%;
 	    margin:0px auto;
 	    bottom: 0;
-	    padding:10 0px;
+	    padding:0;
 	    position: fixed;
 	    text-align:center;
 	}
@@ -33,8 +38,8 @@
 	    margin:0;
 	    padding:0;
 	}
-	.navbar .glyphicon{
-		font-size:200%;
+	.material-icons, .fas, .glyphicon, .btn{
+		font-size:240%;
 		color:white;
 	}
 	a:hover{
@@ -72,6 +77,9 @@
 	.bg-gray{
 		background-color: var(--dusty-gray);
 	}
+	.bg-blue{
+		background-color: var(--dusty-blue);
+	}
 	.break-btn{
 		font-size:200%;
 		background-color: var(--dusty-pink);
@@ -89,31 +97,29 @@
 </head>
 <body>
 	<!-- NAVBAR -->
-	<ul class="navbar border-top bg-gray">
-		<li class="border-right">
-			<a href="main_timer" class="glyphicon glyphicon-plus" onClick="return confirmLeave()"></a></li>
-		<li class="border-right">
-			<a href="main_todo" class="glyphicon glyphicon-th-list" onClick="return confirmLeave()"></a></li>
-		<li class="border-right">
-			<a href="main_log" class="glyphicon glyphicon-time" onClick="return confirmLeave()"></a></li>
-		<li><a href="main_settings" class="glyphicon glyphicon-cog" onClick="return confirmLeave()"></a></li>
+	<ul class="navbar border-top bg-blue">
+		<li class="border-right"><a href="main_timer"><span class="material-icons">add_alarm</span></a></li>
+		<li class="border-right"><a href="main_todo"><span class="fas fa-tasks" aria-hidden="true"></span></a></li>
+		<li class="border-right"><a href="main_log"><span class="fas fa-history" aria-hidden="true"></span></a></li>
+		<li><a href="main_settings" class="glyphicon glyphicon-cog"></a></li>
 	</ul>
 
 	<!-- Actual Page -->
 	<div class="container" style="text-align:center">
 
-		<h2 class="font-pink pad-10 no-margin" style="margin-top:10%" >good job!</h2><br>
+		<h2 class="font-blue pad-10 no-margin" style="margin-top:10%" >good job!</h2><br>
 		<h2 class="font-pink pad-10 no-margin" >you've finished {{hours}} hours and {{minutes}} minutes of</h1>
 		<h1 class="font-blue pad-10 no-margin" id="assignment">{{subject}}: {{assignment}}</h1>
 
 
  	</div>
+ 	<br>
 
  	<!-- End Break Btn -->
  	<div id="end-session-btn">
 		<a href="index">
-			<span class="glyphicon glyphicon-arrow-right font-gray" style="float:right; font-size: 40px"></span>
-		<br><h3 class="font-blue">go home</h3></a>
+			<span class="glyphicon glyphicon-home font-gray" style="float:right; padding-right:10px; font-size: 40px"></span>
+		<br><h3 class="font-gray">home</h3></a>
 	
 	</div>
 
@@ -122,55 +128,6 @@
 		<br>
 	<!-- space under submit button so it scrolls if doesnt fit screen -->
 	</div>
-
-
-	<!-- delete i think  -->
-	<!-- Hidden Forms submissions -->
-	<form action="timer" method="post" id="toTimer">
-		<input type="hidden" name="breaks" value="{{breaks}}">
-		<!-- <input type="hidden" id="time_passed" name="total_minutes_spent" value="{{breaks_total}}"> -->
-		<!-- extra stuff for passing session -->
-		<input type="hidden" name="subject" value="{{subject}}">
-		<input type="hidden" name="assignment" value="{{assignment}}">
-		<input type="hidden" id="hours_left" name="hour" value="0">
-		<input type="hidden" id="mins_left" name="minute" value="0">
-	</form>
-
-
-
-<script>
-
-
-//TODO inconsistent leave statements and form submissions... deal with it
-function confirmStudy(){
-	var c = confirm('Are you sure you want to skip the rest of your break and continue studying?');
-	if (c){
-		submitStudy();
-	}
-
-}
-
-function submitStudy(){
-	var readable = totalToReadable({{totalMinsLeft}});
-    document.getElementById("hours_left").value = readable[0];
-    document.getElementById("mins_left").value = readable[1];
-    document.getElementById("toTimer").submit();
-}
-
-/* leaving timer from end session button or navbar */
-function confirmLeave(){ 
-	return confirm('You are in the middle of a session, are you sure you want to leave? Your data will be lost');
-}
-
-//out of total minutes, how many hour/min
-function totalToReadable(total){
-	var h = Math.floor(total/60);
-	var m = Math.floor(total%60);
-	return [h,m];
-}
-
-
-</script>
 
 
 

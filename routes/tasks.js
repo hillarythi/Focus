@@ -112,13 +112,16 @@ exports.update = function(req,res){
         }
     } 
 
-    //send get request with new subject name to /tasks with query subject=[newsubjectname]
+
+
+    // //send get request with new subject name to /tasks with query subject=[newsubjectname]
     res.redirect(url.format({
         pathname:"tasks",
         query: {
           "subject": req.body.list.name
         }    
     }) );
+    return;
 
 
 
