@@ -242,20 +242,11 @@
 		<!-- <a href='/'><span class="glyphicon glyphicon-arrow-left left"></span></a> -->
 		
 		<!-- invisible form to send data -->
-
-		<form action="timer" method="get" name="invisible" id="send" onsubmit="return validateForm();">
-			<input type="hidden" id="subject" name="subject">
-			<input type="hidden" id="assignment" name="assignment">
-			<input type="hidden" id="hour" name="hour">
-			<input type="hidden" id="minute" name="minute">
-			<input type="hidden" id="breaks" name="breaks">
-			<input type="hidden" id="totalTime" name="totalTimeSet">
-			<!-- <input type="submit" value="Submit" id="other" name="what" onclick="fillForm()"> -->
-			<button onclick="fillForm()" style="float:right"><span class="glyphicon glyphicon-arrow-right right"></button>
+		<form action="timer" method="get" name="invisible" id="toTimer">
+			<button onclick="validateForm()" style="float:right"><span class="glyphicon glyphicon-arrow-right right"></span></button>
 		</form>
+		<input type="hidden" id="breaks" name="breaks">
 
-
-		<!-- <a href='timer' onclick="fillForm()"><span class="glyphicon glyphicon-arrow-right right"></span></a> -->
 		<br>
 			<!-- <p class="left title">save for later</p> -->
 			<p class="right title">let's study!</p>
@@ -423,11 +414,16 @@ function selectTime(n){
 /* Validates that all form fields are filled out, otherwise throw error */
 /* Error Checks */
 function validateForm(){
-	var t1 = document.getElementById("assignment").value;
-	var t2 = document.getElementById("hour").value;
-	var t3 = document.getElementById("minute").value;
+
+	var h = document.getElementById("dropHour").value;
+	var m = document.getElementById("dropMinute").value;
+	var totalTime = (parseInt(h)*3600) + parseInt(m*60);
+
+	var t1 = document.getElementById("dropAssignment").value;
+	var t2 = document.getElementById("dropHour").value;
+	var t3 = document.getElementById("dropMinute").value;
 	var t4 = document.getElementById("breaks").value;
-	var t5 = document.getElementById("totalTime").value;
+	var t5 = totalTime;
 	if (t1 == "" || t1 == null || 
 		t2 == "" || t2 == null || 
 		t3 == "" || t3 == null || 
@@ -444,42 +440,31 @@ function validateForm(){
 	//send xml post request to put things in current
 
 	var new_list = { 
-		"totalTimeSet": document.getElementById("totalTime").value,
+		"totalTimeSet": totalTime,
+		"totalTimeLeft": totalTime,
 		"subject": document.getElementById("dropSubject").value,
-		"assignment": document.getElementById("assignment").value,
-		"hour": document.getElementById("hour").value ,
-		"minute": document.getElementById("minute").value,
-		"breaks": document.getElementById("breaks").value 
+		"assignment": document.getElementById("dropAssignment").value,
+		"breaks": document.getElementById("breaks").value,
+		"breakLength": "{{breakLength}}"
 	};
 
 	var xhr = new XMLHttpRequest();
 	xhr.open('post', 'timer');
 	xhr.setRequestHeader('Content-Type', 'application/json');
 	console.log("xml timer payload" + JSON.stringify(new_list));
-	xhr.onerror = function(){ alert("Edit request failed. Please refresh and try again."); } 
+	xhr.onerror = function(){ alert("Edit request failed. Please refresh and try again."); return false; } 
+	xhr.onload = function(){
+		document.getElementById("toTimer").submit();
+		return true;
+	}
 	xhr.send(JSON.stringify(new_list));
+
+
+
 
 	return true;
 }
 
-
-/* Fills out invisible form fields before submitting to timer */
-function fillForm(){
-	document.getElementById("subject").value = document.getElementById("dropSubject").value;
-	document.getElementById("assignment").value = document.getElementById("dropAssignment").value;
-	document.getElementById("hour").value = document.getElementById("dropHour").value;
-	document.getElementById("minute").value = document.getElementById("dropMinute").value;
-	var h = document.getElementById("hour").value;
-	var m = document.getElementById("minute").value;
-	document.getElementById("totalTime").value = (parseInt(h)*60) + parseInt(m);
-	console.log("fill form");
-	console.log("h: " + h);
-	console.log("m: " + m);
-
-	// document.invisible.submit();
-	// document.forms[0].submit();
-	// $('#send').submit();
-}
 
 
 function confirmLeave(){ 

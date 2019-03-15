@@ -12,23 +12,26 @@
 var data = require('../data.json');
 
 exports.view = function (request, response){
+	console.log("before going into break");
+	console.log(data.current);
 	response.render('break', data.current);
 }
 
 //currently for early break
 exports.update = function(request, response) {    
-	// Your code goes here
-	// console.log(request);
 
 	/* Edit JSON to reflect current situation */
-
-	data.current["total_min"] = request.body.total_min;
-	var subtract_b = data.current["breaks"]; //breaks left before taking this break
-	var subtract_m = request.body.total_minutes_spent;
 
 	console.log("BREAK UPDATING going into timer REQUEST: ");
 	console.log(request.body);
 
+
+	//only updates how much time is left in total
+	console.log("data current total sec left in session before: " + data.current["total_left"]);
+	data.current["total_left"] = request.body.total_sec;
+	var subtract_b = data.current["breaks"]; //breaks left before taking this break
+
+	console.log("data current total sec after: " + data.current["total_left"]);
 
 	//subtract current json - above numbers, write back
 
@@ -43,42 +46,8 @@ exports.update = function(request, response) { 
 		data.current["breaks"] = 0;
 	}
 
+	response.send("success");
 
-	//passing rest of session stuff 
-	// var subject = request.body.subject;
-	// var assignment = request.body.assignment;
-	// var totalTimeSet = request.body.total_time_set;
-	// var totalMinsLeft = request.body.total_mins_left;
-
-	// new_break["subject"] = subject;
-	// new_break["assignment"] = assignment;
-	// new_break["totalTimeSet"] = totalTimeSet; //total minutes initially set by user
-	// new_break["totalMinsLeft"] = totalMinsLeft;//total minutes left in study session
-
-	// console.log("break render:");
-	// console.log(new_break);
-
-	//updating log
-	// console.log("updating database:");
-	// var found = false;
-	// for(var i = 0; i < data.completed.length; i++) {
-	// 	if (data.completed[i].subject === subject && data.completed[i].task === assignment) {
-	// 		data.completed[i].time = totalTimeSet - totalMinsLeft;
-	// 		found = true;
-	// 		break;
-	// 	}
-	// }
-	// if(!found) {
-	// 	var newTask = {
-	// 		'subject': subject,
-	// 		'task': assignment,
-	// 			'time': totalTimeSet - totalMinsLeft
-	// 	}
-	// 	data.completed.push(newTask);
-	// };
-
-	//maybe send a total time left to breaks? 
-	//response.render('break', new_break);
 }
 
 

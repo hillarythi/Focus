@@ -22,6 +22,7 @@ exports.view = function(req, res){
     {
      "subjects": subjects,
      "tasks": tasks,
+     "breakLength" : data.breakLength,
      "populated": false,
      "helpers": {
             makeIdHandle: function (taskName) { 
@@ -48,6 +49,7 @@ exports.fill = function(req,res){
    res.render('main_timer', {
      "subjects": subjects,
      "tasks": tasks,
+     "breakLength" : data.breakLength,
      "populated": true,
      "curr_subj": req.body.subject,
      "curr_task": req.body.task,

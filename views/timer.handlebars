@@ -135,20 +135,18 @@
 	<!-- Hidden Forms submissions -->
 	<!-- To Break Screen -->
 	<form action="break" method="get" id="toBreak">
-		<input type="hidden" name="breaks_before" value="{{breaks}}">
-		<input type="hidden" id="time_passed" name="total_minutes_spent" value="{{breaks_total}}">
+		<!-- <input type="hidden" name="breaks_before" value="{{breaks}}">
+		<input type="hidden" id="time_passed" name="total_minutes_spent" value="{{breaks_total}}"> -->
 		<!-- extra stuff for passing session -->
-		<input type="hidden" name="subject" value="{{subject}}">
+		<!-- <input type="hidden" name="subject" value="{{subject}}">
 		<input type="hidden" name="assignment" value="{{assignment}}">
 		<input type="hidden" name="total_time_set" value="{{total_time_set}}">
-		<input type="hidden" id="totalMinsLeft" name="total_mins_left" value="0">
+		<input type="hidden" id="totalMinsLeft" name="total_mins_left" value="0"> -->
 	</form>
 
 	<!-- To the Finishing Page -->
 	<form action="finish" method="post" id="toFinish">
-		<input type="hidden" name="subject" value="{{subject}}">
-		<input type="hidden" name="assignment" value="{{assignment}}">
-		<input type="hidden" name="total_time_set" id="total_time" value="{{total_time_set}}">
+		<input type="hidden" id="totalSecLeft" name="total_sec" value="0">
 	</form>
 
 
@@ -157,12 +155,14 @@
 
 var currHours;
 var currMinutes;
+var currSeconds;
 
 $( document ).ready(function() {
     populateBreaks();
     startCountdown();
     currHours = 0;
     currMinutes = 0;
+    currSeconds = 0;
     if ({{breaks}}==0){
     	document.getElementById('lastSession').innerHTML = "end";
     }
@@ -186,6 +186,7 @@ function startCountdown(){ //currently countdown to next break
 	// countDownDate.setMinutes(countDownDate.getMinutes()+{{total_min}});
 	countDownDate.setHours(countDownDate.getHours()+{{breaks_hr}});
 	countDownDate.setMinutes(countDownDate.getMinutes()+{{breaks_min}});
+	countDownDate.setSeconds(countDownDate.getSeconds()+{{breaks_sec}});
 	countDownDate = countDownDate.getTime();
 
 	// Update the count down every 1 second
@@ -202,11 +203,11 @@ function startCountdown(){ //currently countdown to next break
 	  var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
 	  var seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
-	  currHours = hours; currMinutes = minutes; 
+	  currHours = hours; currMinutes = minutes; currSeconds = seconds;
 
 	  // Display the result in the element with id="demo"
 	  document.getElementById("countdown").innerHTML = "  " + hours + "h "
-	  + minutes + "m " + seconds + "s";
+	  + minutes + "m " + seconds + "s ";
 
 	  // If the count down is finished, write some text 
 	  if (distance < 0) {
@@ -219,10 +220,19 @@ function startCountdown(){ //currently countdown to next break
 	    	document.getElementById("toFinish").submit();
 	    }
 	    else{
-		    //when timer is over, send form over to break page
-		    document.getElementById("totalMinsLeft").value = ({{total_time_set}} - {{breaks_total}});
-		    alert("it's time to take a break, let's go!");
-		    document.getElementById("toBreak").submit();
+		    //when timer is over, send xml request over to break page
+		    document.getElementById("totalSecLeft").value = ({{total_left}} - {{breaks_total}});
+		    	var audio = new Audio('sounds/bell.mp3');
+				const playPromise = audio.play();
+				if (playPromise !== null){
+				    playPromise.catch(() => { audio.play(); })
+				}
+				setTimeout(function(){ 
+					alert("it's time to take a break, let's go!");
+		    		sendRequestToBreak();
+				 }, 1000);
+		    // alert("it's time to take a break, let's go!");
+		    // document.getElementById("toBreak").submit();
 
 		}
 	    //TODO : edit json to be total time - break time {breaks, breaks_hr, breaks_min} hidden form?
@@ -235,8 +245,8 @@ function startCountdown(){ //currently countdown to next break
 /**** LEAVING PAGE FROM BUTTONS *****/
 function getTimePassed(){
 	//session ended early, get how much time has passed since
-	var totalBefore = ({{breaks_hr}}*60)+{{breaks_min}};
-	var totalAfter = (currHours*60)+currMinutes;
+	var totalBefore = ({{breaks_hr}}*3600)+({{breaks_min}}*60)+{{breaks_sec}};
+	var totalAfter = (currHours*3600)+(currMinutes*60)+currSeconds;
 	console.log("Before: "+totalBefore);
 	console.log("After: "+totalAfter);
 	var update = totalBefore - totalAfter;
@@ -247,10 +257,31 @@ function getTimePassed(){
 function populateEarlyForm(){
 	//session ended early, populate with right values
 	var timePassed = getTimePassed();
-	document.getElementById("time_passed").value = timePassed;
-	document.getElementById("totalMinsLeft").value = ({{total_time_set}} - timePassed);
+	// document.getElementById("time_passed").value = timePassed;
+	document.getElementById("totalSecLeft").value = ({{total_left}} - timePassed);
 
 }
+
+//send xmlrequest
+function sendRequestToBreak(){
+
+	//xml request
+	var update_json = { 
+		"total_sec": document.getElementById("totalSecLeft").value
+	};
+
+	var xhr = new XMLHttpRequest();
+	xhr.open('post', 'break');
+	xhr.setRequestHeader('Content-Type', 'application/json');
+	console.log("xml timer to break payload" + JSON.stringify(update_json));
+	xhr.onerror = function(){ alert("Edit request failed. Please refresh and try again."); } 
+	xhr.onload = ()=>{
+		document.getElementById("toBreak").submit();
+	};
+
+	xhr.send(JSON.stringify(update_json));
+}
+
 
 /* leaving timer to break by taking break early */
 function confirmBreak(){
@@ -259,23 +290,7 @@ function confirmBreak(){
 		//if leave, populate form to post to break page
 		//when timer is over, send form over to break page
 		populateEarlyForm();
-
-		//xml request
-		var update_json = { 
-			"total_min": document.getElementById("totalMinsLeft").value,
-			"total_minutes_spent": document.getElementById("time_passed").value //total time passed
-		};
-
-		var xhr = new XMLHttpRequest();
-		xhr.open('post', 'break');
-		xhr.setRequestHeader('Content-Type', 'application/json');
-		console.log("xml timer to break payload" + JSON.stringify(update_json));
-		xhr.onerror = function(){ alert("Edit request failed. Please refresh and try again."); } 
-		xhr.send(JSON.stringify(update_json));
-
-
-
-	    document.getElementById("toBreak").submit();
+		sendRequestToBreak();
 	}
 	//TODO Change so that leave will log current time or something
 }
@@ -290,9 +305,8 @@ function confirmLeave(){
 function confirmEnd(){ 
 	var c = confirm('Are you sure you want to end your session? ');
 	if (c){
-		$('#total_time').val({{total_time_set}}-({{total_hr}}*60)-{{total_min}}+getTimePassed() );
+		populateEarlyForm();
 	    document.getElementById("toFinish").submit();
-
 	}
 }
 

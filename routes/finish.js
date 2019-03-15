@@ -6,23 +6,25 @@
 var data = require('../data.json');
 
 exports.view = function(request, response) {    
-	
-	var finish_subject = request.body.subject;
-	var finish_assignment = request.body.assignment;
-	var total_time = request.body.total_time_set;
 
-	var readableTime = totalToReadable(total_time); //tuple
+
+	data.current["total_left"] = request.body.total_sec;
+	var totalTime = parseInt(data.current.total_time_set);
+	var totalLeft = parseInt(data.current.total_left);
+	var totalSpent = totalTime-totalLeft;
+	var readableTime = totalToReadable(totalSpent); //tuple
 
 	var new_display = {};
-	new_display["subject"] = finish_subject;
-	new_display["assignment"] = finish_assignment;
+	new_display["subject"] = data.current.subject,
+	new_display["assignment"] = data.current.assignment,
 	new_display["hours"] = readableTime[0];
 	new_display["minutes"] = readableTime[1];
+	new_display["seconds"] = readableTime[2];
 
 	var newTask = {
-		'subject': finish_subject,
-		'task': finish_assignment,
-		'time': total_time
+		'subject': data.current.subject,
+		'task': data.current.assignment,
+		'time': totalSpent
 	}
 	data.completed.push(newTask);
 	console.log("completed pushed:");
@@ -33,11 +35,11 @@ exports.view = function(request, response) { 
 	
     //find task list of corresponding query subject
     for(var i = 0; i < data.subjects.length; i++) {
-        if (data.subjects[i]["name"].toUpperCase() == request.body.subject.toUpperCase()){
+        if (data.subjects[i]["name"].toUpperCase() == data.current.subject.toUpperCase()){
 
             //for that subject, go through tasks to find task we want to delete
             for (var j = 0; j < data.subjects[i].tasks.length; j++){
-                if (data.subjects[i].tasks[j]["name"] == request.body.assignment){
+                if (data.subjects[i].tasks[j]["name"] == data.current.assignment){
                     // deletes that element
                     data.subjects[i].tasks.splice(j,1);
                     break;
@@ -50,10 +52,10 @@ exports.view = function(request, response) { 
 	response.render('finish',new_display);
 }
 
-//out of total minutes, how many hour/min
+//out of total seconds, how many hour/min/sec
 function totalToReadable(total){
-	var h = Math.floor(total/60);
-	var m = Math.floor(total%60);
-	return [h,m];
+	var h = Math.floor(total/3600);
+	var m = Math.floor((total%3600)/60);
+	var s = Math.floor((total%3600)%60);
+	return [h,m,s];
 }
-

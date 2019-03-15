@@ -129,11 +129,13 @@
 		//puts total minutes into readable h:m:s time
 		$(".time-studied").each(function(){
 			var totalMins = parseInt($(this).html());
-			var h = Math.floor(totalMins/60);
-			var m = Math.floor(totalMins%60);
+			var h = Math.floor(totalMins/3600);
+			var m = Math.floor((totalMins%3600)/60);
+			var s = Math.floor((totalMins%3600)%60);
 			h = ("0" + h).slice(-2);
 			m = ("0" + m).slice(-2);
-			$(this).html(h+":"+m+":00");
+			s = ("0" + s).slice(-2);
+			$(this).html(h+":"+m+":"+s);
 		});
 	});
 
