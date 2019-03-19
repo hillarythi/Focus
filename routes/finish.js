@@ -57,5 +57,8 @@ function totalToReadable(total){
 	var h = Math.floor(total/3600);
 	var m = Math.floor((total%3600)/60);
 	var s = Math.floor((total%3600)%60);
+	h = ("0" + h).slice(-2);
+	m = ("0" + m).slice(-2);
+	s = ("0" + s).slice(-2);
 	return [h,m,s];
 }
