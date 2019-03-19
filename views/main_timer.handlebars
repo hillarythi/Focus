@@ -452,7 +452,7 @@ function validateForm(){
 	xhr.open('post', 'timer');
 	xhr.setRequestHeader('Content-Type', 'application/json');
 	console.log("xml timer payload" + JSON.stringify(new_list));
-	xhr.onerror = function(){ alert("Edit request failed. Please refresh and try again."); return false; } 
+	xhr.onerror = function(){ alert("Edit request failed. Please refresh and try again. " + xhr.responseText); return false; } 
 	xhr.onload = function(){
 		document.getElementById("toTimer").submit();
 		return true;
