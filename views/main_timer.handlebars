@@ -243,7 +243,7 @@
 		
 		<!-- invisible form to send data -->
 		<form action="timer" method="get" name="invisible" id="toTimer">
-			<button onclick="validateForm()" style="float:right"><span class="glyphicon glyphicon-arrow-right right"></span></button>
+			<button onclick="return validateForm()" style="float:right"><span class="glyphicon glyphicon-arrow-right right"></span></button>
 		</form>
 		<input type="hidden" id="breaks" name="breaks">
 
@@ -453,8 +453,9 @@ function validateForm(){
 	xhr.setRequestHeader('Content-Type', 'application/json');
 	console.log("xml timer payload" + JSON.stringify(new_list));
 	xhr.onerror = function(){ 
-		alert("Edit request failed. Please refresh and try again. ");
+		alert("Edit request failed in main timer. Please refresh and try again. ");
 		alert(JSON.parse(xhr.responseText)); 
+		alert(JSON.parse(xhr));
 		return false; 
 	} 
 	xhr.onload = function(){
