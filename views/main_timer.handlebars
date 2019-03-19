@@ -19,6 +19,7 @@
   		--dusty-pink: rgb(212,171,179);
   		--dusty-blue: rgb(153,195,203);
   		--dusty-gray: rgb(104,124,135);
+  		--selected-pink: rgb(209, 98, 118);
 	}
 	body{
 		font-family: 'Fira Sans', sans-serif;
@@ -121,9 +122,18 @@
 	.bg-blue{
 		background-color: var(--dusty-blue);
 	}
+	.font-gray{
+		color: var(--dusty-gray);
+	}
+	.font-selected-pink{
+		color: var(--selected-pink);
+	}
 	.dropdown-menu, .dropdown-toggle{
 		max-height: 200px;
 		overflow-y: auto;
+	}
+	.element{
+		padding-bottom : calc( 100vh * .03 );
 	}
 	</style>
 
@@ -149,14 +159,14 @@
 
 
 	<div class="container center-page">
-	<br><br>
+	<br>
 
 	<!-- can do <li id="\{\{@index\}\}"> -->
 	<!-- class will be only instance, using as second id -->
 
 
 	<!-- Class / subject -->
-	<div id="show_subject">
+	<div id="show_subject" class="element">
 		<p class="title">subject</p>
 		<div class="dropdown fixed-length">
 		  <button class="btn btn-default btn-block dropdown-toggle" type="button" id="dropSubject" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">subject </button>
@@ -168,11 +178,11 @@
 		  </ul>
 		</div>
 	</div>
-	<br>
+
 
 
 	<!-- Task / assignment -->
-	<div id="show_assignment" style="display:none">
+	<div id="show_assignment" class="element" style="display:none">
 		<p class="title">assignment</p>
 		<div class="dropdown fixed-length">
 		  <button class="btn btn-default btn-block dropdown-toggle" type="button" id="dropAssignment" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">assignment </button>
@@ -181,11 +191,11 @@
 		  </ul>	
 		</div>
 	</div>
-	<br>
+	
 
 
 	<!-- Select Time / time length-->
-	<div id="show_time" style="display:none">
+	<div id="show_time" class="element" style="display:none">
 		<p class="title" style="padding-bottom: 10px">time length</p>
 
 		<div class="dropdown" style="display:inline; float:left">
@@ -221,7 +231,7 @@
 		  </ul>
 		</div>
 	</div>
-	<br><br><br><br>
+	<br><br><br>
 
 
 	<!-- Breaks -->
@@ -240,20 +250,22 @@
 		  </div>
 		</div>
 	</div>
-	<br>
+	<br><br>
 
 	<div id="show_submit" style="display:none">
 		<!-- <a href='/'><span class="glyphicon glyphicon-arrow-left left"></span></a> -->
 		
 		<!-- invisible form to send data -->
 		<form action="timer" method="get" name="invisible" id="toTimer">
-			<a href="#" onclick="return validateForm();" style="float:right"><span class="glyphicon glyphicon-arrow-right right"></span></a>
+			<a href="#" onclick="return validateForm();" style="float:right"><span class="glyphicon glyphicon-arrow-right right font-selected-pink" style="font-size:250%"></span></a>
+			<br><br>
+			<p class="right title font-gray">let's study!</p>
 		</form>
 		<input type="hidden" id="breaks" name="breaks">
 
 		<br>
 			<!-- <p class="left title">save for later</p> -->
-			<p class="right title">let's study!</p>
+			
 	</div>
 
 	 <!-- super inefficient -->
