@@ -180,18 +180,6 @@
 
 
 <script>
-
-	$(document).ready(function(){
-		// break slide
-		$("#break_toggle").click(function(){
-		$("#showBreak").slideToggle("slow");
-		});
-
-		// form slide
-		$("#form_toggle").on("click", function(){
-			$("#showForm").slideToggle("slow");
-		});
-	});
 	
 	function confirmLeave(){
 		var val = $("#break_length").val();
@@ -220,6 +208,17 @@
 		alert("logged out!");
 	}
 
+	$(document).ready(function(){
+		// break slide
+		$("#break_toggle").click(function(){
+			$("#showBreak").slideToggle("slow");
+		});
+
+		// form slide
+		$("#form_toggle").on("click", function(){
+			$("#showForm").slideToggle("slow");
+		});
+	});
 	
 
 </script>
