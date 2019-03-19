@@ -228,11 +228,15 @@ function submitStudy(){
 	xhr.open('post', 'timer');
 	xhr.setRequestHeader('Content-Type', 'application/json');
 	console.log("xml break->timer payload" + JSON.stringify(update_timer));
-	xhr.onerror = function(){ alert("Edit request failed. Please refresh and try again."); } 
+	xhr.onerror = function(){ 
+		alert("Edit request failed in timer with " + xhr.status +" "+ xhr.statusText + ". Please refresh and try again. If this problem persists, please forward the error message details to us through the 'Contact Us' form inside settings.");
+	} 
+	xhr.onload = function(){
+    	document.getElementById("toTimer").submit();
+    }
 	xhr.send(JSON.stringify(update_timer));
 
-
-    document.getElementById("toTimer").submit();
+	
 }
 
 /* leaving timer from end session button or navbar */
