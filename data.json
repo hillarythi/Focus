@@ -43,6 +43,7 @@
     "total_hr": 0,
     "total_min": 0,
     "total_sec": 0,
+    "breaks_orig": 0,
     "breaks": 0,
     "breaks_hr": 0,
     "breaks_min":0,

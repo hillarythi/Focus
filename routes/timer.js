@@ -25,6 +25,7 @@ exports.update = function(request, response) { 
 	// var new_sec = request.body.seconds;  //total left
 	var new_breaks = request.body.breaks;
 	var break_length = request.body.breakLength;
+	var break_orig = request.body.breaks_orig;
 
 	if (new_breaks < 0){
 		new_breaks = 0;
@@ -47,6 +48,7 @@ exports.update = function(request, response) { 
 	data.current["breaks_sec"] = breakCalculations[2]; // + sec left till break
 	data.current["breaks_total"] = breakCalculations[3]; //total seconds till break
 	data.current["break_length"] = parseInt(break_length); //mins break length
+	data.current["breaks_orig"] = parseInt(break_orig);
 
 	
 	response.send("success");
