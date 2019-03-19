@@ -178,14 +178,14 @@ function populateBreaks(){
 	//valid breaks/cupcakes
 	for (var i = 0; i < {{breaks}}; i++){
 		// $('#breaks-left').append('<button type="button" class="btn break-btn"><span class="glyphicon glyphicon-star"></span></button>');
-		var toAppend = '<a href="#" style="padding: 0" onclick="confirmBreak()"><img src="images/cupcake.png" height="'+sw+'px" width="'+sw+'px"></a>'
+		var toAppend = '<span style="padding: 0" onclick="confirmBreak()"><img src="images/cupcake.png" height="'+sw+'px" width="'+sw+'px"></span>'
 		$('#breaks-left').append(toAppend);
 	}
 
 	//empty breaks, no longer
 	for (var i = 0; i < {{breaks_orig}}-{{breaks}}; i++){
 		// $('#breaks-left').append('<button type="button" class="btn break-btn"><span class="glyphicon glyphicon-star"></span></button>');
-		var toAppend = '<a href="#" style="padding: 0"><img src="images/cupcake_empty.png" height="'+sw+'px" width="'+sw+'px"></a>'
+		var toAppend = '<span style="padding: 0"><img src="images/cupcake_empty.png" height="'+sw+'px" width="'+sw+'px"></span>'
 		$('#breaks-left').append(toAppend);
 	}
 
