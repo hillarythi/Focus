@@ -13,7 +13,6 @@ exports.view = function(req, res){
 
 
 exports.added = function (req, res) {
-	console.log("ADDED");
 	data.breakLength = req.body.break_length;
 	data.snoozeLength = req.body.snooze_length;
 	console.log(data);

@@ -167,17 +167,32 @@
 		</div>
 
 
-
 		<a role="button" aria-pressed="true" class="btn btn-default btn-block bg-blue font-white" href="tutorial/1">tutorial</a>
 
-		<a role="button" aria-pressed="true" class="btn btn-default btn-block bg-pink font-white" onclick="aboutUs()">about us</a>
+		<a role="button" aria-pressed="true" class="btn btn-default btn-block bg-pink font-white" id="form_toggle">contact us</a>
+
+		<iframe id="showForm" style="display:none" src="https://docs.google.com/forms/d/e/1FAIpQLScHzvJ_M1CMyuUHn1JJMRXMm090cKTo36UmGKLaqEuV33R4mw/viewform?embedded=true" width="100%" height="800" frameborder="0" marginheight="0" marginwidth="0">Loading...</iframe>
 
 		<a role="button" href="/" aria-pressed="true" class="btn btn-default btn-block bg-blue font-white" onclick="logout()">log out</a>
+		<br><br>
 	</div>
 
 
 
 <script>
+
+	$(document).ready(function(){
+		// break slide
+		$("#break_toggle").click(function(){
+		$("#showBreak").slideToggle("slow");
+		});
+
+		// form slide
+		$("#form_toggle").on("click", function(){
+			$("#showForm").slideToggle("slow");
+		});
+	});
+	
 	function confirmLeave(){
 		var val = $("#break_length").val();
 		if (val == ""){
@@ -200,19 +215,12 @@
 		}
 	}
 
-	function aboutUs(){
-		alert("'About Us' coming soon!");
-	}
 
 	function logout(){
 		alert("logged out!");
 	}
 
-	$(document).ready(function(){
-	  $("#break_toggle").click(function(){
-	    $("#showBreak").slideToggle("slow");
-	  });
-	});
+	
 
 </script>
 
