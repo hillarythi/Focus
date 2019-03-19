@@ -275,9 +275,7 @@ function sendRequestToBreak(){
 	xhr.setRequestHeader('Content-Type', 'application/json');
 	console.log("xml timer to break payload" + JSON.stringify(update_json));
 	xhr.onerror = function(){ 
-		alert("Edit request failed in timer. Please refresh and try again."); 
-		alert(JSON.parse(xhr.responseText)); 
-		alert(JSON.parse(xhr));
+		alert("Edit request failed in timer with " + xhr.status +" "+ xhr.statusText + ". Please refresh and try again. If this problem persists, please forward the error message details to us through the 'Contact Us' form inside settings.");
 	} 
 	xhr.onload = ()=>{
 		document.getElementById("toBreak").submit();
