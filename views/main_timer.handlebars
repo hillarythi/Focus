@@ -459,6 +459,8 @@ function validateForm(){
 		return false; 
 	} 
 	xhr.onload = function(){
+		alert(JSON.parse(xhr.responseText)); 
+		alert(JSON.parse(xhr));
 		document.getElementById("toTimer").submit();
 		return true;
 	}
