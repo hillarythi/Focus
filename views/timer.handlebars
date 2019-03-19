@@ -9,7 +9,7 @@
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css">
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 	<!-- fonts -->
-	<link href="https://fonts.googleapis.com/css?family=Fira+Sans:300" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Fira+Sans:200" rel="stylesheet">
 	<style>
 	:root {
   		--dusty-pink: rgb(212,171,179);
@@ -45,21 +45,31 @@
 		text-decoration:none;
 	}
 
-	.pad-10{
-		padding: 10% 0%;
+	.pad{
+		padding: calc(100vh*.03) 0%;
 	}
 	.no-margin{
 		margin: 0;
 	}
 	#circle-div{ 
 		/*TODO  : center circle :( currently iphonex */
-		width:300px;
-		height:300px;
+		width: calc(100vw*.8);
+		height: calc(100vw*.8);
 		margin-left: 8%;
 		border: 2px solid rgb(153,195,203);
 		border-radius:50%;
 		text-align: center;
-		font-size:50px;
+		font-size:13vw;
+	}
+	/*subject*/
+	h2{
+		font-size:8vw;
+	}
+	h1{
+		font-size:8vw;
+	}
+	h3{
+		font-size:6vw;
 	}
 	#circle-div2{
 		padding-top:35%;
@@ -84,7 +94,6 @@
 
 	/*for exit button/arrow*/
 	#end-session-btn {
-		padding-top: 15%;
 		float:right;
 		padding-right:10%;
 	}
@@ -96,42 +105,43 @@
 	<!-- Actual Page -->
 	<div class="container" style="text-align:center">
 
-		<h2 class="font-pink pad-10 no-margin" >{{subject}}</h2>
+		<h2 class="font-pink pad no-margin" >{{subject}}</h2>
 
 		<!-- Timer (circular border, time caption, countdown timer) -->
 		<div id="circle-div" class="font-pink">
 			<div id="circle-div2">
-				<p style="font-size:20px; margin:0">time until <span id="lastSession">break</span></p><!--add the circle animations instead of text?-->
+				<p style="font-size:5vw; margin:0">time until <span id="lastSession">break</span></p><!--add the circle animations instead of text?-->
 				<p id="countdown" class="no-margin"></p>
 			</div>
 		</div>
 
-		<h1 class="font-blue pad-10 no-margin" id="assignment">{{assignment}}</h1>
+		<h1 class="font-blue pad no-margin" id="assignment">{{assignment}}</h1>
 
 		<!-- breaks -->
 		<h3 class="font-pink no-margin" style="padding-bottom: calc(100vh/100)">breaks left</h3>
 		<!-- <a href="" onclick="return confirmBreak()"> -->
 			<div class="btn-group no-margin" role="group" aria-label="First group" id="breaks-left">
 			<!-- number of breaks added here  -->
-		 </div>
+		 	</div>
 		 <h5 class="font-gray no-margin" id="clickCupcake">click a cupcake to take a break early!</h5>
-	 	<!-- </a> -->
+	 	<!-- </a> 	 	</div>-->
+
 
  	</div>
 
  	<!-- End Session Btn -->
- 	<div id="end-session-btn">
+ 	<div id="end-session-btn" class="pad">
 		<a href="#" onclick="return confirmEnd()"><span class="glyphicon glyphicon-arrow-right font-gray" style="float:right; font-size: 40px"></span>
-		<br><h3 class="font-blue" style="text-align:right">end<br>session</h3></a>
+		<br><h3 class="font-blue">end session</h3></a>
 	
 	</div>
 
 
 	<!-- Extra White Space -->
-	<div style="margin: 20%">
-	<br>
 	<!-- space under submit button so it scrolls if doesnt fit screen -->
-	</div>
+	<!-- <div style="margin: 20%">
+	<br>
+	</div> -->
 
 	<!-- Hidden Forms submissions -->
 	<!-- To Break Screen -->
